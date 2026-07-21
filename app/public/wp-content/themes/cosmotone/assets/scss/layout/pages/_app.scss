@@ -1,0 +1,120 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  7.2 app css start
+/*----------------------------------------*/
+.tp-app{
+    &-section-box{
+        & p {
+            padding-right: 70px;
+            @media #{$lg,$md,$xs}{
+                font-size: 14px;
+                padding-right: 0;
+            }
+        }
+    }
+    &-thumb {
+        & img {
+            @media #{$xs}{
+                max-width: 45%;
+            } 
+        }
+    }
+    &-shape {
+        &-1 {
+            position: absolute;
+            bottom: 0;
+            left: 80px;
+            animation: tptranslateX2 4s infinite alternate;
+            @media #{$xxxl}{
+                left: 30px;
+            }
+            @media #{$xxl}{
+                left: 20px;
+            }
+            @media #{$xl}{
+                left: 40px;
+            }
+            & img {
+                @media #{$xxl}{
+                    max-width: 50%;
+                }
+                @media #{$xl}{
+                    max-width: 40%;
+                }
+            }
+        }
+        &-2 {
+            position: absolute;
+            bottom: 0;
+            right: 0px;
+            @media #{$xl}{
+                right: -14%;
+            }
+            @media #{$lg}{
+                right: -30%;
+            }
+        }
+        &-3 {
+            position: absolute;
+            bottom: 40px;
+            right: 0;
+            @media #{$xl}{
+                right: -15%;
+            }
+        }
+        &-4 {
+            position: absolute;
+            bottom: 0px;
+            right:225px;
+            @media #{$xxxl}{
+                right: 100px;
+            }
+            @media #{$xxl}{
+                right: 60px;
+            }
+            @media #{$xl}{
+                right:10px;
+            }
+            @media #{$lg}{
+                right:50px;
+            }
+            @media #{$md}{
+                position: static;
+            }
+            & img {
+                @media #{$xxl}{
+                    max-width: 95%;
+                }
+                @media #{$xl}{
+                    max-width: 80%;
+                }
+                @media #{$lg}{
+                    max-width: 90%;
+                }
+            }
+        }
+        &-5 {
+            position: absolute;
+            bottom: 0px;
+            right:605px;
+            @media #{$xxxl}{
+                right: 500px;
+            }
+            @media #{$xxl}{
+                right: 400px;
+            }
+            @media #{$xl}{
+                right: 300px;
+            }
+            & img {
+                @media #{$xxl}{
+                    max-width: 95%;
+                }
+                @media #{$xl}{
+                    max-width: 80%;
+                }
+            }
+        }
+    }
+}

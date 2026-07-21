@@ -1,0 +1,233 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  2.12 Accordion
+/*----------------------------------------*/
+.tp-custom-accordion {
+    & .accordion-items {
+        margin-bottom: 20px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 2px 3.464px 20px 0px rgba(16, 23, 40, 0.06);
+    }
+    & .accordion-buttons {
+        position: relative;
+        width: 100%;
+        font-weight: 700;
+        font-size: 18px;
+        text-align: left;
+        padding: 21px 30px;
+        padding-left: 75px;    
+        transition: .3s;
+        color: var(--tp-common-black);
+        background-color: var(--tp-common-white);
+        @media #{$lg}{
+            font-size: 17px;
+        }  
+        @media #{$md}{
+            font-size: 16px;
+        }  
+        @media #{$xs}{
+            font-size: 15px;
+            padding: 21px 20px;
+            padding-left: 63px; 
+        }  
+        @media #{$sm}{
+            font-size: 14px;
+        }  
+        &:hover {
+            background-color: var(--tp-theme-1);
+            color: var(--tp-common-white);
+            &::after{
+                background-color: var(--tp-common-white);
+                color: var(--tp-common-black);
+            }
+        }
+        &::after {
+            position: absolute;
+            content: "\f068";
+            font-family: 'Font Awesome 5 Pro';
+            top: 19px;
+            left: 30px;
+            font-weight: 700;
+            font-size: 12px;
+            opacity: 1;
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            border-radius: 50%;
+            background-color: var(--tp-theme-1);
+            color: var(--tp-common-white);
+            transition: .3s;
+            @media #{$xs}{
+                left: 20px;
+            } 
+        }
+
+        &.collapsed {
+            &::after {
+                content: '\f067';
+            }
+        }
+        &:not(.collapsed){
+            border-bottom: 1px solid #ececed;
+            background-color: var(--tp-theme-1);
+            color: var(--tp-common-white);
+            &::after{
+                background-color: var(--tp-common-white);
+                color: var(--tp-theme-1);
+            }
+        }
+
+
+    }
+
+    & .collapsed {
+        position: relative;
+        z-index: 8;
+    }
+
+    & .accordion-body {
+        padding: 15px 30px;
+        padding-bottom: 25px;
+        padding-right: 50px;
+        position: relative;
+        z-index: 1;
+        font-weight: 400;
+        font-size:16px;
+        line-height:30px;
+        background-color: var(--tp-common-white);
+        @media #{$xl} {
+            font-size: 15px;
+        }
+        @media #{$lg}{
+            font-size: 14px;
+        }
+        @media #{$md}{
+            font-size: 14px;
+        }
+        @media #{$xs}{
+            padding: 15px 20px;
+            padding-bottom: 25px;
+            padding-right: 20px;
+            font-size: 14px;
+        }
+        @media #{$sm}{
+            font-size: 15px;
+        }
+    }
+}
+.tp-custom-accordion-2 {
+    & .accordion-items {
+        margin-bottom: 20px;
+        border-bottom: 1px solid var(--tp-common-black);
+    }
+    & .accordion-buttons {
+        position: relative;
+        width: 100%;
+        font-weight: 700;
+        font-size: 18px;
+        text-align: left;
+        padding: 21px 30px;
+        padding-left: 30px;    
+        transition: .3s;
+        color: var(--tp-common-black);
+        @media #{$lg}{
+            font-size: 17px;
+        }  
+        @media #{$md}{
+            font-size: 16px;
+        }  
+        @media #{$xs}{
+            font-size: 15px;
+        }  
+        @media #{$sm}{
+            font-size: 17px;
+        }  
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left:0;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            opacity: 1;
+            border-radius: 50%;
+            background-color: var(--tp-common-black);
+        }
+        &::after {
+            position: absolute;
+            content: "\f068";
+            font-family: 'Font Awesome 5 Pro';
+            top: 19px;
+            right:30px;
+            font-weight: 700;
+            font-size: 12px;
+            opacity: 1;
+            color: var(--tp-common-black);
+            transition: .3s;
+            @media #{$xs}{
+              right: 20px;
+            } 
+        }
+
+        &.collapsed {
+            &::after {
+                content: '\f067';
+            }
+        }
+       
+    }
+
+    & .collapsed {
+        position: relative;
+        z-index: 99;
+    }
+
+    & .accordion-body {
+        padding:0px;
+        padding-bottom: 25px;
+        padding-right: 50px;
+        position: relative;
+        z-index: 1;
+        font-weight: 400;
+        font-size:16px;
+        line-height:30px;
+        @media #{$xl} {
+            font-size: 15px;
+        }
+        @media #{$lg}{
+            font-size: 14px;
+        }
+        @media #{$md}{
+            font-size: 14px;
+        }
+        @media #{$xs}{
+            font-size: 13px;
+            padding-right: 0;
+            line-height: 26px;
+        }
+        @media #{$sm}{
+            font-size: 15px;
+        }
+    }
+}
+
+.tp-black-mode {
+    & .tp-custom-accordion {
+        & .accordion-buttons {
+            background-color:#242629;
+            color: var(--tp-common-white);
+            &:not(.collapsed) {
+                border: none;
+            }
+            &:hover {
+                background-color: var(--tp-theme-1);
+            }
+        }
+        & .accordion-body{
+            background-color:#242629 ;
+        }
+    }
+}

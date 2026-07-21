@@ -1,0 +1,310 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  7.8 cta css start
+/*----------------------------------------*/
+.tp-cta{
+    &-bg {
+        position: relative;
+        &::after{
+            content: '';
+            top: 0;
+            left: 0;
+            height: 30%;
+            width: 100%;
+            background-color: var(--tp-grey-2);
+            position: absolute;
+            z-index: -1;
+            @media #{$md,$xs}{
+                height: 55%;
+            }
+        }
+    }
+    &-wrap {
+        height: 195px;
+        display: flex;
+        align-items: center;
+        padding-left: 80px;
+        padding-right: 60px;
+        justify-content:space-between;
+        @media #{$md,$xs}{
+            height:300px;
+        }
+        @media #{$lg}{
+            padding: 0 20px;
+        }
+        @media #{$md,$xs}{
+            padding: 0 35px;
+        }
+        @media #{$xs}{
+            padding: 0 15px;
+        }
+        &-box {
+            margin-bottom: -135px;
+            position: relative;
+            z-index: 8;
+        }
+    }
+    &-title {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--tp-common-white);
+        @media #{$md,$xs}{
+            margin-bottom: 40px;
+        }
+        @media #{$xs}{
+            margin-bottom: 40px;
+            font-size: 25px;
+        }
+    }
+    &-right-box{
+        margin-left: 5px;
+        @media #{$md,$xs}{
+            margin-left: 0;
+        }
+        & input {
+            height: 80px;
+            line-height: 80px;
+            padding: 0 30px;
+            font-size: 16px;
+            padding-right: 260px;
+            color: var(--tp-common-white);
+            background-color: #c4062d;
+            border: 2px solid #e38b9d;
+            @media #{$xs}{
+                height: 60px;
+                line-height: 60px;
+                padding: 0 12px;
+                padding-right: 12px;
+                font-size: 14px;
+                padding-right: 155px;
+            }
+            @media #{$sm}{
+                height: 70px;
+                line-height: 70px;
+                padding: 0 12px;
+                padding-right: 12px;
+                font-size: 14px;
+                padding-right: 220px;
+            }
+            @include placeholder{
+                color: var(--tp-common-white);
+            }
+        }
+    }
+    &-button{
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);        
+        @media #{$xs}{
+            right: 5px;
+            top: 49%;
+        }
+        @media #{$sm}{
+            right: 10px;
+            top: 50%;
+        }
+    }
+    &-shape {
+        position: absolute;
+        top:0;
+        left: 51%;
+        transform: translateX(-50%);
+    }
+}
+.tp-cta-3 {
+    &-left {
+        &-wrap {
+            padding: 30px 0;
+            @media #{$xl,$lg}{
+                padding: 20px 0;
+            }
+            @media #{$md,$xs}{
+                padding: 20px 0;
+                margin-bottom: 30px;
+            }
+            &:hover {
+                & .tp-cta-3-left-thumb {
+                    &::before{
+                        -webkit-animation: shine 1s;
+                        animation: shine 1s;
+                    }
+                }
+            }
+        }
+        &-box {
+            height: 480px;
+            @media #{$xxl}{
+                height: 350px;
+            }
+            @media #{$xl,$lg,$md}{
+                height: 300px;
+            }
+            @media #{$xs}{
+                height: 300px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        &-text {
+            padding-left: 15px;
+            @media #{$xxxl}{
+                padding-left: 0px;             
+            }
+            @media #{$xxl,$xl}{
+                padding-left: 0px;   
+                margin-left: -20px;            
+            }
+            @media #{$xl}{
+                padding-left: 0px;   
+                margin-left: -20px;            
+            }
+            @media #{$lg,$xs}{
+                padding-left: 0px;               
+            }
+        }
+        &-title {
+            font-weight: 700;
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: var(--tp-common-white);
+            @media #{$xxxl}{
+                font-size: 30px;
+            }
+            @media #{$xxl}{
+                font-size: 28px;
+            }
+            @media #{$xl}{
+                font-size: 23px;
+            }
+            @media #{$lg}{
+                font-size: 25px;
+                & br {
+                    display: none;
+                }
+            }
+            @media #{$md}{
+                font-size: 26px;                
+            }
+            @media #{$xs}{
+                font-size: 26px;
+                & br {
+                    display: none;
+                }              
+            }
+            @media #{$sm}{
+                font-size: 28px;
+                & br {
+                    display: block;
+                }              
+            }
+        }
+        &-shape {
+            position: absolute;
+            bottom: 0;
+            right: 65px;
+            z-index: -1;
+            @media #{$xl,$lg,$md,$xs}{
+                bottom: -15%;
+                right: 30px;
+            }
+        }
+        &-thumb {    
+            position: relative;    
+            overflow: hidden;  
+            margin-right: 30px;
+            @media #{$lg,$md,$xs}{
+                margin-right: 0;               
+            }
+            &::before{
+                position: absolute;
+                top: 0;
+                left: -80%;
+                z-index: 2;
+                display: block;
+                content: "";
+                width: 50%;
+                height: 100%;
+                background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
+                background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), to(rgba(255, 255, 255, 0.3)));
+                background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
+                -webkit-transform: skewX(-25deg);
+                -ms-transform: skewX(-25deg);
+                transform: skewX(-25deg);
+                z-index: 1;
+            }
+            &:hover {
+                & img {
+                    transform: scale(1.1);
+                }
+            }
+            & img {
+                height: 480px;
+                @media #{$xxl}{
+                    height: 350px;
+                }
+                @media #{$xl,$lg}{
+                    height: 300px;
+                }
+                @media #{$md,$xs}{
+                    height: 300px;
+                    width: 100%;
+                }
+                transition: all 700ms ease;
+            }
+        }
+    }
+    &-right {
+        &-wrap {
+            padding: 30px 0;
+            @media #{$xl,$lg,$md,$xs}{
+                padding: 20px 0;
+            }
+        }
+        &-box {
+            height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            @media #{$xxl}{
+                height: 350px;
+            }
+            @media #{$xl,$lg,$md,$xs}{
+                height: 300px;
+            }
+            &::after{
+                content: '';
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                background-color: rgba(22, 23, 26, 0.702);               
+            }
+            & .tp-section-title {
+                @media #{$lg,$md}{
+                    font-size: 30px;
+                    & br {
+                        display: block;
+                    }
+                }
+                @media #{$xs}{
+                    font-size: 25px;
+                    & br {
+                        display: block;
+                    }
+                }
+            }
+        }
+        &-shape {
+            position: absolute;
+            top: 0;
+            right: 2%;
+            z-index: 1;
+            animation: tptranslateX2 4s infinite alternate;
+        }
+    }
+}

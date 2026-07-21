@@ -1,0 +1,148 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  7.12 funfact css start
+/*----------------------------------------*/
+.tp-funfact {
+    &-item {
+        position: relative;
+        z-index: 1;
+        &:hover {
+            & .tp-funfact-icon {
+                & span {
+                    & i {
+                        animation: icon-bounce 0.8s 1;
+                    }
+                }
+            }
+        }
+    }
+    &-icon {
+        & span {
+            font-size: 62px;
+            border-radius: 50%;
+            height: 130px;
+            width: 130px;
+            margin-bottom: 20px;
+            line-height: 149px;
+            text-align: center;
+            display: inline-block;
+            color: var(--tp-common-white);
+            background-color: var(--tp-theme-1);
+            & i {
+                display: inline-block;
+                transition: all 0.3s ease-out 0s;
+            }
+            @media #{$lg}{
+                font-size: 44px;
+                height: 90px;
+                width: 90px;
+                line-height: 105px;
+            }
+            @media #{$md,$xs}{
+                font-size: 51px;
+                height: 110px;
+                width: 110px;
+                line-height: 128px;
+            }
+        }
+    }
+    &-number {
+        font-weight: 700;
+        font-size: 50px;
+        margin-bottom: 5px;
+        @media #{$xl}{
+            font-size: 40px;
+        }
+        @media #{$lg,$md,$xs}{
+            font-size: 38px;
+        }
+        & i {
+            font-style: normal;
+        }
+    }
+    &-content {
+        & span {
+            font-weight: 500;
+            font-size: 16px;
+        }
+    }
+    &-shape {
+        &-1 {
+            position: absolute;
+            left: 0;
+            bottom:-7%;
+            animation: tptranslateY2 4s infinite alternate;
+        }
+        &-2 {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            animation: tptranslateX2 4s infinite alternate;
+        }
+    }
+}
+.tp-funfact-4 {
+    &-icon {
+        line-height: 0;
+        & span {
+            font-size: 52px;
+            color: var(--tp-theme-1);
+        }
+    }
+    &-content {
+        padding-top: 35px;
+        border-top: 1px solid #f2f2f2;
+        position: relative;
+        &::after{
+            content: '';
+            position: absolute;
+            top: -2px;
+            right: -10px;
+            width: 20px;
+            height: 3px;
+            z-index: 1;
+            background-color: var(--tp-theme-1);
+            @media #{$md,$xs}{
+                display: none;
+            }
+        }
+        &.content-box {
+            &::after{
+                display: none;
+            }
+        }
+    }
+    &-number {
+        color: #f2f2f2;
+        font-weight: 700;
+        font-size: 100px;
+        margin-bottom: 0;
+        @media #{$xl}{
+            font-size: 70px;
+        }
+        @media #{$lg}{
+            font-size: 70px;
+        }
+        @media #{$md,$xs}{
+            font-size: 75px;
+        }
+    }
+    &-text {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        & span {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--tp-common-black);
+            @media #{$xl}{
+                font-size: 19px;
+            }
+            @media #{$lg,$md,$xs}{
+                font-size: 18px;
+            }
+        }
+    }
+}

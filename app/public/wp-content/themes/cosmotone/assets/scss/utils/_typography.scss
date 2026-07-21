@@ -1,0 +1,23 @@
+// font url
+
+$font-url: 'https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet';
+
+// font family
+$font-family: (
+    'ff': (
+        'body': "'DM Sans', sans-serif",
+        'heading': "'DM Sans', sans-serif",
+        'p': "'DM Sans', sans-serif",
+        'fontawesome': '"Font Awesome 6 Pro"',
+    )
+);
+
+// font size
+$font-size: (
+    'fz': (
+        'body': 16px,
+        'p': 16px,
+    )
+);
+
+

@@ -1,0 +1,36 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  3.3 Header Style 3
+/*----------------------------------------*/
+.tp-header {
+    &-style-3{
+        & .tp-header-main-menu{
+            & > nav {
+                & > ul {
+                    & > li { 
+                        & > a{
+                            padding: 28px 0;
+                            &::after{
+                                bottom: 30px;
+                            }
+                        }
+                    }
+                }
+            }
+        }   
+        & .tp-header-bar {
+            & button {
+                margin-left: 30px;
+            }
+        }  
+        & .tp-header-menu-border-2 {
+            &::before{
+                background-color:#4b4c4d;
+            }
+            &::after{
+                background-color:#4b4c4d;
+            }
+        } 
+    }
+}

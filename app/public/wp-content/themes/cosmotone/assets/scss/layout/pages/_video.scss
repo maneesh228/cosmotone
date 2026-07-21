@@ -1,0 +1,225 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  7.21 video css start
+/*----------------------------------------*/
+
+.tp-video-3{
+    &-bg {
+        height: 800px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        @media #{$xl}{
+            height: 700px;
+        }
+        @media #{$lg}{
+            height: 700px;
+        }
+        @media #{$md}{
+            height: 600px;
+        }
+        @media #{$xs}{
+            height: 750px;
+        }
+        @media #{$sm}{
+            height: 620px;
+        }
+        &::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgb(30, 30, 30);
+            opacity: 0.902;
+        }
+    }
+    &-play-box {
+        position: absolute;
+        right:530px;
+        top: 220px;
+        z-index: 2;
+        @media #{$xxl}{
+            right: 400px;
+        }
+        @media #{$xl}{
+            right: 200px;
+        }
+        @media #{$lg}{
+            right: 100px;
+        }
+        & a {
+            display: inline-block;
+            height: 120px;
+            width: 120px;
+            line-height: 120px;
+            border-radius: 50%;
+            text-align: center;
+            color: var(--tp-common-white);
+            background-color: var(--tp-theme-1);
+            position: relative;
+            & i {
+                font-size: 18px;
+            }
+            &::before {
+                position: absolute;
+                content: "";
+                left: 50%;
+                top: 50%;
+                width: 70%;
+                height: 70%;
+                background-color: rgba(221, 7, 50, 0.311);
+                animation: borderanimate2 2s linear infinite;
+                z-index: -1;
+                border-radius: 50%;
+            }
+            &::after {
+                position: absolute;
+                content: "";
+                left: 50%;
+                top: 50%;
+                width: 90%;
+                height: 90%;
+                transform: scale(1.5);
+                border: 1px solid var(--tp-theme-1);
+                animation: borderanimate2 2s linear infinite;
+                border-radius: 50%;
+            }
+        }
+    }
+    &-content {
+        & p {
+            @media #{$lg,$md,$xs}{
+                font-size: 14px;
+                & br {
+                    display: none;
+                }
+            }
+        }
+    }
+    &-btn-box {
+        & a {
+            @media #{$xs}{
+                margin-bottom: 20px;
+            }
+            @media #{$sm}{
+                margin-bottom: 0px;
+            }
+        }
+    }
+    &-shape {
+        &-1 {
+            position: absolute;
+            top: 370px;
+            right: 280px;
+            z-index: 1;
+        }
+        &-2 {
+            position: absolute;
+            z-index: 1;
+            top: 280px;
+            right: 425px;
+            animation: tpswing 1s ease-in-out 1s forwards infinite alternate;
+            transform-origin: bottom left;
+            @media #{$xxl}{
+                right: 280px;
+            }
+        }
+        &-3 {
+            position: absolute;
+            z-index: 1;
+            right: 0;
+            bottom: 0;            
+            animation: tptranslateX2 2.7s infinite alternate;
+            @media #{$xxl}{
+                right: -3%;
+                bottom: -10%;
+            }
+            @media #{$xl}{
+                right: -3%;
+                bottom: -15%;
+            }
+        }
+    }
+    &-section-box{
+        & .tp-section-title {
+            @media #{$sm}{
+                font-size: 33px;
+            }
+        }
+    }
+}
+.tp-video-4 {
+    &-bg {
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 840px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @media #{$xxl}{
+           height: 700px;
+        }
+        @media #{$xl}{
+           height: 550px;
+        }
+        @media #{$lg}{
+           height: 500px;
+        }
+        @media #{$md}{
+           height: 400px;
+        }
+        @media #{$xs}{
+           height: 300px;
+        }
+    }
+    &-play-box {
+        & a {
+            display: inline-block;
+            height: 190px;
+            width: 190px;
+            line-height: 190px;
+            border-radius: 50%;
+            text-align: center;
+            color: var(--tp-common-white);
+            background-color: rgba(255, 255, 255, 0.149);
+            position: relative;
+            @media #{$md,$xs}{
+                height: 120px;
+                width: 120px;
+                line-height: 120px;
+            }
+            & i {
+                font-size: 24px;
+                padding-left: 4px;
+                @media #{$md,$xs}{
+                    font-size: 18px;
+                }
+            }
+            &::before {
+                position: absolute;
+                content: "";
+                left: 50%;
+                top: 50%;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.065);
+                animation: borderanimate2 2.7s linear infinite;
+                border-radius: 50%;
+            }
+            &::after {
+                position: absolute;
+                content: "";
+                left: 50%;
+                top: 50%;
+                width: 100%;
+                height: 100%;
+                border: 1px solid rgba(255, 255, 255, 0.065);
+                animation: borderanimate2 2.3s linear infinite;
+                border-radius: 50%;
+            }
+        }
+    }
+}

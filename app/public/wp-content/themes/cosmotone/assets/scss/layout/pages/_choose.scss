@@ -1,0 +1,413 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  7.6 choose css start
+/*----------------------------------------*/
+.tp-choose{
+    &-space {
+        padding-top: 120px;
+        padding-bottom: 200px;
+        @media #{$xs}{
+            padding-bottom: 120px;
+        }
+    }
+    &-content {
+        @media #{$md,$xs}{
+           margin-bottom: 50px;
+        }
+    }
+    &-text {
+        & p {
+            line-height: 30px;
+            @media #{$xl}{
+                padding-right: 100px;
+                & br {
+                    display: none;
+                }
+            }
+            @media #{$lg,$md,$xs}{
+               font-size: 14px;
+                & br {
+                    display: none;
+                }
+            }
+        }
+    }
+    &-wrap {
+        margin-right: 10px;
+        @media #{$xl}{
+            margin-right: 50px;
+        }
+        @media #{$lg,$md,$xs}{
+            margin-right: 0px;
+        }
+    }
+    &-item {
+        padding: 15px 20px;
+        transition: .3s;
+        background-color: var(--tp-common-black-2);
+        &:hover {
+            background-color: var(--tp-common-white);
+            & span {
+               &::after{
+                transform: scale(1);
+               }
+            }
+            & .tp-choose-item-title {
+                color: var(--tp-common-black);
+            }
+        }
+        & span {
+            font-size: 36px;
+            height: 60px;
+            width: 60px;
+            line-height: 69px;
+            text-align: center;
+            border-radius: 50%;
+            margin-right: 15px;
+            display: inline-block;
+            color: var(--tp-common-white);
+            background-color: var(--tp-theme-1);
+            transition: .3s;
+            position: relative;
+            &::after{
+                position: absolute;
+                content: '';
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                transform: scale(0);
+                transition: .4s;
+                border-radius: 50%;
+                background-color: var(--tp-common-black);
+            }
+            & i {
+                position: relative;
+                z-index: 1;
+            }
+            @media #{$xl,$lg}{
+                font-size: 26px;
+                height: 50px;
+                width:50px;
+                line-height: 59px;
+            }
+        }
+        &-title {
+            font-size: 20px;
+            margin-bottom: 0;
+            color: var(--tp-common-white);
+            transition: .3s;
+            @media #{$xl}{
+                font-size: 18px;
+            }
+            @media #{$lg,$md,$xs}{
+               font-size: 14px;
+            }
+            @media #{$md,$xs}{
+               font-size: 17px;
+            }
+        }
+        &-wrap {
+            & .tp-choose-item{
+                background-color: var(--tp-common-black);
+                &:hover {
+                    background-color: var(--tp-common-white);                    
+                }
+            }
+        }
+    }
+    &-thumb-box {
+        position: absolute;
+        top: 0;
+        right: 0;
+        @media #{$xxxl}{
+           right: -5%;
+        }
+        @media #{$xxl}{
+           right: -12%;
+        }
+        @media #{$xl}{
+           right: -16%;
+        }
+        @media #{$lg}{
+           right: -35%;
+        }
+        @media #{$md,$xs}{
+           position: static;
+        }        
+    }
+    &-shape {
+        &-1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            
+        }
+        &-2 {
+            position: absolute;
+            bottom: 60px;
+            left: 30px;
+            animation: tptranslateX2 4s infinite alternate;
+            & img {
+                @media #{$xxl}{
+                    max-width: 70%;
+                }
+                @media #{$xl}{
+                    max-width: 60%;
+                }
+            }
+        }
+        &-3 {
+            position: absolute;
+            bottom: 0px;
+            right: 0;
+            z-index: 2;
+            @media #{$xxl}{
+                right: -6%;
+            }
+            @media #{$xl}{
+                right: -12%;
+            }
+            @media #{$lg}{
+                right: -12%;
+            }
+        }
+        &-4 {
+            position: absolute;
+            bottom: 0px;
+            right: 0;
+            z-index: 1;
+            animation: tptranslateX2 2s infinite alternate;
+            @media #{$xxl}{
+                right: -4%;
+            }
+            @media #{$xl}{
+                right: -14%;
+            }
+            @media #{$lg}{
+                right: -14%;
+            }
+        }
+        &-5 {
+            position: absolute;
+            bottom: 0px;
+            right: 0;
+            @media #{$xxxl}{
+                right: -4%;
+            }
+            @media #{$xxl}{
+                right: -12%;
+            }
+            @media #{$xl}{
+                right: -18%;
+            }
+            @media #{$lg}{
+                display: none;
+            }
+        }
+    }
+}
+.tp-choose-2{
+    &-bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 45.5%;
+        @media #{$xxl}{
+            width: 50.5%;
+        }
+        @media #{$xl}{
+            width: 50.5%;
+        }
+        @media #{$lg}{
+            width: 49.5%;
+        }
+        @media #{$md}{
+            position: static;
+            height: 600px;
+            width: 100%;
+            margin-bottom: 50px;
+        }
+        @media #{$xs}{
+            position: static;
+            height: 350px;
+            width: 100%;
+            margin-bottom: 50px;
+            background-position: center;
+        }
+    }
+    &-text {
+        & p {
+            line-height: 30px;
+            @media #{$xxl,$xl}{
+                padding-right: 40px;
+                & br {
+                    display: none;
+                }
+            }
+            @media #{$lg,$md,$xs}{
+                font-size: 14px;
+                & br {
+                    display: none;
+                }
+            }
+        }
+    }
+    &-icon{
+       &-box {
+        margin-right: 120px;
+        @media #{$lg}{
+            margin-right: 70px;
+        }
+        @media #{$md,$xs}{
+            margin-right: 00px;
+        }
+        &:hover {
+            & .tp-choose-2-icon {
+                & span {
+                    background-color: var(--tp-theme-1);
+                    color: var(--tp-common-white);
+                }
+            }
+        }
+       }
+        & span {
+            height: 70px;
+            width: 70px;
+            line-height: 82px;
+            border-radius: 50%;
+            font-size: 34px;
+            text-align: center;
+            display: inline-block;
+            margin-right: 25px;
+            transition: .3s;
+            color: var(--tp-theme-1);
+            background-color: var(--tp-grey-2);
+        }
+        &-text {
+            & h5 {
+                font-weight: 700;
+                font-size: 18px;
+                margin-bottom: 8px;
+            }
+            & p {
+                line-height: 30px;
+                margin-bottom: 0;
+                @media #{$lg,$md,$xs}{
+                    font-size: 14px;
+                    & br {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    &-shape{
+        &-1{
+            position: absolute;
+            bottom: -6%;
+            left: 0;
+            animation: tptranslateY2 4s infinite alternate;
+        }
+        &-2{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+            animation: tptranslateX2 4s infinite alternate;
+        }
+    }
+}
+.tp-choose-3 {
+    &-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 45.5%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        @media #{$md}{
+            position: static;
+            height: 600px;
+            width: 100%;
+            margin-bottom: 50px;
+        }
+        @media #{$xs}{
+            position: static;
+            height: 300px;
+            width: 100%;
+            margin-bottom: 50px;
+        }
+    }
+    &-shape {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        & img {
+            animation: tpupdown 0.8s infinite alternate;
+        }
+    }
+    &-text {
+        position: absolute;
+        bottom: 135px;
+        left: 385px;
+        padding: 45px 60px;
+        padding-right: 80px;
+        background-color: var(--tp-common-white);
+        z-index: 2;
+        animation: tp-pulse 1.7s infinite alternate;
+        @media #{$xxxl}{
+            left: 200px;
+        }
+        @media #{$xxl}{
+            left: 130px;
+        }
+        @media #{$xl}{
+            left: 100px;
+        }
+        @media #{$lg}{
+            left: 70px;
+            padding: 35px 30px;
+            padding-right: 40px;
+        }
+        &::after{
+            position: absolute;
+            content: '';
+            top: 50%;
+            left: 50%;
+            height: 115%;
+            width: 108%;
+            opacity: 0.2;
+            transform: translate(-50%,-50%);
+            background-color: rgb(255, 255, 255);
+            z-index: -1;
+        }
+        & span {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 20px;
+            color: var(--tp-common-black);
+            @media #{$xl,$lg}{
+                font-size: 18px;
+            }
+        }
+        & a {
+            font-size: 28px;
+            color: var(--tp-theme-1);
+            @media #{$xl,$lg}{
+                font-size: 24px;
+            }
+        }
+    }
+}
+.tp-black-mode {
+    & .tp-choose-3-wrap{
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}

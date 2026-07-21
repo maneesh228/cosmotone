@@ -1,0 +1,156 @@
+@use '../../utils' as *;
+
+/*----------------------------------------*/
+/*  7.18 step css start
+/*----------------------------------------*/
+.tp-step {
+    &-item {
+        padding:0 32px;
+        padding-top: 80px;
+        background-color: var(--tp-common-white);
+        box-shadow: 2px 3.464px 40px 0px rgba(35, 35, 49, 0.08);
+        &-box {
+            margin-top: 50px;
+            &-pl {
+                padding-top: 60px;
+                @media #{$lg,$md,$xs}{
+                    padding-top: 0;
+                }
+            }
+            &.active {
+                & .tp-step-icon {
+                    & span {
+                        &::after{
+                            transform: scale(1);
+                        }
+                    }
+                }
+            }
+        }
+        &:hover {
+            & .tp-step-icon {
+                & span {
+                    & i {
+                        animation: icon-bounce 0.8s 1;
+                    }
+                }
+            }
+        }
+    }
+    &-icon {
+        position: absolute;
+        top: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        display: inline-block;
+        & span {
+            font-size: 44px;
+            display: inline-block;
+            height: 95px;
+            width: 95px;
+            line-height: 109px;
+            border-radius: 50%;
+            text-align: center;
+            transition: .3s;
+            color: var(--tp-common-white);
+            background-color: var(--tp-common-black);
+            & i {
+                position: relative;
+                z-index: 2;
+                display: inline-block;
+            }
+            &::after{
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                border-radius: 50%;
+                background-color: #d60708;
+                transform: scale(0);
+                transition: .4s;
+            }
+        }
+    }
+    &-title {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: var(--tp-common-black);
+        transition: .3s;
+        &:hover {
+            color: var(--tp-theme-1);
+        }
+    }
+    &-number {
+        transform: translateY(21px);
+        padding: 8px 35px;
+        background-color: #d60708;
+        display: inline-block;
+        position: relative;
+        &::before{
+            position: absolute;
+            content: '';
+            bottom: 0;
+            left: -16px;
+            height: 22px;
+            width: 16px;
+            background-color:#b90809;
+            clip-path: polygon(100% 100%, 100% 0, 0 0);
+        }
+        &::after{
+            position: absolute;
+            content: '';
+            top: 0;
+            right: -16px;
+            height: 22px;
+            width: 16px;
+            background-color:#b90809;
+            clip-path: polygon(100% 100%, 0 0, 0 100%);
+        }
+        & span {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--tp-common-white);
+        }
+    }
+    &-text {
+        margin-bottom: 35px;
+    }
+    &-section-title {
+        & .tp-section-title {
+            @media #{$lg}{
+                & br {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+.tp-black-mode {
+    & .tp-step-icon {
+        & span {
+            background-color: #26272a;
+        }
+    }
+    & .tp-step-item {
+        background-color: var(--tp-common-black-3);
+    }
+    & .tp-step-title {
+        color: var(--tp-common-white);
+        &:hover {
+            color: var(--tp-theme-1);
+        }
+    }
+    & .tp-step-number {
+        background-color:#26272a;
+        &::after{
+            background-color:#16171a;
+        }
+        &::before{
+            background-color:#1c1d20;
+        }
+    }
+}
