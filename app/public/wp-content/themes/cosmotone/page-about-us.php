@@ -2,6 +2,7 @@
 /** Template for the about-us page. @package Cosmotone */
 defined( 'ABSPATH' ) || exit;
 get_header();
+ob_start();
 ?>
    <main>
 
@@ -409,5 +410,9 @@ get_header();
       </div>
       <!-- team area end -->
 
-</main>
+   </main>
+<?php
+$cosmotone_about_markup = ob_get_clean();
+echo cosmotone_apply_page_section_fields( $cosmotone_about_markup, get_queried_object_id(), 'about' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+?>
 <?php get_footer(); ?>

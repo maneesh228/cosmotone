@@ -249,10 +249,10 @@ defined( 'ABSPATH' ) || exit;
                               <a class="<?php echo is_page( 'about-us' ) ? 'active' : ''; ?>" href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>" <?php echo is_page( 'about-us' ) ? 'aria-current="page"' : ''; ?>>About Us</a>
                            </li>
                            <li class="">
-                              <a class="<?php echo is_page( array( 'services', 'service-details' ) ) ? 'active' : ''; ?>" href="<?php echo esc_url( home_url( '/services/' ) ); ?>" <?php echo is_page( array( 'services', 'service-details' ) ) ? 'aria-current="page"' : ''; ?>>Services</a>
+                              <a class="<?php echo ( is_page( array( 'services', 'service-details' ) ) || is_singular( 'cosmotone_service' ) ) ? 'active' : ''; ?>" href="<?php echo esc_url( home_url( '/services/' ) ); ?>" <?php echo ( is_page( array( 'services', 'service-details' ) ) || is_singular( 'cosmotone_service' ) ) ? 'aria-current="page"' : ''; ?>>Services</a>
                            </li>
                            <li class="">
-                              <a class="<?php echo is_page( array( 'products', 'product-details' ) ) ? 'active' : ''; ?>" href="<?php echo esc_url( home_url( '/products/' ) ); ?>" <?php echo is_page( array( 'products', 'product-details' ) ) ? 'aria-current="page"' : ''; ?>>Products</a>
+                              <a class="<?php echo ( is_page( array( 'products', 'product-details' ) ) || is_singular( 'cosmotone_product' ) ) ? 'active' : ''; ?>" href="<?php echo esc_url( home_url( '/products/' ) ); ?>" <?php echo ( is_page( array( 'products', 'product-details' ) ) || is_singular( 'cosmotone_product' ) ) ? 'aria-current="page"' : ''; ?>>Products</a>
                            </li>
                            <li class="">
                               <a class="<?php echo is_page( 'career' ) ? 'active' : ''; ?>" href="<?php echo esc_url( home_url( '/career/' ) ); ?>" <?php echo is_page( 'career' ) ? 'aria-current="page"' : ''; ?>>Career</a>

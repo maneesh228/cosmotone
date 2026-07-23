@@ -7,6 +7,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
+require_once get_template_directory() . '/inc/sliders.php';
+require_once get_template_directory() . '/inc/page-sections.php';
+require_once get_template_directory() . '/inc/home-sections.php';
+require_once get_template_directory() . '/inc/catalog.php';
+
 function cosmotone_setup() {
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );
@@ -22,6 +27,7 @@ add_action( 'after_setup_theme', 'cosmotone_setup' );
  */
 function cosmotone_create_theme_pages() {
 	$pages = array(
+		'home'     => 'Home',
 		'about-us' => 'About Us',
 		'services' => 'Services',
 		'products' => 'Products',
@@ -48,14 +54,20 @@ function cosmotone_create_theme_pages() {
 		}
 	}
 
+	$home_page = get_page_by_path( 'home', OBJECT, 'page' );
+	if ( $home_page && ( 'page' !== get_option( 'show_on_front' ) || ! get_option( 'page_on_front' ) ) ) {
+		update_option( 'show_on_front', 'page' );
+		update_option( 'page_on_front', (int) $home_page->ID );
+	}
+
 	flush_rewrite_rules();
-	update_option( 'cosmotone_pages_version', '1.2.0' );
+	update_option( 'cosmotone_pages_version', '1.4.0' );
 }
 add_action( 'after_switch_theme', 'cosmotone_create_theme_pages' );
 
 /** Create pages once for installations where the theme was already active. */
 function cosmotone_maybe_create_theme_pages() {
-	if ( '1.2.0' !== get_option( 'cosmotone_pages_version' ) ) {
+	if ( '1.4.0' !== get_option( 'cosmotone_pages_version' ) ) {
 		cosmotone_create_theme_pages();
 	}
 }

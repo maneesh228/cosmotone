@@ -2,113 +2,16 @@
 /** Front page template. @package Cosmotone */
 defined( 'ABSPATH' ) || exit;
 get_header();
+$home_sections = cosmotone_get_home_sections( get_queried_object_id() );
 ?>
    <main>
 
       <!-- hero area start -->
-      <div class="tp-slider-area z-index p-relative">
-         <div class="tp-slider-arrow-box">
-            <button class="slider-prev">
-               <i class="fa-regular fa-arrow-left-long"></i>
-            </button>
-            <button class="slider-next active">
-               <i class="fa-regular fa-arrow-right-long"></i>
-            </button>
-         </div>
-         <div class="tp-slider-wrapper">
-            <div class="swiper-container tp-slider-active">
-               <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                     <div class="tp-slider-height tp-slider-overly">
-                        <div class="tp-slider-shape-2 d-none d-xl-block">
-                           <img src="assets/img/hero/bg-1-2.png" alt="">
-                        </div>
-                        <div class="tp-slider-shape-3 d-none d-md-block">
-                           <img src="assets/img/hero/bg-1-3.png" alt="">
-                        </div>
-                        <div class="tp-slider-bg tp-slider-video-bg" data-background="assets/img/hero/cosmotone-blue-hero.png">
-                           <video muted playsinline preload="metadata" poster="assets/img/hero/cosmotone-blue-hero.png" aria-hidden="true">
-                              <source src="assets/video/automotive-wiring-harness.mp4" type="video/mp4">
-                           </video>
-                        </div>
-                        <div class="container z-index-5">
-                           <div class="row">
-                              <div class="col-xl-8 col-lg-8">
-                                 <div class="tp-slider-content">
-                                    <div class="tp-slider-title-box">                                       
-                                       <h1 class="tp-slider-title">Strengthening the <br>automotive industry with <br>world-class <span>electrical solutions</span></h1>
-                                    </div>
-                                    <div class="tp-slider-text">
-                                       <p>Trusted by automotive OEMs across the globe, we deliver high-quality electrical components built for performance and reliability.</p>
-                                       <a class="tp-btn" href="#"><span>Discover More</span></a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                     <div class="tp-slider-height tp-slider-overly">
-                        <div class="tp-slider-shape-2 d-none d-xl-block">
-                           <img src="assets/img/hero/bg-1-2.png" alt="">
-                        </div>
-                        <div class="tp-slider-shape-3 d-none d-md-block">
-                           <img src="assets/img/hero/bg-1-3.png" alt="">
-                        </div>
-                        <div class="tp-slider-bg" data-background="assets/img/hero/banner2.jpg"></div>
-                        <div class="container z-index-5">
-                           <div class="row">
-                              <div class="col-xl-8 col-lg-8">
-                                 <div class="tp-slider-content z-index-5">
-                                    <div class="tp-slider-title-box">                                       
-                                       <h1 class="tp-slider-title">Reliable components <br>engineered to <br><span>perform</span></h1>
-                                    </div>
-                                    <div class="tp-slider-text">
-                                       <p>Expert & Experienced Electricians for Residential to Commercialto services
-                                          with 100% satisfaction guarantee</p>
-                                       <a class="tp-btn" href="#"><span>Discover More</span></a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                     <div class="tp-slider-height tp-slider-overly">
-                        <div class="tp-slider-shape-2 d-none d-xl-block">
-                           <img src="assets/img/hero/bg-1-2.png" alt="">
-                        </div>
-                        <div class="tp-slider-shape-3 d-none d-md-block">
-                           <img src="assets/img/hero/bg-1-3.png" alt="">
-                        </div>
-                        <div class="tp-slider-bg" data-background="assets/img/hero/cosmotone-blue-hero.png"></div>
-                        <div class="container z-index-5">
-                           <div class="row">
-                              <div class="col-xl-8 col-lg-8">
-                                 <div class="tp-slider-content">
-                                    <div class="tp-slider-title-box">                                       
-                                       <h1 class="tp-slider-title">Powering mobility <br>through trusted <br><span>innovation</span></h1>
-                                    </div>
-                                    <div class="tp-slider-text">
-                                       <p>Expert & Experienced Electricians for Residential to Commercialto services
-                                          with 100% satisfaction guarantee</p>
-                                       <a class="tp-btn" href="#"><span>Discover More</span></a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+      <?php cosmotone_render_managed_home_slider(); ?>
       <!-- hero area end -->
 
       <!-- about area start -->
+      <?php if ( ! empty( $home_sections['about_enabled'] ) ) : ?>
       <div class="tp-about-area p-relative pt-120 pb-120">
          <div class="tp-about-shape-3">
             <img src="assets/img/about/shape-1-4.png" alt="">
@@ -121,22 +24,22 @@ get_header();
                <div class="col-xl-6 col-lg-6 wow tpfadeLeft" data-wow-duration=".9s" data-wow-delay=".5s">
                   <div class="tp-about-left-box">
                      <div class="tp-about-section-box mb-15">
-                        <span class="tp-section-subtitle"><i class="flaticon-flash"></i> ABOUT COSMOTONE</span>
-                        <h4 class="tp-section-title">Empowering Mobility with Reliable Electrical Solutions</h4>
+                        <span class="tp-section-subtitle"><i class="flaticon-flash"></i> <?php echo esc_html( $home_sections['about_subtitle'] ); ?></span>
+                        <h4 class="tp-section-title"><?php echo wp_kses_post( $home_sections['about_title'] ); ?></h4>
                      </div>
                      <div class="tp-about-text">
-                        <p>Cosmotone manufactures automotive electrical components, wiring harnesses, relays and sensors engineered for dependable performance.</p>
-                        <span>A legacy of quality, reliability, and innovation.</span>
+                        <div class="tp-about-description"><?php echo wp_kses_post( wpautop( $home_sections['about_description'] ) ); ?></div>
+                        <span><?php echo esc_html( $home_sections['about_highlight'] ); ?></span>
                         <div class="tp-about-icon-wrap p-relative d-flex justify-content-between mb-45">
-                           <div class="tp-about-icon-shape d-none d-xl-block">
+                           <!-- <div class="tp-about-icon-shape d-none d-xl-block">
                               <img src="assets/img/about/shape-1-6.png" alt="">
-                           </div>
+                           </div> -->
                            <div class="tp-about-icon-box d-flex align-items-center mb-20">
                               <div class="tp-about-icon">
                                  <span><i class="flaticon-electrician"></i></span>
                               </div>
                               <div class="tp-about-icon-text">
-                                 <h5>Driven by <br> Excellence</h5>
+                                 <h5><?php echo wp_kses_post( $home_sections['about_feature_1'] ); ?></h5>
                               </div>
                            </div>
                            <div class="tp-about-icon-box d-flex align-items-center mb-20">
@@ -144,12 +47,12 @@ get_header();
                                  <span><i class="flaticon-plug"></i></span>
                               </div>
                               <div class="tp-about-icon-text">
-                                 <h5>Powering <br> Connections</h5>
+                                 <h5><?php echo wp_kses_post( $home_sections['about_feature_2'] ); ?></h5>
                               </div>
                            </div>
                         </div>
                         <div class="tp-about-button-box d-flex align-items-center">
-                           <a class="tp-btn-black" href="#"><span>KNOW MORE</span></a>
+                           <a class="tp-btn-black" href="<?php echo esc_url( $home_sections['about_button_url'] ); ?>"><span><?php echo esc_html( $home_sections['about_button_text'] ); ?></span></a>
                            <img src="assets/img/about/shape-1-1.png" alt="">
                         </div>
                      </div>
@@ -158,10 +61,10 @@ get_header();
                <div class="col-xl-6 col-lg-6 wow tpfadeRight" data-wow-duration=".9s" data-wow-delay=".7s">
                   <div class="tp-about-right-box p-relative text-end">
                      <div class="tp-about-main-thumb">
-                        <img src="assets/img/about/thumb-1-1.jpg" alt="">
+                        <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'about_main_image' ) ); ?>" alt="">
                      </div>
                      <div class="tp-about-thumb-sm">
-                        <img src="assets/img/about/thumb-1-2.jpg" alt="">
+                        <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'about_small_image' ) ); ?>" alt="">
                      </div>
                      <div class="tp-about-shape-1 d-none d-lg-block">
                         <img src="assets/img/about/shape-1-2.png?v=blue-theme" alt="">
@@ -174,9 +77,11 @@ get_header();
             </div>
          </div>
       </div>
+      <?php endif; ?>
       <!-- about area end -->
 
       <!-- quality assurance area start -->
+      <?php if ( ! empty( $home_sections['quality_enabled'] ) ) : ?>
       <section class="tp-quality-strip-area" aria-label="Our quality commitments">
          <div class="container">
             <div class="tp-quality-strip">
@@ -185,8 +90,8 @@ get_header();
                      <div class="tp-quality-strip-item">
                         <span class="tp-quality-strip-icon"><i class="fa-regular fa-badge-check"></i></span>
                         <div>
-                           <h5>Quality Assurance</h5>
-                           <p>Stringent testing at every stage</p>
+                           <h5><?php echo esc_html( $home_sections['quality_1_title'] ); ?></h5>
+                           <div><?php echo wp_kses_post( wpautop( $home_sections['quality_1_description'] ) ); ?></div>
                         </div>
                      </div>
                   </div>
@@ -194,8 +99,8 @@ get_header();
                      <div class="tp-quality-strip-item">
                         <span class="tp-quality-strip-icon"><i class="fa-regular fa-gears"></i></span>
                         <div>
-                           <h5>Custom Solutions</h5>
-                           <p>Designed to meet customer needs</p>
+                           <h5><?php echo esc_html( $home_sections['quality_2_title'] ); ?></h5>
+                           <div><?php echo wp_kses_post( wpautop( $home_sections['quality_2_description'] ) ); ?></div>
                         </div>
                      </div>
                   </div>
@@ -203,8 +108,8 @@ get_header();
                      <div class="tp-quality-strip-item">
                         <span class="tp-quality-strip-icon"><i class="fa-regular fa-truck-fast"></i></span>
                         <div>
-                           <h5>On-time Delivery</h5>
-                           <p>Reliable production and dispatch</p>
+                           <h5><?php echo esc_html( $home_sections['quality_3_title'] ); ?></h5>
+                           <div><?php echo wp_kses_post( wpautop( $home_sections['quality_3_description'] ) ); ?></div>
                         </div>
                      </div>
                   </div>
@@ -212,8 +117,8 @@ get_header();
                      <div class="tp-quality-strip-item">
                         <span class="tp-quality-strip-icon"><i class="fa-regular fa-headset"></i></span>
                         <div>
-                           <h5>Expert Support</h5>
-                           <p>Technical support you can rely on</p>
+                           <h5><?php echo esc_html( $home_sections['quality_4_title'] ); ?></h5>
+                           <div><?php echo wp_kses_post( wpautop( $home_sections['quality_4_description'] ) ); ?></div>
                         </div>
                      </div>
                   </div>
@@ -221,11 +126,13 @@ get_header();
             </div>
          </div>
       </section>
+      <?php endif; ?>
       <!-- quality assurance area end -->
 
       <!-- service area start -->
+      <?php if ( ! empty( $home_sections['services_enabled'] ) ) : ?>
       <div class="tp-service-area tp-service-bg p-relative pt-120 pb-120"
-         data-background="assets/img/service/bg-1-1.png">
+         data-background="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'services_background' ) ); ?>">
          <div class="tp-service-shape-2 d-none d-xxl-block">
             <!-- <img src="assets/img/service/shape-1-3.png" alt=""> -->
          </div>
@@ -234,8 +141,8 @@ get_header();
                <div class="row align-items-end">
                   <div class="col-xl-6 col-lg-6 col-md-9">
                      <div class="tp-service-section-box">
-                        <span class="tp-section-subtitle"><i class="flaticon-flash"></i>OUR BUSINESS SEGMENT</span>
-                        <h4 class="tp-section-title">Engineered for Performance and Reliability</h4>
+                        <span class="tp-section-subtitle"><i class="flaticon-flash"></i><?php echo esc_html( $home_sections['services_subtitle'] ); ?></span>
+                        <h4 class="tp-section-title"><?php echo wp_kses_post( $home_sections['services_title'] ); ?></h4>
                      </div>
                   </div>
                   <div class="col-xl-6 col-lg-6 col-md-3">
@@ -254,7 +161,7 @@ get_header();
                            <div class="swiper-slide">
                               <div class="tp-service-item p-relative">
                                  <div class="tp-service-thumb">
-                                    <img src="assets/img/service/sv-1-1.jpg" alt="">
+                                    <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'service_1_image' ) ); ?>" alt="">
                                  </div>
                                  <div class="tp-service-content-box">
                                     <div class="tp-service-content fix">
@@ -266,12 +173,12 @@ get_header();
                                        </div>
                                        <div class="tp-service-text pb-5">
                                           <h4 class="tp-service-title">
-                                             <a href="#">Automotive Electrical</a>
+                                             <a href="<?php echo esc_url( $home_sections['service_1_url'] ); ?>"><?php echo esc_html( $home_sections['service_1_title'] ); ?></a>
                                           </h4>
-                                          <p>Reliable electrical components engineered for vehicle safety and performance.</p>
+                                          <div><?php echo wp_kses_post( wpautop( $home_sections['service_1_description'] ) ); ?></div>
                                        </div>
                                        <div class="tp-service-arrow">
-                                          <a href="#">Read More<i
+                                          <a href="<?php echo esc_url( $home_sections['service_1_url'] ); ?>"><?php echo esc_html( $home_sections['service_1_button_text'] ); ?><i
                                                 class="flaticon-right-arrow"></i></a>
                                        </div>
                                     </div>
@@ -284,7 +191,7 @@ get_header();
                            <div class="swiper-slide">
                               <div class="tp-service-item p-relative">
                                  <div class="tp-service-thumb">
-                                    <img src="assets/img/service/sv-1-2.jpg" alt="">
+                                    <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'service_2_image' ) ); ?>" alt="">
                                  </div>
                                  <div class="tp-service-content-box">
                                     <div class="tp-service-content fix">
@@ -296,12 +203,12 @@ get_header();
                                        </div>
                                        <div class="tp-service-text pb-5">
                                           <h4 class="tp-service-title">
-                                             <a href="#">Wires and Cables</a>
+                                             <a href="<?php echo esc_url( $home_sections['service_2_url'] ); ?>"><?php echo esc_html( $home_sections['service_2_title'] ); ?></a>
                                           </h4>
-                                          <p>Precision-engineered wires and cables ensuring secure connections and dependable performance.</p>
+                                          <div><?php echo wp_kses_post( wpautop( $home_sections['service_2_description'] ) ); ?></div>
                                        </div>
                                        <div class="tp-service-arrow">
-                                          <a href="#">Read More<i
+                                          <a href="<?php echo esc_url( $home_sections['service_2_url'] ); ?>"><?php echo esc_html( $home_sections['service_2_button_text'] ); ?><i
                                                 class="flaticon-right-arrow"></i></a>
                                        </div>
                                     </div>
@@ -314,7 +221,7 @@ get_header();
                            <div class="swiper-slide">
                               <div class="tp-service-item p-relative">
                                  <div class="tp-service-thumb">
-                                    <img src="assets/img/service/sv-1-3.jpg" alt="">
+                                    <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'service_3_image' ) ); ?>" alt="">
                                  </div>
                                  <div class="tp-service-content-box">
                                     <div class="tp-service-content fix">
@@ -326,12 +233,12 @@ get_header();
                                        </div>
                                        <div class="tp-service-text pb-5">
                                           <h4 class="tp-service-title">
-                                             <a href="#">Automotive</a>
+                                             <a href="<?php echo esc_url( $home_sections['service_3_url'] ); ?>"><?php echo esc_html( $home_sections['service_3_title'] ); ?></a>
                                           </h4>
-                                          <p>High-quality automotive solutions designed to deliver reliable power, safety, and long-lasting performance.</p>
+                                          <div><?php echo wp_kses_post( wpautop( $home_sections['service_3_description'] ) ); ?></div>
                                        </div>
                                        <div class="tp-service-arrow">
-                                          <a href="#">Read More<i
+                                          <a href="<?php echo esc_url( $home_sections['service_3_url'] ); ?>"><?php echo esc_html( $home_sections['service_3_button_text'] ); ?><i
                                                 class="flaticon-right-arrow"></i></a>
                                        </div>
                                     </div>
@@ -348,9 +255,11 @@ get_header();
             </div>
          </div>
       </div>
+      <?php endif; ?>
       <!-- service area end -->
 
       <!-- choose area start -->
+      <?php if ( ! empty( $home_sections['choose_enabled'] ) ) : ?>
       <div class="tp-choose-area tp-choose-space fix p-relative black-bg">
          <div class="tp-choose-shape-1 d-none d-lg-block">
             <img src="assets/img/choose/shape-1-1.png" alt="">
@@ -372,36 +281,36 @@ get_header();
                <div class="col-xl-6 col-lg-6">
                   <div class="tp-choose-content z-index">
                      <div class="tp-choose-section-box mb-30">
-                        <span class="tp-section-subtitle text-color"><i class="flaticon-flash"></i>WHY CHOOSE COSMOTONE</span>
-                        <h4 class="tp-section-title text-white">Comprehensive Automotive Electrical Solutions Tailored to Your Needs</h4>
+                        <span class="tp-section-subtitle text-color"><i class="flaticon-flash"></i><?php echo esc_html( $home_sections['choose_subtitle'] ); ?></span>
+                        <h4 class="tp-section-title text-white"><?php echo wp_kses_post( $home_sections['choose_title'] ); ?></h4>
                      </div>
                      <div class="tp-choose-text mb-50">
-                        <p>Innovative engineering, stringent quality control, and a customer-centric approach enable us to deliver dependable automotive electrical solutions that keep you ahead of the road.</p>
+                        <?php echo wp_kses_post( wpautop( $home_sections['choose_description'] ) ); ?>
                      </div>
                      <div class="tp-choose-wrap">
                         <div class="row">
                            <div class="col-xl-6 col-lg-6 col-md-6 mb-20">
                               <div class="tp-choose-item d-flex align-items-center">
                                  <span><i class="flaticon-battery"></i></span>
-                                 <h5 class="tp-choose-item-title">Industry Expertise</h5>
+                                 <h5 class="tp-choose-item-title"><?php echo esc_html( $home_sections['choose_item_1'] ); ?></h5>
                               </div>
                            </div>
                            <div class="col-xl-6 col-lg-6 col-md-6 mb-20">
                               <div class="tp-choose-item d-flex align-items-center">
                                  <span><i class="flaticon-electrician-1"></i></span>
-                                 <h5 class="tp-choose-item-title">Superior Product Quality</h5>
+                                 <h5 class="tp-choose-item-title"><?php echo esc_html( $home_sections['choose_item_2'] ); ?></h5>
                               </div>
                            </div>
                            <div class="col-xl-6 col-lg-6 col-md-6 mb-20">
                               <div class="tp-choose-item d-flex align-items-center">
                                  <span><i class="flaticon-price-tag"></i></span>
-                                 <h5 class="tp-choose-item-title">ISO 9001:2015 Certified</h5>
+                                 <h5 class="tp-choose-item-title"><?php echo esc_html( $home_sections['choose_item_3'] ); ?></h5>
                               </div>
                            </div>
                            <div class="col-xl-6 col-lg-6 col-md-6 mb-20">
                               <div class="tp-choose-item d-flex align-items-center">
                                  <span><i class="flaticon-alarm-clock"></i></span>
-                                 <h5 class="tp-choose-item-title">Innovative Solutions</h5>
+                                 <h5 class="tp-choose-item-title"><?php echo esc_html( $home_sections['choose_item_4'] ); ?></h5>
                               </div>
                            </div>
                         </div>
@@ -411,12 +320,14 @@ get_header();
             </div>
          </div>
          <div class="tp-choose-thumb-box">
-            <img src="assets/img/hero/banner2.jpg" alt="Automotive wiring harness, relays and electrical components">
+            <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'choose_image' ) ); ?>" alt="Automotive wiring harness, relays and electrical components">
          </div>
       </div>
+      <?php endif; ?>
       <!-- choose area end -->
 
       <!-- project area start -->
+      <?php if ( ! empty( $home_sections['products_enabled'] ) ) : ?>
       <div class="tp-project-area p-relative pt-120 pb-120">
          <div class="tp-project-shape-1 d-none d-xl-block">
             <img src="assets/img/project/shape-1-1.png" alt="">
@@ -425,8 +336,8 @@ get_header();
             <div class="row">
                <div class="col-xl-12">
                   <div class="tp-project-section-box text-center mb-60">
-                     <span class="tp-section-subtitle"><i class="flaticon-flash"></i>TOP PRODUCTS</span>
-                     <h4 class="tp-section-title">Check our latest products</h4>
+                     <span class="tp-section-subtitle"><i class="flaticon-flash"></i><?php echo esc_html( $home_sections['products_subtitle'] ); ?></span>
+                     <h4 class="tp-section-title"><?php echo wp_kses_post( $home_sections['products_title'] ); ?></h4>
                   </div>
                </div>
                <div class="tp-project-plr z-index">
@@ -438,75 +349,75 @@ get_header();
                                  <div class="swiper-slide">
                                     <div class="tp-project-item p-relative">
                                        <div class="tp-project-thumb">
-                                          <a class="popup-image tp-product-popup-image" href="assets/img/project/pro-1-1.jpg" title="Automotive" aria-label="View Automotive product image">
-                                             <img src="assets/img/project/pro-1-1.jpg" alt="Automotive electrical solutions">
+                                          <a class="popup-image tp-product-popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_1_image' ) ); ?>" title="<?php echo esc_attr( $home_sections['product_1_title'] ); ?>" aria-label="<?php echo esc_attr( 'View ' . $home_sections['product_1_title'] . ' product image' ); ?>">
+                                             <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_1_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['product_1_title'] ); ?>">
                                           </a>
                                        </div>
                                        <div class="tp-project-content">
-                                          <a class="tp-project-read-more" href="#"><span>Read More</span><i class="flaticon-right-arrow"></i></a>
-                                          <span>Automotive electrical solutions</span>
-                                          <h4 class="tp-project-title"><a href="#">Automotive</a></h4>
-                                          <p>Wide range of electrical solutions for modern vehicles, built for safety.</p>
+                                          <a class="tp-project-read-more" href="<?php echo esc_url( $home_sections['product_1_url'] ); ?>"><span><?php echo esc_html( $home_sections['product_1_button_text'] ); ?></span><i class="flaticon-right-arrow"></i></a>
+                                          <span><?php echo esc_html( $home_sections['product_1_subtitle'] ); ?></span>
+                                          <h4 class="tp-project-title"><a href="<?php echo esc_url( $home_sections['product_1_url'] ); ?>"><?php echo esc_html( $home_sections['product_1_title'] ); ?></a></h4>
+                                          <div><?php echo wp_kses_post( wpautop( $home_sections['product_1_description'] ) ); ?></div>
                                        </div>
                                     </div>
                                  </div>
                                  <div class="swiper-slide">
                                     <div class="tp-project-item p-relative">
                                        <div class="tp-project-thumb">
-                                          <a class="popup-image tp-product-popup-image" href="assets/img/project/pro-1-2.jpg" title="EV Relays" aria-label="View EV Relays product image">
-                                             <img src="assets/img/project/pro-1-2.jpg" alt="EV relays">
+                                          <a class="popup-image tp-product-popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_2_image' ) ); ?>" title="<?php echo esc_attr( $home_sections['product_2_title'] ); ?>" aria-label="<?php echo esc_attr( 'View ' . $home_sections['product_2_title'] . ' product image' ); ?>">
+                                             <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_2_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['product_2_title'] ); ?>">
                                           </a>
                                        </div>
                                        <div class="tp-project-content">
-                                          <a class="tp-project-read-more" href="#"><span>Read More</span><i class="flaticon-right-arrow"></i></a>
-                                          <span>High-performance relays</span>
-                                          <h4 class="tp-project-title"><a href="#">EV Relays</a></h4>
-                                          <p>Reliable and efficient relays engineered for electric vehicles.</p>
+                                          <a class="tp-project-read-more" href="<?php echo esc_url( $home_sections['product_2_url'] ); ?>"><span><?php echo esc_html( $home_sections['product_2_button_text'] ); ?></span><i class="flaticon-right-arrow"></i></a>
+                                          <span><?php echo esc_html( $home_sections['product_2_subtitle'] ); ?></span>
+                                          <h4 class="tp-project-title"><a href="<?php echo esc_url( $home_sections['product_2_url'] ); ?>"><?php echo esc_html( $home_sections['product_2_title'] ); ?></a></h4>
+                                          <div><?php echo wp_kses_post( wpautop( $home_sections['product_2_description'] ) ); ?></div>
                                        </div>
                                     </div>
                                  </div>
                                  <div class="swiper-slide">
                                     <div class="tp-project-item p-relative">
                                        <div class="tp-project-thumb">
-                                          <a class="popup-image tp-product-popup-image" href="assets/img/project/pro-1-3.jpg" title="EV–EVSE Relays" aria-label="View EV–EVSE Relays product image">
-                                             <img src="assets/img/project/pro-1-3.jpg" alt="EV–EVSE relays">
+                                          <a class="popup-image tp-product-popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_3_image' ) ); ?>" title="<?php echo esc_attr( $home_sections['product_3_title'] ); ?>" aria-label="<?php echo esc_attr( 'View ' . $home_sections['product_3_title'] . ' product image' ); ?>">
+                                             <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_3_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['product_3_title'] ); ?>">
                                           </a>
                                        </div>
                                        <div class="tp-project-content">
-                                          <a class="tp-project-read-more" href="#"><span>Read More</span><i class="flaticon-right-arrow"></i></a>
-                                          <span>Charging and energy control</span>
-                                          <h4 class="tp-project-title"><a href="#">EV–EVSE Relays</a></h4>
-                                          <p>Custom wiring and switching solutions built for durability.</p>
+                                          <a class="tp-project-read-more" href="<?php echo esc_url( $home_sections['product_3_url'] ); ?>"><span><?php echo esc_html( $home_sections['product_3_button_text'] ); ?></span><i class="flaticon-right-arrow"></i></a>
+                                          <span><?php echo esc_html( $home_sections['product_3_subtitle'] ); ?></span>
+                                          <h4 class="tp-project-title"><a href="<?php echo esc_url( $home_sections['product_3_url'] ); ?>"><?php echo esc_html( $home_sections['product_3_title'] ); ?></a></h4>
+                                          <div><?php echo wp_kses_post( wpautop( $home_sections['product_3_description'] ) ); ?></div>
                                        </div>
                                     </div>
                                  </div>
                                  <div class="swiper-slide">
                                     <div class="tp-project-item p-relative">
                                        <div class="tp-project-thumb">
-                                          <a class="popup-image tp-product-popup-image" href="assets/img/project/pro-1-4.jpg" title="Electrical Accessories" aria-label="View Electrical Accessories product image">
-                                             <img src="assets/img/project/pro-1-4.jpg" alt="Electrical accessories">
+                                          <a class="popup-image tp-product-popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_4_image' ) ); ?>" title="<?php echo esc_attr( $home_sections['product_4_title'] ); ?>" aria-label="<?php echo esc_attr( 'View ' . $home_sections['product_4_title'] . ' product image' ); ?>">
+                                             <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_4_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['product_4_title'] ); ?>">
                                           </a>
                                        </div>
                                        <div class="tp-project-content">
-                                          <a class="tp-project-read-more" href="#"><span>Read More</span><i class="flaticon-right-arrow"></i></a>
-                                          <span>Precision components</span>
-                                          <h4 class="tp-project-title"><a href="#">Electrical Accessories</a></h4>
-                                          <p>High-quality accessories for every automotive requirement.</p>
+                                          <a class="tp-project-read-more" href="<?php echo esc_url( $home_sections['product_4_url'] ); ?>"><span><?php echo esc_html( $home_sections['product_4_button_text'] ); ?></span><i class="flaticon-right-arrow"></i></a>
+                                          <span><?php echo esc_html( $home_sections['product_4_subtitle'] ); ?></span>
+                                          <h4 class="tp-project-title"><a href="<?php echo esc_url( $home_sections['product_4_url'] ); ?>"><?php echo esc_html( $home_sections['product_4_title'] ); ?></a></h4>
+                                          <div><?php echo wp_kses_post( wpautop( $home_sections['product_4_description'] ) ); ?></div>
                                        </div>
                                     </div>
                                  </div>
                                  <div class="swiper-slide">
                                     <div class="tp-project-item p-relative">
                                        <div class="tp-project-thumb">
-                                          <a class="popup-image tp-product-popup-image" href="assets/img/project/pro-1-5.jpg" title="Sensors &amp; Connectors" aria-label="View Sensors and Connectors product image">
-                                             <img src="assets/img/project/pro-1-5.jpg" alt="Sensors and connectors">
+                                          <a class="popup-image tp-product-popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_5_image' ) ); ?>" title="<?php echo esc_attr( $home_sections['product_5_title'] ); ?>" aria-label="<?php echo esc_attr( 'View ' . $home_sections['product_5_title'] . ' product image' ); ?>">
+                                             <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_5_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['product_5_title'] ); ?>">
                                           </a>
                                        </div>
                                        <div class="tp-project-content">
-                                          <a class="tp-project-read-more" href="#"><span>Read More</span><i class="flaticon-right-arrow"></i></a>
-                                          <span>Engineered connections</span>
-                                          <h4 class="tp-project-title"><a href="#">Sensors & Connectors</a></h4>
-                                          <p>Accurate sensing and secure connections for dependable performance.</p>
+                                          <a class="tp-project-read-more" href="<?php echo esc_url( $home_sections['product_5_url'] ); ?>"><span><?php echo esc_html( $home_sections['product_5_button_text'] ); ?></span><i class="flaticon-right-arrow"></i></a>
+                                          <span><?php echo esc_html( $home_sections['product_5_subtitle'] ); ?></span>
+                                          <h4 class="tp-project-title"><a href="<?php echo esc_url( $home_sections['product_5_url'] ); ?>"><?php echo esc_html( $home_sections['product_5_title'] ); ?></a></h4>
+                                          <div><?php echo wp_kses_post( wpautop( $home_sections['product_5_description'] ) ); ?></div>
                                        </div>
                                     </div>
                                  </div>
@@ -519,11 +430,13 @@ get_header();
             </div>
          </div>
       </div>
+      <?php endif; ?>
       <!-- project area end -->
 
       <!-- contact area start -->
+      <?php if ( ! empty( $home_sections['contact_enabled'] ) ) : ?>
       <div class="tp-contact-area">
-         <div class="tp-contact-bg p-relative jarallax pt-120" data-background="assets/img/contact/cosmotone-vision-bg.png">
+         <div class="tp-contact-bg p-relative jarallax pt-120" data-background="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_background' ) ); ?>">
             <div class="tp-contact-shape-2 d-none d-xl-block">
                <img src="assets/img/contact/shape-1-2.png" alt="">
             </div>
@@ -536,17 +449,17 @@ get_header();
                               <li class="nav-items" role="presentation">
                                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
                                     data-bs-target="#home" type="button" role="tab" aria-controls="home"
-                                    aria-selected="true">VISION</button>
+                                    aria-selected="true"><?php echo esc_html( $home_sections['contact_tab_1'] ); ?></button>
                               </li>
                               <li class="nav-items" role="presentation">
                                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
                                     data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
-                                    aria-selected="false">MISSION</button>
+                                    aria-selected="false"><?php echo esc_html( $home_sections['contact_tab_2'] ); ?></button>
                               </li>
                               <li class="nav-items" role="presentation">
                                  <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
                                     data-bs-target="#contact" type="button" role="tab" aria-controls="contact"
-                                    aria-selected="false">VALUES</button>
+                                    aria-selected="false"><?php echo esc_html( $home_sections['contact_tab_3'] ); ?></button>
                               </li>
                            </ul>
                         </div>
@@ -558,7 +471,7 @@ get_header();
                                     <div class="col-xl-5 col-lg-5 col-md-5">
                                        <div class="tp-contact-tab-content-left p-relative">
                                           <div class="tp-contact-tab-content-thumb">
-                                             <img class="w-100" src="assets/img/contact/contact1-1.jpg" alt="">
+                                             <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_vision_image' ) ); ?>" alt="">
                                           </div>
                                           <div class="tp-contact-tab-play-icon">
                                              <a class="popup-video"
@@ -569,12 +482,12 @@ get_header();
                                     </div>
                                     <div class="col-xl-7 col-lg-7 col-md-7">
                                        <div class="tp-contact-tab-content-right">
-                                          <h5 class="tp-contact-tab-content-title">Shaping the Future of Automotive Components </h5>
+                                          <h5 class="tp-contact-tab-content-title"><?php echo wp_kses_post( $home_sections['contact_vision_title'] ); ?></h5>
                                           <div class="tp-contact-tab-content-list">
                                              <ul>
-                                                <li><i class="fa-light fa-badge-check"></i>Product Design & Development </li>
-                                                <li><i class="fa-light fa-badge-check"></i>Advanced Manufacturing</li>
-                                                <li><i class="fa-light fa-badge-check"></i>Quality Assurance</li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_vision_item_1'] ); ?></li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_vision_item_2'] ); ?></li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_vision_item_3'] ); ?></li>
                                              </ul>
                                           </div>
                                        </div>
@@ -586,7 +499,7 @@ get_header();
                                     <div class="col-xl-5 col-lg-5 col-md-5">
                                        <div class="tp-contact-tab-content-left p-relative">
                                           <div class="tp-contact-tab-content-thumb">
-                                             <img class="w-100" src="assets/img/contact/contact1-2.jpg" alt="">
+                                             <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_mission_image' ) ); ?>" alt="">
                                           </div>
                                           <div class="tp-contact-tab-play-icon">
                                              <a class="popup-video"
@@ -597,15 +510,12 @@ get_header();
                                     </div>
                                     <div class="col-xl-7 col-lg-7 col-md-7">
                                        <div class="tp-contact-tab-content-right">
-                                          <h5 class="tp-contact-tab-content-title">Future Electricity
-                                             and Problem Solution</h5>
+                                          <h5 class="tp-contact-tab-content-title"><?php echo wp_kses_post( $home_sections['contact_mission_title'] ); ?></h5>
                                           <div class="tp-contact-tab-content-list">
                                              <ul>
-                                                <li><i class="fa-light fa-badge-check"></i>Full-service electrical
-                                                   layout </li>
-                                                <li><i class="fa-light fa-badge-check"></i>AC instalation in one hour
-                                                </li>
-                                                <li><i class="fa-light fa-badge-check"></i>Wiring and installation</li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_mission_item_1'] ); ?></li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_mission_item_2'] ); ?></li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_mission_item_3'] ); ?></li>
                                              </ul>
                                           </div>
                                        </div>
@@ -617,7 +527,7 @@ get_header();
                                     <div class="col-xl-5 col-lg-5 col-md-5">
                                        <div class="tp-contact-tab-content-left p-relative">
                                           <div class="tp-contact-tab-content-thumb">
-                                             <img class="w-100" src="assets/img/contact/contact1-3.jpg" alt="">
+                                             <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_values_image' ) ); ?>" alt="">
                                           </div>
                                           <div class="tp-contact-tab-play-icon">
                                              <a class="popup-video"
@@ -628,15 +538,12 @@ get_header();
                                     </div>
                                     <div class="col-xl-7 col-lg-7 col-md-7">
                                        <div class="tp-contact-tab-content-right">
-                                          <h5 class="tp-contact-tab-content-title">Electricity can transform
-                                             people's lives, not just living </h5>
+                                          <h5 class="tp-contact-tab-content-title"><?php echo wp_kses_post( $home_sections['contact_values_title'] ); ?></h5>
                                           <div class="tp-contact-tab-content-list">
                                              <ul>
-                                                <li><i class="fa-light fa-badge-check"></i>Full-service electrical
-                                                   layout </li>
-                                                <li><i class="fa-light fa-badge-check"></i>AC instalation in one hour
-                                                </li>
-                                                <li><i class="fa-light fa-badge-check"></i>Wiring and installation</li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_values_item_1'] ); ?></li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_values_item_2'] ); ?></li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_values_item_3'] ); ?></li>
                                              </ul>
                                           </div>
                                        </div>
@@ -650,18 +557,17 @@ get_header();
                   <div class="col-xl-6 col-lg-6">
                      <div class="tp-contact-right-box p-relative z-index">
                         <div class="tp-contact-section-box mb-25">
-                           <span class="tp-section-subtitle">NEED HELP?</span>
-                           <h4 class="tp-section-title-2">Have a question? <br>We're ready to help</h4>
+                           <span class="tp-section-subtitle"><?php echo esc_html( $home_sections['contact_subtitle'] ); ?></span>
+                           <h4 class="tp-section-title-2"><?php echo wp_kses_post( $home_sections['contact_title'] ); ?></h4>
                         </div>
                         <div class="tp-contact-text">
-                           <p class="mb-35">Don’t hesitate to call us on any product related query, our team wait for
-                              your call</p>
+                           <div class="mb-35"><?php echo wp_kses_post( wpautop( $home_sections['contact_description'] ) ); ?></div>
                            <div class="tp-contact-right-tel-box">
                               <div class="tp-contact-right-tel-icon d-flex align-items-center">
                                  <i class="flaticon-phone-call"></i>
                                  <div class="tp-contact-right-tel-content">
-                                    <span>For emergency </span>
-                                    <a href="#">+91 485 220 8431</a>
+                                    <span><?php echo esc_html( $home_sections['contact_phone_label'] ); ?></span>
+                                    <a href="<?php echo esc_url( $home_sections['contact_phone_url'] ); ?>"><?php echo esc_html( $home_sections['contact_phone'] ); ?></a>
                                  </div>
                               </div>
                            </div>
@@ -675,9 +581,11 @@ get_header();
             </div>
          </div>
       </div>
+      <?php endif; ?>
       <!-- contact area end -->
 
       <!-- funfact area  start -->
+      <?php if ( ! empty( $home_sections['stats_enabled'] ) ) : ?>
       <div class="tp-funfact-area fix p-relative grey-bg pt-180 pb-85">
          <div class="tp-funfact-shape-1">
             <img src="assets/img/funfact/shape-1-1.png" alt="">
@@ -694,8 +602,8 @@ get_header();
                      </div>
                      <div class="tp-funfact-content">
                         <h5 class="tp-funfact-number"><i class="purecounter" data-purecounter-duration="1"
-                              data-purecounter-end="820">0</i>+</h5>
-                        <span>Succesfull Projects</span>
+                              data-purecounter-end="<?php echo esc_attr( $home_sections['stat_1_number'] ); ?>">0</i><?php echo esc_html( $home_sections['stat_1_suffix'] ); ?></h5>
+                        <span><?php echo esc_html( $home_sections['stat_1_label'] ); ?></span>
                      </div>
                   </div>
                </div>
@@ -706,8 +614,8 @@ get_header();
                      </div>
                      <div class="tp-funfact-content">
                         <h5 class="tp-funfact-number"><i class="purecounter" data-purecounter-duration="1"
-                              data-purecounter-end="9">0</i>M</h5>
-                        <span>Satisfied Clients</span>
+                              data-purecounter-end="<?php echo esc_attr( $home_sections['stat_2_number'] ); ?>">0</i><?php echo esc_html( $home_sections['stat_2_suffix'] ); ?></h5>
+                        <span><?php echo esc_html( $home_sections['stat_2_label'] ); ?></span>
                      </div>
                   </div>
                </div>
@@ -718,8 +626,8 @@ get_header();
                      </div>
                      <div class="tp-funfact-content">
                         <h5 class="tp-funfact-number"><i class="purecounter" data-purecounter-duration="1"
-                              data-purecounter-end="45">0</i>+</h5>
-                        <span>Experienced Staff</span>
+                              data-purecounter-end="<?php echo esc_attr( $home_sections['stat_3_number'] ); ?>">0</i><?php echo esc_html( $home_sections['stat_3_suffix'] ); ?></h5>
+                        <span><?php echo esc_html( $home_sections['stat_3_label'] ); ?></span>
                      </div>
                   </div>
                </div>
@@ -730,44 +638,46 @@ get_header();
                      </div>
                      <div class="tp-funfact-content">
                         <h5 class="tp-funfact-number"><i class="purecounter" data-purecounter-duration="1"
-                              data-purecounter-end="848">0</i>+</h5>
-                        <span>Awards Winning</span>
+                              data-purecounter-end="<?php echo esc_attr( $home_sections['stat_4_number'] ); ?>">0</i><?php echo esc_html( $home_sections['stat_4_suffix'] ); ?></h5>
+                        <span><?php echo esc_html( $home_sections['stat_4_label'] ); ?></span>
                      </div>
                   </div>
                </div>
             </div>
          </div>
       </div>
+      <?php endif; ?>
       <!-- funfact area end -->
 
       <!-- team area start -->
+      <?php if ( ! empty( $home_sections['team_enabled'] ) ) : ?>
       <div class="tp-team-area pt-120 pb-120">
          <div class="container">
             <div class="row">
                <div class="col-xl-12">
                   <div class="tp-team-section-box text-center mb-60">
-                     <span class="tp-section-subtitle"><i class="flaticon-flash"></i>OUR EXPERT TEAM</span>
-                     <h4 class="tp-section-title">Meet our experienced <br>team people</h4>
+                     <span class="tp-section-subtitle"><i class="flaticon-flash"></i><?php echo esc_html( $home_sections['team_subtitle'] ); ?></span>
+                     <h4 class="tp-section-title"><?php echo wp_kses_post( $home_sections['team_title'] ); ?></h4>
                   </div>
                </div>
                <div class="col-xl-4 col-lg-4 col-md-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".3s">
                   <div class="tp-team-item text-center">
                      <div class="tp-team-thumb-box p-relative">
                         <div class="tp-team-thumb">
-                           <img src="assets/img/team/team-1-2.jpg" alt="">
+                           <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'team_1_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['team_1_name'] ); ?>">
                         </div>
                         <div class="tp-team-social-wrap">
                            <span><i class="fa-solid fa-share-nodes"></i></span>
                            <div class="tp-team-social-box">
-                              <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                              <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                              <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                              <a href="<?php echo esc_url( $home_sections['team_1_facebook'] ); ?>"><i class="fa-brands fa-facebook-f"></i></a>
+                              <a href="<?php echo esc_url( $home_sections['team_1_instagram'] ); ?>"><i class="fa-brands fa-instagram"></i></a>
+                              <a href="<?php echo esc_url( $home_sections['team_1_linkedin'] ); ?>"><i class="fa-brands fa-linkedin-in"></i></a>
                            </div>
                         </div>
                      </div>
                      <div class="tp-team-content">
-                        <h4 class="tp-team-title"><a href="#">Alberta Infantino</a></h4>
-                        <span>Electrician</span>
+                        <h4 class="tp-team-title"><a href="#"><?php echo esc_html( $home_sections['team_1_name'] ); ?></a></h4>
+                        <span><?php echo esc_html( $home_sections['team_1_role'] ); ?></span>
                      </div>
                   </div>
                </div>
@@ -775,20 +685,20 @@ get_header();
                   <div class="tp-team-item text-center">
                      <div class="tp-team-thumb-box p-relative">
                         <div class="tp-team-thumb">
-                           <img src="assets/img/team/team-1-1.jpg" alt="">
+                           <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'team_2_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['team_2_name'] ); ?>">
                         </div>
                         <div class="tp-team-social-wrap">
                            <span><i class="fa-solid fa-share-nodes"></i></span>
                            <div class="tp-team-social-box">
-                              <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                              <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                              <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                              <a href="<?php echo esc_url( $home_sections['team_2_facebook'] ); ?>"><i class="fa-brands fa-facebook-f"></i></a>
+                              <a href="<?php echo esc_url( $home_sections['team_2_instagram'] ); ?>"><i class="fa-brands fa-instagram"></i></a>
+                              <a href="<?php echo esc_url( $home_sections['team_2_linkedin'] ); ?>"><i class="fa-brands fa-linkedin-in"></i></a>
                            </div>
                         </div>
                      </div>
                      <div class="tp-team-content">
-                        <h4 class="tp-team-title"><a href="#">Jessica Robinson</a></h4>
-                        <span>Architect</span>
+                        <h4 class="tp-team-title"><a href="#"><?php echo esc_html( $home_sections['team_2_name'] ); ?></a></h4>
+                        <span><?php echo esc_html( $home_sections['team_2_role'] ); ?></span>
                      </div>
                   </div>
                </div>
@@ -796,34 +706,36 @@ get_header();
                   <div class="tp-team-item text-center">
                      <div class="tp-team-thumb-box p-relative">
                         <div class="tp-team-thumb">
-                           <img src="assets/img/team/team-1-3.jpg" alt="">
+                           <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'team_3_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['team_3_name'] ); ?>">
                         </div>
                         <div class="tp-team-social-wrap">
                            <span><i class="fa-solid fa-share-nodes"></i></span>
                            <div class="tp-team-social-box">
-                              <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                              <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                              <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                              <a href="<?php echo esc_url( $home_sections['team_3_facebook'] ); ?>"><i class="fa-brands fa-facebook-f"></i></a>
+                              <a href="<?php echo esc_url( $home_sections['team_3_instagram'] ); ?>"><i class="fa-brands fa-instagram"></i></a>
+                              <a href="<?php echo esc_url( $home_sections['team_3_linkedin'] ); ?>"><i class="fa-brands fa-linkedin-in"></i></a>
                            </div>
                         </div>
                      </div>
                      <div class="tp-team-content">
-                        <h4 class="tp-team-title"><a href="#">Tomaas Hirschi</a></h4>
-                        <span>Support</span>
+                        <h4 class="tp-team-title"><a href="#"><?php echo esc_html( $home_sections['team_3_name'] ); ?></a></h4>
+                        <span><?php echo esc_html( $home_sections['team_3_role'] ); ?></span>
                      </div>
                   </div>
                </div>
                <div class="col-xl-12 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".3s">
                   <div class="tp-team-text text-center">
-                     <p>Contact Our Expert Team Memeber To Take Our <a href="#">Best Services</a></p>
+                     <p><?php echo wp_kses_post( $home_sections['team_footer_text'] ); ?> <a href="<?php echo esc_url( $home_sections['team_footer_link_url'] ); ?>"><?php echo esc_html( $home_sections['team_footer_link_text'] ); ?></a></p>
                   </div>
                </div>
             </div>
          </div>
       </div>
+      <?php endif; ?>
       <!-- team area end -->
 
       <!-- testimonial area start -->
+      <?php if ( ! empty( $home_sections['testimonials_enabled'] ) ) : ?>
       <div class="tp-testimonial-area p-relative fix grey-bg pt-120 pb-120">
          <div class="tp-testimonial-shape-1">
             <img src="assets/img/testimonial/shape-1-1.png" alt="">
@@ -835,8 +747,8 @@ get_header();
             <div class="row">
                <div class="col-xl-12">
                   <div class="tp-testimonial-section-box z-index text-center mb-60">
-                     <span class="tp-section-subtitle"><i class="flaticon-flash"></i>OUR CLIENTS REVIEW</span>
-                     <h4 class="tp-section-title">What our partners say about <br>Cosmotone </h4>
+                     <span class="tp-section-subtitle"><i class="flaticon-flash"></i><?php echo esc_html( $home_sections['testimonials_subtitle'] ); ?></span>
+                     <h4 class="tp-section-title"><?php echo wp_kses_post( $home_sections['testimonials_title'] ); ?></h4>
                   </div>
                </div>
                <div class="col-xl-12">
@@ -846,19 +758,19 @@ get_header();
                            <div class="swiper-slide">
                               <div class="tp-testimonial-item z-index p-relative">
                                  <div class="tp-testimonial-thumb">
-                                    <img src="assets/img/testimonial/author-1-1.png" alt="">
+                                    <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'testimonial_1_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['testimonial_1_name'] ); ?>">
                                     <div class="tp-testimonial-thumb-quot">
                                        <span><i class="flaticon-quote"></i></span>
                                     </div>
                                  </div>
                                  <div class="tp-testimonial-text">
-                                    <p>We've been using Cosmotone automotive electrical components for years. The product quality, consistency, and reliability have always exceeded our expectations.</p>
+                                    <?php echo wp_kses_post( wpautop( $home_sections['testimonial_1_text'] ) ); ?>
                                  </div>
                                  <div
                                     class="tp-testimonial-author-box d-flex align-items-center justify-content-between">
                                     <div class="tp-testimonial-author-info">
-                                       <h6 class="tp-testimonial-author-name">Arun Kumar</h6>
-                                       <span>Project Manager</span>
+                                       <h6 class="tp-testimonial-author-name"><?php echo esc_html( $home_sections['testimonial_1_name'] ); ?></h6>
+                                       <span><?php echo esc_html( $home_sections['testimonial_1_role'] ); ?></span>
                                     </div>
                                     <div class="tp-testimonial-star d-none d-sm-block">
                                        <i class="fa-solid fa-star"></i>
@@ -876,19 +788,19 @@ get_header();
                            <div class="swiper-slide">
                               <div class="tp-testimonial-item z-index p-relative">
                                  <div class="tp-testimonial-thumb">
-                                    <img src="assets/img/testimonial/author-1-2.png" alt="">
+                                    <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'testimonial_2_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['testimonial_2_name'] ); ?>">
                                     <div class="tp-testimonial-thumb-quot">
                                        <span><i class="flaticon-quote"></i></span>
                                     </div>
                                  </div>
                                  <div class="tp-testimonial-text">
-                                    <p>Cosmotone delivers premium-quality wiring harnesses and relays with excellent technical support. A dependable partner for our manufacturing needs</p>
+                                    <?php echo wp_kses_post( wpautop( $home_sections['testimonial_2_text'] ) ); ?>
                                  </div>
                                  <div
                                     class="tp-testimonial-author-box d-flex align-items-center justify-content-between">
                                     <div class="tp-testimonial-author-info">
-                                       <h6 class="tp-testimonial-author-name">Anil Patel </h6>
-                                       <span>OEM Procurement Manager</span>
+                                       <h6 class="tp-testimonial-author-name"><?php echo esc_html( $home_sections['testimonial_2_name'] ); ?></h6>
+                                       <span><?php echo esc_html( $home_sections['testimonial_2_role'] ); ?></span>
                                     </div>
                                     <div class="tp-testimonial-star d-none d-sm-block">
                                        <i class="fa-solid fa-star"></i>
@@ -906,19 +818,19 @@ get_header();
                            <div class="swiper-slide">
                               <div class="tp-testimonial-item z-index p-relative">
                                  <div class="tp-testimonial-thumb">
-                                    <img src="assets/img/testimonial/author-1-3.png" alt="">
+                                    <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'testimonial_3_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['testimonial_3_name'] ); ?>">
                                     <div class="tp-testimonial-thumb-quot">
                                        <span><i class="flaticon-quote"></i></span>
                                     </div>
                                  </div>
                                  <div class="tp-testimonial-text">
-                                    <p>The durability and performance of Cosmotone products have significantly improved our customer satisfaction. Highly recommended</p>
+                                    <?php echo wp_kses_post( wpautop( $home_sections['testimonial_3_text'] ) ); ?>
                                  </div>
                                  <div
                                     class="tp-testimonial-author-box d-flex align-items-center justify-content-between">
                                     <div class="tp-testimonial-author-info">
-                                       <h6 class="tp-testimonial-author-name">Deepak Nair</h6>
-                                       <span>Manager, Automtoive Service Centre</span>
+                                       <h6 class="tp-testimonial-author-name"><?php echo esc_html( $home_sections['testimonial_3_name'] ); ?></h6>
+                                       <span><?php echo esc_html( $home_sections['testimonial_3_role'] ); ?></span>
                                     </div>
                                     <div class="tp-testimonial-star d-none d-sm-block">
                                        <i class="fa-solid fa-star"></i>
@@ -940,9 +852,11 @@ get_header();
             </div>
          </div>
       </div>
+      <?php endif; ?>
       <!-- testimonial area end -->
 
       <!-- blog area start -->
+      <?php if ( ! empty( $home_sections['news_enabled'] ) ) : ?>
       <div class="tp-blog-area p-relative pt-120 pb-120">
          <div class="tp-blog-shape-1">
             <img src="assets/img/blog/shape-1-3.png" alt="">
@@ -951,8 +865,8 @@ get_header();
             <div class="row">
                <div class="col-xl-12">
                   <div class="tp-blog-section-box text-center mb-55">
-                     <span class="tp-section-subtitle"><i class="flaticon-flash"></i>NEWS & ARTICLES</span>
-                     <h4 class="tp-section-title">Latest news & articles <br>from the blog</h4>
+                     <span class="tp-section-subtitle"><i class="flaticon-flash"></i><?php echo esc_html( $home_sections['news_subtitle'] ); ?></span>
+                     <h4 class="tp-section-title"><?php echo wp_kses_post( $home_sections['news_title'] ); ?></h4>
                   </div>
                </div>
                <div class="col-xl-4 col-lg-4 col-md-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".3s">
@@ -960,10 +874,10 @@ get_header();
                      <div class="tp-blog-thumb-wrap p-relative">
                         <div class="tp-blog-thumb-box p-relative">
                            <div class="tp-blog-thumb-main z-index-3 fix">
-                              <img src="assets/img/blog/blog-1-1.jpg" alt="">
+                              <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'news_1_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['news_1_title'] ); ?>">
                            </div>
                            <div class="tp-blog-thumb-icon">
-                              <a class="popup-image" href="assets/img/blog/blog-1-1.jpg"><i
+                              <a class="popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'news_1_image' ) ); ?>"><i
                                     class="fa-sharp fa-light fa-eye"></i></a>
                            </div>
                         </div>
@@ -976,13 +890,13 @@ get_header();
                      </div>
                      <div class="tp-blog-content">
                         <div class="tp-blog-meta">
-                           <span><i class="fa-light fa-circle-user"></i>By thempure</span>
-                           <span><i class="flaticon-price-tag"></i>Repair</span>
+                           <span><i class="fa-light fa-circle-user"></i><?php echo esc_html( $home_sections['news_1_author'] ); ?></span>
+                           <span><i class="flaticon-price-tag"></i><?php echo esc_html( $home_sections['news_1_category'] ); ?></span>
                         </div>
-                        <h4 class="tp-blog-title"><a href="#">Why Quality Wiring Harnesses Matter</a></h4>
+                        <h4 class="tp-blog-title"><a href="<?php echo esc_url( $home_sections['news_1_url'] ); ?>"><?php echo esc_html( $home_sections['news_1_title'] ); ?></a></h4>
                         <div class="tp-blog-link d-flex justify-content-between align-items-center">
-                           <a href="#">Read More</a>
-                           <a href="#"><i class="flaticon-right-arrow"></i></a>
+                           <a href="<?php echo esc_url( $home_sections['news_1_url'] ); ?>"><?php echo esc_html( $home_sections['news_1_button_text'] ); ?></a>
+                           <a href="<?php echo esc_url( $home_sections['news_1_url'] ); ?>"><i class="flaticon-right-arrow"></i></a>
                         </div>
                      </div>
                   </div>
@@ -992,10 +906,10 @@ get_header();
                      <div class="tp-blog-thumb-wrap p-relative">
                         <div class="tp-blog-thumb-box p-relative">
                            <div class="tp-blog-thumb-main z-index-3 fix">
-                              <img src="assets/img/blog/blog-1-2.jpg" alt="">
+                              <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'news_2_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['news_2_title'] ); ?>">
                            </div>
                            <div class="tp-blog-thumb-icon">
-                              <a class="popup-image" href="assets/img/blog/blog-1-2.jpg"><i
+                              <a class="popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'news_2_image' ) ); ?>"><i
                                     class="fa-sharp fa-light fa-eye"></i></a>
                            </div>
                         </div>
@@ -1008,13 +922,13 @@ get_header();
                      </div>
                      <div class="tp-blog-content">
                         <div class="tp-blog-meta">
-                           <span><i class="fa-light fa-circle-user"></i>By thempure</span>
-                           <span><i class="flaticon-price-tag"></i>Repair</span>
+                           <span><i class="fa-light fa-circle-user"></i><?php echo esc_html( $home_sections['news_2_author'] ); ?></span>
+                           <span><i class="flaticon-price-tag"></i><?php echo esc_html( $home_sections['news_2_category'] ); ?></span>
                         </div>
-                        <h4 class="tp-blog-title"><a href="#">Advancements in EV Relay Technology</a></h4>
+                        <h4 class="tp-blog-title"><a href="<?php echo esc_url( $home_sections['news_2_url'] ); ?>"><?php echo esc_html( $home_sections['news_2_title'] ); ?></a></h4>
                         <div class="tp-blog-link d-flex justify-content-between align-items-center">
-                           <a href="#">Read More</a>
-                           <a href="#"><i class="flaticon-right-arrow"></i></a>
+                           <a href="<?php echo esc_url( $home_sections['news_2_url'] ); ?>"><?php echo esc_html( $home_sections['news_2_button_text'] ); ?></a>
+                           <a href="<?php echo esc_url( $home_sections['news_2_url'] ); ?>"><i class="flaticon-right-arrow"></i></a>
                         </div>
                      </div>
                   </div>
@@ -1024,10 +938,10 @@ get_header();
                      <div class="tp-blog-thumb-wrap p-relative">
                         <div class="tp-blog-thumb-box p-relative">
                            <div class="tp-blog-thumb-main z-index-3 fix">
-                              <img src="assets/img/blog/blog-1-3.jpg" alt="">
+                              <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'news_3_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['news_3_title'] ); ?>">
                            </div>
                            <div class="tp-blog-thumb-icon">
-                              <a class="popup-image" href="assets/img/blog/blog-1-3.jpg"><i
+                              <a class="popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'news_3_image' ) ); ?>"><i
                                     class="fa-sharp fa-light fa-eye"></i></a>
                            </div>
                         </div>
@@ -1040,13 +954,13 @@ get_header();
                      </div>
                      <div class="tp-blog-content">
                         <div class="tp-blog-meta">
-                           <span><i class="fa-light fa-circle-user"></i>By thempure</span>
-                           <span><i class="flaticon-price-tag"></i>Repair</span>
+                           <span><i class="fa-light fa-circle-user"></i><?php echo esc_html( $home_sections['news_3_author'] ); ?></span>
+                           <span><i class="flaticon-price-tag"></i><?php echo esc_html( $home_sections['news_3_category'] ); ?></span>
                         </div>
-                        <h4 class="tp-blog-title"><a href="#">Latest Trends in Automotive Electronicss</a></h4>
+                        <h4 class="tp-blog-title"><a href="<?php echo esc_url( $home_sections['news_3_url'] ); ?>"><?php echo esc_html( $home_sections['news_3_title'] ); ?></a></h4>
                         <div class="tp-blog-link d-flex justify-content-between align-items-center">
-                           <a href="#">Read More</a>
-                           <a href="#"><i class="flaticon-right-arrow"></i></a>
+                           <a href="<?php echo esc_url( $home_sections['news_3_url'] ); ?>"><?php echo esc_html( $home_sections['news_3_button_text'] ); ?></a>
+                           <a href="<?php echo esc_url( $home_sections['news_3_url'] ); ?>"><i class="flaticon-right-arrow"></i></a>
                         </div>
                      </div>
                   </div>
@@ -1054,9 +968,11 @@ get_header();
             </div>
          </div>
       </div>
+      <?php endif; ?>
       <!-- blog area end -->
 
       <!-- certificates area start -->
+      <?php if ( ! empty( $home_sections['certificates_enabled'] ) ) : ?>
       <section class="tp-certificate-area tp-cta-wrap-box p-relative" aria-labelledby="certificate-title">
          <div class="container">
             <div class="tp-certificate-wrap">
@@ -1067,25 +983,26 @@ get_header();
                            <i class="fa-regular fa-shield-check"></i>
                         </div>
                         <div>
-                           <span>QUALITY YOU CAN TRUST</span>
-                           <h4 id="certificate-title">ISO 9001:2015<br>Certified Company</h4>
+                           <span><?php echo esc_html( $home_sections['certificates_subtitle'] ); ?></span>
+                           <h4 id="certificate-title"><?php echo wp_kses_post( $home_sections['certificates_title'] ); ?></h4>
                         </div>
                      </div>
                   </div>
                   <div class="col-lg-5">
                      <div class="tp-certificate-copy">
-                        <p>We are committed to quality and continuous improvement. Our products comply with international standards and undergo rigorous testing to ensure reliability and safety.</p>
+                        <?php echo wp_kses_post( wpautop( $home_sections['certificates_description'] ) ); ?>
                      </div>
                   </div>
                   <div class="col-lg-3">
                      <div class="tp-certificate-action">
-                        <a href="/downloads" class="tp-certificate-btn">VIEW CERTIFICATES <i class="fa-regular fa-arrow-right-long"></i></a>
+                        <a href="<?php echo esc_url( $home_sections['certificates_button_url'] ); ?>" class="tp-certificate-btn"><?php echo esc_html( $home_sections['certificates_button_text'] ); ?> <i class="fa-regular fa-arrow-right-long"></i></a>
                      </div>
                   </div>
                </div>
             </div>
          </div>
       </section>
+      <?php endif; ?>
       <!-- certificates area end -->
 
    </main>
