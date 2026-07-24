@@ -437,6 +437,29 @@
 		},
 	});
 	////////////////////////////////////////////////////
+	// Home news slider
+	if (document.querySelector('.tp-blog-active')) {
+		new Swiper('.tp-blog-active', {
+			speed: 1000,
+			loop: true,
+			slidesPerView: 3,
+			autoplay: true,
+			spaceBetween: 30,
+			breakpoints: {
+				'1200': {
+					slidesPerView: 3,
+				},
+				'768': {
+					slidesPerView: 2,
+				},
+				'0': {
+					slidesPerView: 1,
+				},
+			},
+			a11y: false,
+		});
+	}
+	////////////////////////////////////////////////////
 	// 13. Swiper Js
 	const postboxswiper = new Swiper('.postbox__thumb-slider-active', {
 		// Optional parameters

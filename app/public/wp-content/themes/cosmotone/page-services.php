@@ -8,8 +8,10 @@
 defined( 'ABSPATH' ) || exit;
 get_header();
 $services = cosmotone_get_services();
+ob_start();
 ?>
 <main>
+	<!-- breadcrumb area start -->
 	<div class="breadcrumb__area breadcrumb__overlay breadcrumb__height p-relative fix" data-background="assets/img/breadcurmb/breadcurmb.jpg">
 		<div class="container">
 			<div class="row">
@@ -29,6 +31,7 @@ $services = cosmotone_get_services();
 			</div>
 		</div>
 	</div>
+	<!-- breadcrumb area end -->
 
 	<div class="tp-feature-2-area p-relative">
 		<div class="tp-feature-2-bg pt-120 pb-90" data-background="assets/img/feature/bg-1.png">
@@ -104,4 +107,8 @@ $services = cosmotone_get_services();
 	</div>
 	<?php get_template_part( 'template-parts/cta' ); ?>
 </main>
-<?php get_footer(); ?>
+<?php
+$markup = ob_get_clean();
+echo cosmotone_apply_page_section_fields( $markup, get_queried_object_id(), 'services' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+get_footer();
+?>

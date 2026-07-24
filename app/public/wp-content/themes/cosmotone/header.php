@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || exit;
    <link rel="stylesheet" href="assets/css/spacing.css">
    <link rel="stylesheet" href="assets/css/custom-animation.css">
    <link rel="stylesheet" href="assets/css/main.css">
-   <link rel="stylesheet" href="assets/css/cosmotone.css?v=header-whatsapp">
+   <link rel="stylesheet" href="assets/css/cosmotone.css?v=about-team-compact-1">
    <?php wp_head(); ?>
 </head>
 
@@ -208,7 +208,7 @@ defined( 'ABSPATH' ) || exit;
                            <div class="tp-header-top-right-text d-none d-xl-block">
                               <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Support</a>
                               <a href="<?php echo esc_url( home_url( '/downloads/' ) ); ?>">Download</a>
-                              <a href="#">English</a>
+                              <!-- <a href="#">English</a> -->
                            </div>
                         </li>
                         <li>

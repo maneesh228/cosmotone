@@ -1,6 +1,6 @@
 <?php
 /**
- * Legacy structured Page Sections editor retained for the About page.
+ * Structured Page Sections editor for the theme's public pages.
  *
  * @package Cosmotone
  */
@@ -10,17 +10,88 @@ defined( 'ABSPATH' ) || exit;
 function cosmotone_page_sections_config() {
 	return array(
 		'about' => array(
+			'slug'     => 'about-us',
 			'template' => 'page-about-us.php',
 			'sections' => array(
 				'breadcrumb' => 'Page Banner', 'about' => 'About',
-				'contact' => 'Contact Information', 'team' => 'Expert Team',
+				'team' => 'Expert Team',
+			),
+		),
+		'services' => array(
+			'slug'     => 'services',
+			'template' => 'page-services.php',
+			'sections' => array( 'breadcrumb' => 'Page Banner' ),
+		),
+		'products' => array(
+			'slug'     => 'products',
+			'template' => 'page-products.php',
+			'sections' => array( 'breadcrumb' => 'Page Banner' ),
+		),
+		'product-details' => array(
+			'slug'     => 'product-details',
+			'template' => 'template-parts/product-detail.php',
+			'sections' => array( 'breadcrumb' => 'Page Banner' ),
+		),
+		'career' => array(
+			'slug'     => 'career',
+			'template' => 'page-career.php',
+			'sections' => array(
+				'breadcrumb' => 'Page Banner',
+				'career'     => 'Careers',
+			),
+		),
+		'news' => array(
+			'slug'     => 'news',
+			'template' => 'page-news.php',
+			'sections' => array( 'breadcrumb' => 'Page Banner' ),
+		),
+		'news-details' => array(
+			'slug'     => 'news-details',
+			'template' => 'template-parts/news-detail.php',
+			'sections' => array( 'breadcrumb' => 'Page Banner' ),
+		),
+		'contact' => array(
+			'slug'     => 'contact',
+			'template' => 'page-contact.php',
+			'sections' => array(
+				'breadcrumb' => 'Page Banner',
+				'contact'    => 'Contact Information',
+				'form'       => 'Enquiry Form',
+				'map'        => 'Map',
+			),
+		),
+		'service-details' => array(
+			'slug'     => 'service-details',
+			'template' => 'template-parts/service-detail.php',
+			'sections' => array( 'breadcrumb' => 'Page Banner' ),
+		),
+		'downloads' => array(
+			'slug'     => 'downloads',
+			'template' => 'page-downloads.php',
+			'sections' => array(
+				'breadcrumb' => 'Page Banner',
+				'downloads'  => 'Downloads',
+			),
+		),
+		'media' => array(
+			'slug'     => 'media',
+			'template' => 'page-media.php',
+			'sections' => array(
+				'breadcrumb' => 'Page Banner',
+				'media'      => 'Media',
 			),
 		),
 	);
 }
 
 function cosmotone_page_sections_type( $post_id ) {
-	return 'about-us' === get_post_field( 'post_name', $post_id ) ? 'about' : '';
+	$slug = get_post_field( 'post_name', $post_id );
+	foreach ( cosmotone_page_sections_config() as $type => $page ) {
+		if ( isset( $page['slug'] ) && $slug === $page['slug'] ) {
+			return $type;
+		}
+	}
+	return '';
 }
 
 function cosmotone_page_section_default_html( $type, $key ) {
@@ -125,7 +196,240 @@ function cosmotone_sanitize_page_section_link_url( $url ) {
 	return sanitize_text_field( $url );
 }
 
+function cosmotone_page_banner_defaults( $type ) {
+	$defaults = array(
+		'about'     => array( 'BIDDUT ELCETRIC SERVICE', 'About us', 'About us' ),
+		'services'  => array( 'COSMOTONE SERVICES', 'Services', 'Services' ),
+		'products'  => array( 'COSMOTONE PRODUCT RANGE', 'Products', 'Products' ),
+		'career'    => array( 'JOIN COSMOTONE', 'Careers', 'Careers' ),
+		'news'      => array( 'NEWS & ARTICLES', 'Our blog', 'Our blog' ),
+		'news-details' => array( 'NEWS & ARTICLES', 'Blog details', 'Blog details' ),
+		'contact'   => array( 'GET IN TOUCH', 'Contact us', 'Contact us' ),
+		'downloads' => array( 'RESOURCE CENTRE', 'Downloads', 'Downloads' ),
+		'media'     => array( 'OUR GALLERY', 'Media', 'Media' ),
+	);
+	return isset( $defaults[ $type ] ) ? $defaults[ $type ] : array( 'COSMOTONE', 'Page', 'Page' );
+}
+
+function cosmotone_default_contact_form_shortcode() {
+	if ( ! post_type_exists( 'wpcf7_contact_form' ) ) {
+		return '';
+	}
+	$forms = get_posts(
+		array(
+			'post_type'      => 'wpcf7_contact_form',
+			'post_status'    => 'publish',
+			'posts_per_page' => 1,
+			'orderby'        => 'date',
+			'order'          => 'ASC',
+		)
+	);
+	return $forms ? sprintf( '[contact-form-7 id="%d" title="%s"]', $forms[0]->ID, esc_attr( $forms[0]->post_title ) ) : '';
+}
+
 function cosmotone_page_section_custom_schema( $type, $key ) {
+	if ( 'breadcrumb' === $key && in_array( $type, array( 'product-details', 'service-details' ), true ) ) {
+		$is_product = 'product-details' === $type;
+		return array(
+			'texts' => array(
+				0 => array( 'label' => 'Banner Subtitle', 'default' => $is_product ? 'COSMOTONE PRODUCT' : 'COSMOTONE SERVICE' ),
+				2 => array( 'label' => 'Breadcrumb Home Label', 'default' => 'Home' ),
+				4 => array( 'label' => 'Breadcrumb Listing Label', 'default' => $is_product ? 'Products' : 'Services' ),
+			),
+			'links' => array(
+				0 => array( 'label' => 'Breadcrumb Home Link', 'default' => home_url( '/' ) ),
+				1 => array( 'label' => 'Breadcrumb Listing Link', 'default' => home_url( $is_product ? '/products/' : '/services/' ) ),
+			),
+			'images' => array(
+				0 => array( 'label' => 'Banner Background Image', 'default' => 'assets/img/breadcurmb/breadcurmb.jpg' ),
+			),
+		);
+	}
+
+	if ( 'breadcrumb' === $key ) {
+		$defaults = cosmotone_page_banner_defaults( $type );
+		return array(
+			'texts' => array(
+				0 => array( 'label' => 'Banner Subtitle', 'default' => $defaults[0] ),
+				1 => array( 'label' => 'Banner Title', 'default' => $defaults[1] ),
+				2 => array( 'label' => 'Breadcrumb Home Label', 'default' => 'Home' ),
+				4 => array( 'label' => 'Breadcrumb Current Page Label', 'default' => $defaults[2] ),
+			),
+			'links' => array(
+				0 => array( 'label' => 'Breadcrumb Home Link', 'default' => home_url( '/' ) ),
+			),
+			'images' => array(
+				0 => array( 'label' => 'Banner Background Image', 'default' => 'assets/img/breadcurmb/breadcurmb.jpg' ),
+			),
+		);
+	}
+
+	if ( 'career' === $type && 'career' === $key ) {
+		return array(
+			'texts' => array(
+				0 => array( 'label' => 'Section Subtitle', 'default' => 'CAREERS' ),
+				1 => array( 'label' => 'Section Heading', 'default' => 'Open Positions' ),
+				2 => array( 'label' => 'Section Description', 'default' => 'Build the future of dependable electrical and automotive solutions with our team.', 'type' => 'textarea' ),
+			),
+		);
+	}
+
+	if ( 'downloads' === $type && 'downloads' === $key ) {
+		return array(
+			'texts' => array(
+				0 => array( 'label' => 'Section Subtitle', 'default' => 'DOWNLOADS' ),
+				1 => array( 'label' => 'Section Heading', 'default' => 'Product resources' ),
+				2 => array( 'label' => 'Section Description', 'default' => 'Access company and product information from our resource centre.', 'type' => 'textarea' ),
+			),
+		);
+	}
+
+	if ( 'media' === $type && 'media' === $key ) {
+		return array(
+			'texts' => array(
+				0 => array( 'label' => 'Section Subtitle', 'default' => 'OUR GALLERY' ),
+				1 => array( 'label' => 'Section Heading', 'default' => 'Inside Cosmotone' ),
+				2 => array( 'label' => 'Section Description', 'default' => 'Explore our products, facilities, people, and engineering work.', 'type' => 'textarea' ),
+				3 => array( 'label' => 'All Filter Label', 'default' => 'All' ),
+				4 => array( 'label' => 'Images Filter Label', 'default' => 'Images' ),
+				5 => array( 'label' => 'Videos Filter Label', 'default' => 'Videos' ),
+			),
+		);
+	}
+
+	if ( 'contact' === $type && 'contact' === $key ) {
+		return array(
+			'texts' => array(
+				0 => array( 'label' => 'Address Card Title', 'default' => 'Visit our place' ),
+				1 => array( 'label' => 'Address (one line per row)', 'default' => "88 New South Head Rd, Triple\nNew York", 'type' => 'textarea', 'indexes' => array( 1, 2 ) ),
+				3 => array( 'label' => 'Contact Card Title', 'default' => 'Contact us' ),
+				4 => array( 'label' => 'Email Address', 'default' => 'biddut@website.com' ),
+				5 => array( 'label' => 'Phone Number', 'default' => '+(602) 762 472 96' ),
+				6 => array( 'label' => 'Office Hours Card Title', 'default' => 'Office time' ),
+				7 => array( 'label' => 'Office Hours (one line per row)', 'default' => "Five days 8:00 am - 5:00 pm\nFriday is closed", 'type' => 'textarea', 'indexes' => array( 7, 8 ) ),
+			),
+			'links' => array(
+				0 => array( 'label' => 'Address Link', 'default' => '#' ),
+				1 => array( 'label' => 'Email Link', 'default' => 'mailto:biddut@website.com' ),
+				2 => array( 'label' => 'Phone Link', 'default' => 'tel:+60276247296' ),
+				3 => array( 'label' => 'Office Hours Link', 'default' => '#' ),
+			),
+			'images' => array(
+				0 => array( 'label' => 'Address Card Icon', 'default' => 'assets/img/contact/icon-1.png' ),
+				1 => array( 'label' => 'Contact Card Icon', 'default' => 'assets/img/contact/icon-2.png' ),
+				2 => array( 'label' => 'Office Hours Card Icon', 'default' => 'assets/img/contact/icon-3.png' ),
+			),
+		);
+	}
+
+	if ( 'contact' === $type && 'form' === $key ) {
+		return array(
+			'texts' => array(
+				0 => array( 'label' => 'Form Heading', 'default' => 'Send your message' ),
+			),
+			'attributes' => array(
+				'contact_form_shortcode' => array(
+					'label'     => 'Contact Form 7 Shortcode',
+					'default'   => cosmotone_default_contact_form_shortcode(),
+					'type'      => 'shortcode',
+					'xpath'     => './/*[@data-cosmotone-contact-form]',
+					'attribute' => 'data-contact-form-shortcode',
+				),
+			),
+		);
+	}
+
+	if ( 'contact' === $type && 'map' === $key ) {
+		return array(
+			'attributes' => array(
+				'map_url' => array(
+					'label'     => 'Google Maps Embed URL',
+					'default'   => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d146513.05509247648!2d73.19133525789097!3d54.98596156928781!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43aafde2f601090b%3A0x5eefc33861a69b1a!2z4KaT4Kau4Ka44KeN4KaVLCBPbXNrIE9ibGFzdCwg4Kaw4Ka-4Ka24Ka_4Kav4Ka84Ka-!5e0!3m2!1sbn!2sbd!4v1689181288902!5m2!1sbn!2sbd',
+					'type'      => 'url',
+					'xpath'     => './/iframe',
+					'attribute' => 'src',
+				),
+			),
+		);
+	}
+
+	if ( 'about' !== $type ) {
+		return array();
+	}
+
+	if ( 'about' === $key ) {
+		return array(
+			'texts' => array(
+				2  => array( 'label' => 'Experience Label', 'default' => 'Years of experience' ),
+				4  => array( 'label' => 'Section Subtitle', 'default' => 'WE ARE BIDDUT ELECTRIC COMPANY' ),
+				5  => array( 'label' => 'Section Heading', 'default' => 'Produce your own clean save the environment' ),
+				6  => array( 'label' => 'Description', 'default' => 'Nullam eu nibh vitae est tempor molestie id sed ex. Quisque dignissim maximus ipsum, sed rutrum metus tincidunt et. Sed eget tincidunt ipsum. Eget tincidunt', 'type' => 'textarea' ),
+				7  => array( 'label' => 'Feature 1 Title (one line per row)', 'default' => "Expert\nelectrician", 'type' => 'textarea', 'indexes' => array( 7, 8 ) ),
+				9  => array( 'label' => 'Feature 2 Title (one line per row)', 'default' => "Safety\nassurance", 'type' => 'textarea', 'indexes' => array( 9, 10 ) ),
+				11 => array( 'label' => 'List Item 1', 'default' => 'At vero eos et accusamus et iusto odio.' ),
+				12 => array( 'label' => 'List Item 2', 'default' => 'Sed ut perspiciatis unde omnis iste natus sit.' ),
+				13 => array( 'label' => 'List Item 3', 'default' => 'Established fact that a reader will be distracted.' ),
+			),
+			'combined_values' => array(
+				'experience_value' => array(
+					'label'         => 'Experience Number',
+					'default'       => '35+',
+					'attribute_key' => 'experience_number',
+					'text_index'    => 1,
+					'default_number' => '35',
+					'default_suffix' => '+',
+				),
+			),
+			'attributes' => array(
+				'experience_number' => array(
+					'label'     => 'Years of Experience Number',
+					'default'   => '35',
+					'type'      => 'number',
+					'admin_visible' => false,
+					'xpath'     => './/*[contains(concat(" ", normalize-space(@class), " "), " purecounter ")]',
+					'attribute' => 'data-purecounter-end',
+				),
+			),
+			'images' => array(
+				0 => array( 'label' => 'Experience Badge Background', 'default' => 'assets/img/about/bg-2.jpg' ),
+				1 => array( 'label' => 'Main About Image', 'default' => 'assets/img/about/thumb-3-2.jpg' ),
+				2 => array( 'label' => 'Secondary About Image', 'default' => 'assets/img/about/thumb-3-1.jpg' ),
+			),
+		);
+	}
+
+	if ( 'team' === $key ) {
+		$texts = array(
+			0 => array( 'label' => 'Section Subtitle', 'default' => 'OUR EXPERT TEAM' ),
+			1 => array( 'label' => 'Section Heading (one line per row)', 'default' => "Meet our experienced\nteam people", 'type' => 'textarea', 'indexes' => array( 1, 2 ) ),
+		);
+		$links  = array();
+		$images = array();
+		$members = array(
+			array( 'Alberta Infantino', 'Electrician', 'assets/img/team/team-1-2.jpg', 'team-details.html' ),
+			array( 'Jessica Robinson', 'Architect', 'assets/img/team/team-1-1.jpg', 'team-details.html' ),
+			array( 'Tomaas Hirschi', 'Support', 'assets/img/team/team-1-3.jpg', 'team-details.html' ),
+			array( 'Belal Mahmud', 'Architect', 'assets/img/team/team-1-4.jpg', '#' ),
+			array( 'Diane Lloyd', 'Contractor', 'assets/img/team/team-1-5.jpg', '#' ),
+			array( 'Willie Boyd', 'Support', 'assets/img/team/team-1-6.jpg', '#' ),
+		);
+
+		foreach ( $members as $index => $member ) {
+			$number = $index + 1;
+			$text_index = 3 + ( $index * 2 );
+			$texts[ $text_index ]     = array( 'label' => "Member {$number} Name", 'default' => $member[0] );
+			$texts[ $text_index + 1 ] = array( 'label' => "Member {$number} Role", 'default' => $member[1] );
+			$links[ $index ]          = array( 'label' => "Member {$number} Profile Link", 'default' => $member[3] );
+			$images[ $index ]         = array( 'label' => "Member {$number} Image", 'default' => $member[2] );
+		}
+
+		return array(
+			'texts'  => $texts,
+			'links'  => $links,
+			'images' => $images,
+		);
+	}
+
 	return array();
 }
 
@@ -158,6 +462,23 @@ function cosmotone_render_page_section_image_field( $section_key, $index, $label
 }
 
 function cosmotone_render_custom_page_section_fields( $section_key, $section, $schema ) {
+	if ( ! empty( $schema['combined_values'] ) ) :
+		?>
+		<h4 class="cosmotone-group-title"><?php esc_html_e( 'Numbers and settings', 'cosmotone' ); ?></h4>
+		<div class="cosmotone-fields-grid">
+		<?php foreach ( $schema['combined_values'] as $field_key => $field ) :
+			$default_number = isset( $field['default_number'] ) ? $field['default_number'] : '';
+			$default_suffix = isset( $field['default_suffix'] ) ? $field['default_suffix'] : '';
+			$number = isset( $section['attributes'][ $field['attribute_key'] ] ) ? $section['attributes'][ $field['attribute_key'] ] : $default_number;
+			$suffix = isset( $section['texts'][ $field['text_index'] ] ) ? $section['texts'][ $field['text_index'] ] : $default_suffix;
+			$value  = $number . $suffix;
+			?>
+			<label class="cosmotone-field"><span><?php echo esc_html( $field['label'] ); ?></span><input type="text" name="cosmotone_sections[<?php echo esc_attr( $section_key ); ?>][combined_values][<?php echo esc_attr( $field_key ); ?>]" value="<?php echo esc_attr( $value ); ?>" data-default="<?php echo esc_attr( $field['default'] ); ?>" placeholder="35+"></label>
+		<?php endforeach; ?>
+		</div>
+		<?php
+	endif;
+
 	if ( ! empty( $schema['texts'] ) ) :
 		?>
 		<h4 class="cosmotone-group-title"><?php esc_html_e( 'Text and paragraphs', 'cosmotone' ); ?></h4>
@@ -184,6 +505,24 @@ function cosmotone_render_custom_page_section_fields( $section_key, $section, $s
 				<input type="text" name="cosmotone_sections[<?php echo esc_attr( $section_key ); ?>][<?php echo esc_attr( $name_group ); ?>][<?php echo esc_attr( $index ); ?>]" value="<?php echo esc_attr( $value ); ?>" data-default="<?php echo esc_attr( $default ); ?>">
 			<?php endif; ?>
 			</label>
+		<?php endforeach; ?>
+		</div>
+		<?php
+	endif;
+
+	$visible_attributes = ! empty( $schema['attributes'] )
+		? array_filter( $schema['attributes'], static function ( $field ) { return ! isset( $field['admin_visible'] ) || $field['admin_visible']; } )
+		: array();
+	if ( $visible_attributes ) :
+		?>
+		<h4 class="cosmotone-group-title"><?php esc_html_e( 'Settings', 'cosmotone' ); ?></h4>
+		<div class="cosmotone-fields-grid">
+		<?php foreach ( $visible_attributes as $field_key => $field ) :
+			$default = isset( $field['default'] ) ? $field['default'] : '';
+			$value   = isset( $section['attributes'][ $field_key ] ) ? $section['attributes'][ $field_key ] : $default;
+			$type    = isset( $field['type'] ) && 'number' === $field['type'] ? 'number' : 'text';
+			?>
+			<label class="cosmotone-field"><span><?php echo esc_html( $field['label'] ); ?></span><input type="<?php echo esc_attr( $type ); ?>"<?php echo 'number' === $type ? ' min="0"' : ''; ?> name="cosmotone_sections[<?php echo esc_attr( $section_key ); ?>][attributes][<?php echo esc_attr( $field_key ); ?>]" value="<?php echo esc_attr( $value ); ?>" data-default="<?php echo esc_attr( $default ); ?>"></label>
 		<?php endforeach; ?>
 		</div>
 		<?php
@@ -303,6 +642,21 @@ function cosmotone_render_page_sections_box( $post ) {
 	?>
 	<div class="cosmotone-page-tabs">
 		<p class="description"><?php esc_html_e( 'Edit the visible text, paragraphs, links, and images for each section. Theme layout and styling are kept automatically.', 'cosmotone' ); ?></p>
+		<?php if ( 'about' === $type ) :
+			$home_page_id = absint( get_option( 'page_on_front' ) );
+			?>
+			<p class="description"><?php esc_html_e( 'Vision, Mission, Values, Contact Information, and Fun Facts are shared with the Home page and are managed only from the Home page editor.', 'cosmotone' ); ?></p>
+			<?php if ( $home_page_id ) : ?>
+				<p><a class="button" href="<?php echo esc_url( get_edit_post_link( $home_page_id ) ); ?>"><?php esc_html_e( 'Edit Shared Home Sections', 'cosmotone' ); ?></a></p>
+			<?php endif; ?>
+		<?php endif; ?>
+		<?php if ( in_array( $type, array( 'news', 'news-details' ), true ) ) : ?>
+			<p class="description"><?php esc_html_e( 'News cards and news detail pages are populated from WordPress Posts.', 'cosmotone' ); ?></p>
+			<p>
+				<a class="button button-primary" href="<?php echo esc_url( admin_url( 'edit.php' ) ); ?>"><?php esc_html_e( 'Manage News', 'cosmotone' ); ?></a>
+				<a class="button" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php esc_html_e( 'Add News', 'cosmotone' ); ?></a>
+			</p>
+		<?php endif; ?>
 		<div class="cosmotone-page-tabs-nav">
 		<?php $tab = 0; foreach ( $config[ $type ]['sections'] as $key => $label ) : ?>
 			<button type="button" class="button cosmotone-page-tab-button<?php echo 0 === $tab ? ' active' : ''; ?>" data-tab="cosmotone-tab-<?php echo esc_attr( sanitize_title( $key ) ); ?>"><?php echo esc_html( $label ); ?></button>
@@ -322,6 +676,24 @@ function cosmotone_render_page_sections_box( $post ) {
 				<p><a class="button button-primary button-hero" href="<?php echo esc_url( admin_url( 'edit.php?post_type=cosmotone_slider' ) ); ?>"><?php esc_html_e( 'Manage Sliders', 'cosmotone' ); ?></a></p>
 			</div>
 			<?php ++$tab; continue; ?>
+			<?php endif; ?>
+			<?php if ( 'career' === $type && 'career' === $key ) : ?>
+				<p>
+					<a class="button button-primary" href="<?php echo esc_url( admin_url( 'edit.php?post_type=cosmotone_job' ) ); ?>"><?php esc_html_e( 'Manage Jobs', 'cosmotone' ); ?></a>
+					<a class="button" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=cosmotone_job' ) ); ?>"><?php esc_html_e( 'Add Job', 'cosmotone' ); ?></a>
+				</p>
+			<?php elseif ( 'downloads' === $type && 'downloads' === $key ) : ?>
+				<p>
+					<a class="button button-primary" href="<?php echo esc_url( admin_url( 'edit.php?post_type=cosmotone_download' ) ); ?>"><?php esc_html_e( 'Manage Downloads', 'cosmotone' ); ?></a>
+					<a class="button" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=cosmotone_download' ) ); ?>"><?php esc_html_e( 'Add Download', 'cosmotone' ); ?></a>
+				</p>
+			<?php endif; ?>
+			<?php if ( 'contact' === $type && 'form' === $key ) : ?>
+				<?php if ( shortcode_exists( 'contact-form-7' ) ) : ?>
+					<p><a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=wpcf7' ) ); ?>"><?php esc_html_e( 'Manage Contact Forms', 'cosmotone' ); ?></a></p>
+				<?php else : ?>
+					<p class="notice notice-warning inline"><?php esc_html_e( 'Contact Form 7 must be installed and activated before the shortcode can render.', 'cosmotone' ); ?></p>
+				<?php endif; ?>
 			<?php endif; ?>
 			<label class="cosmotone-section-toggle"><input type="checkbox" name="cosmotone_sections[<?php echo esc_attr( $key ); ?>][enabled]" value="1" <?php checked( $enabled ); ?>> <?php esc_html_e( 'Show this section', 'cosmotone' ); ?></label>
 
@@ -466,7 +838,7 @@ function cosmotone_save_page_sections( $post_id ) {
 	$out = array();
 	foreach ( $config[ $type ]['sections'] as $key => $label ) {
 		$item = isset( $raw[ $key ] ) && is_array( $raw[ $key ] ) ? $raw[ $key ] : array();
-		$out[ $key ] = array( 'enabled' => ! empty( $item['enabled'] ) ? 1 : 0, 'texts' => array(), 'links' => array(), 'images' => array() );
+		$out[ $key ] = array( 'enabled' => ! empty( $item['enabled'] ) ? 1 : 0, 'texts' => array(), 'attributes' => array(), 'links' => array(), 'images' => array() );
 		foreach ( isset( $item['texts'] ) && is_array( $item['texts'] ) ? $item['texts'] : array() as $i => $value ) $out[ $key ]['texts'][ absint( $i ) ] = sanitize_textarea_field( $value );
 
 		$custom_schema = cosmotone_page_section_custom_schema( $type, $key );
@@ -483,6 +855,31 @@ function cosmotone_save_page_sections( $post_id ) {
 			}
 		}
 
+		if ( ! empty( $custom_schema['attributes'] ) ) {
+			foreach ( $custom_schema['attributes'] as $field_key => $field ) {
+				$value = isset( $item['attributes'][ $field_key ] ) ? $item['attributes'][ $field_key ] : '';
+				if ( isset( $field['type'] ) && 'number' === $field['type'] ) {
+					$out[ $key ]['attributes'][ $field_key ] = (string) absint( $value );
+				} elseif ( isset( $field['type'] ) && 'url' === $field['type'] ) {
+					$out[ $key ]['attributes'][ $field_key ] = cosmotone_sanitize_page_section_media_url( $value );
+				} else {
+					$out[ $key ]['attributes'][ $field_key ] = sanitize_text_field( $value );
+				}
+			}
+		}
+
+		if ( ! empty( $custom_schema['combined_values'] ) ) {
+			foreach ( $custom_schema['combined_values'] as $field_key => $field ) {
+				$value = isset( $item['combined_values'][ $field_key ] ) ? sanitize_text_field( $item['combined_values'][ $field_key ] ) : $field['default'];
+				if ( ! preg_match( '/^\s*(\d+)\s*(.*?)\s*$/u', $value, $matches ) ) {
+					preg_match( '/^\s*(\d+)\s*(.*?)\s*$/u', $field['default'], $matches );
+				}
+
+				$out[ $key ]['attributes'][ $field['attribute_key'] ] = isset( $matches[1] ) ? $matches[1] : $field['default_number'];
+				$out[ $key ]['texts'][ absint( $field['text_index'] ) ] = isset( $matches[2] ) ? sanitize_text_field( $matches[2] ) : $field['default_suffix'];
+			}
+		}
+
 		foreach ( isset( $item['links'] ) && is_array( $item['links'] ) ? $item['links'] : array() as $i => $value ) $out[ $key ]['links'][ absint( $i ) ] = cosmotone_sanitize_page_section_link_url( $value );
 		foreach ( isset( $item['images'] ) && is_array( $item['images'] ) ? $item['images'] : array() as $i => $image ) $out[ $key ]['images'][ absint( $i ) ] = array( 'id' => isset( $image['id'] ) ? absint( $image['id'] ) : 0, 'url' => isset( $image['url'] ) ? cosmotone_sanitize_page_section_media_url( $image['url'] ) : '', 'alt' => isset( $image['alt'] ) ? sanitize_text_field( $image['alt'] ) : '' );
 	}
@@ -490,7 +887,7 @@ function cosmotone_save_page_sections( $post_id ) {
 }
 add_action( 'save_post_page', 'cosmotone_save_page_sections' );
 
-function cosmotone_apply_section_values( $html, $values ) {
+function cosmotone_apply_section_values( $html, $values, $schema = array() ) {
 	$dom = cosmotone_page_section_dom( $html );
 	if ( ! $dom ) return $html;
 	$nodes = cosmotone_page_section_nodes( $dom );
@@ -505,8 +902,20 @@ function cosmotone_apply_section_values( $html, $values ) {
 	}
 	foreach ( $nodes['media'] as $i => $node ) {
 		if ( empty( $values['images'][ $i ]['url'] ) ) continue;
-		$node->setAttribute( cosmotone_page_section_media_attr( $node ), cosmotone_page_section_normalize_asset_url( $values['images'][ $i ]['url'] ) );
+		$image_url = cosmotone_page_section_normalize_asset_url( $values['images'][ $i ]['url'] );
+		$node->setAttribute( cosmotone_page_section_media_attr( $node ), $image_url );
 		if ( 'img' === strtolower( $node->nodeName ) && isset( $values['images'][ $i ]['alt'] ) ) $node->setAttribute( 'alt', $values['images'][ $i ]['alt'] );
+		if ( 'img' === strtolower( $node->nodeName ) && $node->parentNode instanceof DOMElement && 'a' === strtolower( $node->parentNode->nodeName ) && false !== strpos( ' ' . $node->parentNode->getAttribute( 'class' ) . ' ', ' popup-image ' ) ) {
+			$node->parentNode->setAttribute( 'href', $image_url );
+		}
+	}
+	foreach ( ! empty( $schema['attributes'] ) ? $schema['attributes'] : array() as $field_key => $field ) {
+		if ( ! isset( $values['attributes'][ $field_key ], $field['xpath'], $field['attribute'] ) ) continue;
+		$attribute_nodes = $dom['xpath']->query( $field['xpath'], $dom['root'] );
+		$attribute_node  = $attribute_nodes ? $attribute_nodes->item( 0 ) : null;
+		if ( $attribute_node instanceof DOMElement ) {
+			$attribute_node->setAttribute( $field['attribute'], $values['attributes'][ $field_key ] );
+		}
 	}
 	return cosmotone_page_section_dom_html( $dom );
 }
@@ -519,7 +928,8 @@ function cosmotone_apply_page_section_fields( $content, $post_id, $type ) {
 		if ( ! isset( $saved[ $key ] ) ) continue;
 		$pattern = '#<!--\s*' . preg_quote( $key, '#' ) . ' area start\s*-->(.*?)<!--\s*' . preg_quote( $key, '#' ) . ' area end\s*-->#is';
 		if ( empty( $saved[ $key ]['enabled'] ) ) { $content = preg_replace( $pattern, '', $content, 1 ); continue; }
-		$content = preg_replace_callback( $pattern, static function ( $match ) use ( $saved, $key ) { return '<!-- ' . $key . ' area start -->' . cosmotone_apply_section_values( $match[1], $saved[ $key ] ) . '<!-- ' . $key . ' area end -->'; }, $content, 1 );
+		$schema = cosmotone_page_section_custom_schema( $type, $key );
+		$content = preg_replace_callback( $pattern, static function ( $match ) use ( $saved, $key, $schema ) { return '<!-- ' . $key . ' area start -->' . cosmotone_apply_section_values( $match[1], $saved[ $key ], $schema ) . '<!-- ' . $key . ' area end -->'; }, $content, 1 );
 	}
 	return $content;
 }

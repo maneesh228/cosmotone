@@ -2,6 +2,7 @@
 /** Template for the about-us page. @package Cosmotone */
 defined( 'ABSPATH' ) || exit;
 get_header();
+$home_sections = cosmotone_get_home_sections();
 ob_start();
 ?>
    <main>
@@ -98,8 +99,12 @@ ob_start();
       <!-- about area end -->
 
       <!-- contact area start -->
+      <?php if ( ! empty( $home_sections['contact_enabled'] ) ) : ?>
+      <?php $contact_background_url = cosmotone_home_image_url( $home_sections, 'contact_background' ); ?>
       <div class="tp-contact-area">
-         <div class="tp-contact-bg p-relative jarallax pt-120" data-background="assets/img/contact/cosmotone-vision-bg.png">
+         <div class="tp-contact-bg p-relative jarallax pt-120"
+            data-background="<?php echo esc_url( $contact_background_url ); ?>"
+            style="<?php echo esc_attr( 'background-image: url("' . $contact_background_url . '") !important;' ); ?>">
             <div class="tp-contact-shape-2 d-none d-xl-block">
                <img src="assets/img/contact/shape-1-2.png" alt="">
             </div>
@@ -112,17 +117,17 @@ ob_start();
                               <li class="nav-items" role="presentation">
                                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
                                     data-bs-target="#home" type="button" role="tab" aria-controls="home"
-                                    aria-selected="true">VISION</button>
+                                    aria-selected="true"><?php echo esc_html( $home_sections['contact_tab_1'] ); ?></button>
                               </li>
                               <li class="nav-items" role="presentation">
                                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
                                     data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
-                                    aria-selected="false">MISSION</button>
+                                    aria-selected="false"><?php echo esc_html( $home_sections['contact_tab_2'] ); ?></button>
                               </li>
                               <li class="nav-items" role="presentation">
                                  <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
                                     data-bs-target="#contact" type="button" role="tab" aria-controls="contact"
-                                    aria-selected="false">VALUES</button>
+                                    aria-selected="false"><?php echo esc_html( $home_sections['contact_tab_3'] ); ?></button>
                               </li>
                            </ul>
                         </div>
@@ -134,23 +139,26 @@ ob_start();
                                     <div class="col-xl-5 col-lg-5 col-md-5">
                                        <div class="tp-contact-tab-content-left p-relative">
                                           <div class="tp-contact-tab-content-thumb">
-                                             <img class="w-100" src="assets/img/contact/contact1-1.jpg" alt="">
+                                             <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_vision_image' ) ); ?>" alt="">
                                           </div>
-                                          <div class="tp-contact-tab-play-icon">
-                                             <a class="popup-video"
-                                                href="#"><i
-                                                   class="flaticon-play-button"></i></a>
-                                          </div>
+                                          <?php if ( ! empty( $home_sections['contact_vision_video_url'] ) ) : ?>
+                                             <div class="tp-contact-tab-play-icon">
+                                                <a class="popup-video"
+                                                   href="<?php echo esc_url( $home_sections['contact_vision_video_url'] ); ?>"
+                                                   aria-label="<?php esc_attr_e( 'Play Vision video', 'cosmotone' ); ?>"><i
+                                                      class="flaticon-play-button"></i></a>
+                                             </div>
+                                          <?php endif; ?>
                                        </div>
                                     </div>
                                     <div class="col-xl-7 col-lg-7 col-md-7">
                                        <div class="tp-contact-tab-content-right">
-                                          <h5 class="tp-contact-tab-content-title">Shaping the Future of Automotive Components </h5>
+                                          <h5 class="tp-contact-tab-content-title"><?php echo wp_kses_post( $home_sections['contact_vision_title'] ); ?></h5>
                                           <div class="tp-contact-tab-content-list">
                                              <ul>
-                                                <li><i class="fa-light fa-badge-check"></i>Product Design & Development </li>
-                                                <li><i class="fa-light fa-badge-check"></i>Advanced Manufacturing</li>
-                                                <li><i class="fa-light fa-badge-check"></i>Quality Assurance</li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_vision_item_1'] ); ?></li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_vision_item_2'] ); ?></li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_vision_item_3'] ); ?></li>
                                              </ul>
                                           </div>
                                        </div>
@@ -162,26 +170,26 @@ ob_start();
                                     <div class="col-xl-5 col-lg-5 col-md-5">
                                        <div class="tp-contact-tab-content-left p-relative">
                                           <div class="tp-contact-tab-content-thumb">
-                                             <img class="w-100" src="assets/img/contact/contact1-2.jpg" alt="">
+                                             <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_mission_image' ) ); ?>" alt="">
                                           </div>
-                                          <div class="tp-contact-tab-play-icon">
-                                             <a class="popup-video"
-                                                href="#"><i
-                                                   class="flaticon-play-button"></i></a>
-                                          </div>
+                                          <?php if ( ! empty( $home_sections['contact_mission_video_url'] ) ) : ?>
+                                             <div class="tp-contact-tab-play-icon">
+                                                <a class="popup-video"
+                                                   href="<?php echo esc_url( $home_sections['contact_mission_video_url'] ); ?>"
+                                                   aria-label="<?php esc_attr_e( 'Play Mission video', 'cosmotone' ); ?>"><i
+                                                      class="flaticon-play-button"></i></a>
+                                             </div>
+                                          <?php endif; ?>
                                        </div>
                                     </div>
                                     <div class="col-xl-7 col-lg-7 col-md-7">
                                        <div class="tp-contact-tab-content-right">
-                                          <h5 class="tp-contact-tab-content-title">Future Electricity
-                                             and Problem Solution</h5>
+                                          <h5 class="tp-contact-tab-content-title"><?php echo wp_kses_post( $home_sections['contact_mission_title'] ); ?></h5>
                                           <div class="tp-contact-tab-content-list">
                                              <ul>
-                                                <li><i class="fa-light fa-badge-check"></i>Full-service electrical
-                                                   layout </li>
-                                                <li><i class="fa-light fa-badge-check"></i>AC instalation in one hour
-                                                </li>
-                                                <li><i class="fa-light fa-badge-check"></i>Wiring and installation</li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_mission_item_1'] ); ?></li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_mission_item_2'] ); ?></li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_mission_item_3'] ); ?></li>
                                              </ul>
                                           </div>
                                        </div>
@@ -193,26 +201,26 @@ ob_start();
                                     <div class="col-xl-5 col-lg-5 col-md-5">
                                        <div class="tp-contact-tab-content-left p-relative">
                                           <div class="tp-contact-tab-content-thumb">
-                                             <img class="w-100" src="assets/img/contact/contact1-3.jpg" alt="">
+                                             <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_values_image' ) ); ?>" alt="">
                                           </div>
-                                          <div class="tp-contact-tab-play-icon">
-                                             <a class="popup-video"
-                                                href="#"><i
-                                                   class="flaticon-play-button"></i></a>
-                                          </div>
+                                          <?php if ( ! empty( $home_sections['contact_values_video_url'] ) ) : ?>
+                                             <div class="tp-contact-tab-play-icon">
+                                                <a class="popup-video"
+                                                   href="<?php echo esc_url( $home_sections['contact_values_video_url'] ); ?>"
+                                                   aria-label="<?php esc_attr_e( 'Play Values video', 'cosmotone' ); ?>"><i
+                                                      class="flaticon-play-button"></i></a>
+                                             </div>
+                                          <?php endif; ?>
                                        </div>
                                     </div>
                                     <div class="col-xl-7 col-lg-7 col-md-7">
                                        <div class="tp-contact-tab-content-right">
-                                          <h5 class="tp-contact-tab-content-title">Electricity can transform
-                                             people's lives, not just living </h5>
+                                          <h5 class="tp-contact-tab-content-title"><?php echo wp_kses_post( $home_sections['contact_values_title'] ); ?></h5>
                                           <div class="tp-contact-tab-content-list">
                                              <ul>
-                                                <li><i class="fa-light fa-badge-check"></i>Full-service electrical
-                                                   layout </li>
-                                                <li><i class="fa-light fa-badge-check"></i>AC instalation in one hour
-                                                </li>
-                                                <li><i class="fa-light fa-badge-check"></i>Wiring and installation</li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_values_item_1'] ); ?></li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_values_item_2'] ); ?></li>
+                                                <li><i class="fa-light fa-badge-check"></i><?php echo esc_html( $home_sections['contact_values_item_3'] ); ?></li>
                                              </ul>
                                           </div>
                                        </div>
@@ -226,18 +234,17 @@ ob_start();
                   <div class="col-xl-6 col-lg-6">
                      <div class="tp-contact-right-box p-relative z-index">
                         <div class="tp-contact-section-box mb-25">
-                           <span class="tp-section-subtitle">NEED HELP?</span>
-                           <h4 class="tp-section-title-2">Have a question? <br>We're ready to help</h4>
+                           <span class="tp-section-subtitle"><?php echo esc_html( $home_sections['contact_subtitle'] ); ?></span>
+                           <h4 class="tp-section-title-2"><?php echo wp_kses_post( $home_sections['contact_title'] ); ?></h4>
                         </div>
                         <div class="tp-contact-text">
-                           <p class="mb-35">Don’t hesitate to call us on any product related query, our team wait for
-                              your call</p>
+                           <div class="mb-35"><?php echo wp_kses_post( wpautop( $home_sections['contact_description'] ) ); ?></div>
                            <div class="tp-contact-right-tel-box">
                               <div class="tp-contact-right-tel-icon d-flex align-items-center">
                                  <i class="flaticon-phone-call"></i>
                                  <div class="tp-contact-right-tel-content">
-                                    <span>For emergency </span>
-                                    <a href="#">+91 485 220 8431</a>
+                                    <span><?php echo esc_html( $home_sections['contact_phone_label'] ); ?></span>
+                                    <a href="<?php echo esc_url( $home_sections['contact_phone_url'] ); ?>"><?php echo esc_html( $home_sections['contact_phone'] ); ?></a>
                                  </div>
                               </div>
                            </div>
@@ -251,9 +258,11 @@ ob_start();
             </div>
          </div>
       </div>
+      <?php endif; ?>
       <!-- contact area end -->
 
       <!-- funfact area  start -->
+      <?php if ( ! empty( $home_sections['stats_enabled'] ) ) : ?>
       <div class="tp-funfact-area fix p-relative grey-bg pt-180 pb-85">
          <div class="tp-funfact-shape-1">
             <img src="assets/img/funfact/shape-1-1.png" alt="">
@@ -270,8 +279,8 @@ ob_start();
                      </div>
                      <div class="tp-funfact-content">
                         <h5 class="tp-funfact-number"><i class="purecounter" data-purecounter-duration="1"
-                              data-purecounter-end="820">0</i>+</h5>
-                        <span>Succesfull Projects</span>
+                              data-purecounter-end="<?php echo esc_attr( $home_sections['stat_1_number'] ); ?>">0</i><?php echo esc_html( $home_sections['stat_1_suffix'] ); ?></h5>
+                        <span><?php echo esc_html( $home_sections['stat_1_label'] ); ?></span>
                      </div>
                   </div>
                </div>
@@ -282,8 +291,8 @@ ob_start();
                      </div>
                      <div class="tp-funfact-content">
                         <h5 class="tp-funfact-number"><i class="purecounter" data-purecounter-duration="1"
-                              data-purecounter-end="9">0</i>M</h5>
-                        <span>Satisfied Clients</span>
+                              data-purecounter-end="<?php echo esc_attr( $home_sections['stat_2_number'] ); ?>">0</i><?php echo esc_html( $home_sections['stat_2_suffix'] ); ?></h5>
+                        <span><?php echo esc_html( $home_sections['stat_2_label'] ); ?></span>
                      </div>
                   </div>
                </div>
@@ -294,8 +303,8 @@ ob_start();
                      </div>
                      <div class="tp-funfact-content">
                         <h5 class="tp-funfact-number"><i class="purecounter" data-purecounter-duration="1"
-                              data-purecounter-end="45">0</i>+</h5>
-                        <span>Experienced Staff</span>
+                              data-purecounter-end="<?php echo esc_attr( $home_sections['stat_3_number'] ); ?>">0</i><?php echo esc_html( $home_sections['stat_3_suffix'] ); ?></h5>
+                        <span><?php echo esc_html( $home_sections['stat_3_label'] ); ?></span>
                      </div>
                   </div>
                </div>
@@ -306,14 +315,15 @@ ob_start();
                      </div>
                      <div class="tp-funfact-content">
                         <h5 class="tp-funfact-number"><i class="purecounter" data-purecounter-duration="1"
-                              data-purecounter-end="848">0</i>+</h5>
-                        <span>Awards Winning</span>
+                              data-purecounter-end="<?php echo esc_attr( $home_sections['stat_4_number'] ); ?>">0</i><?php echo esc_html( $home_sections['stat_4_suffix'] ); ?></h5>
+                        <span><?php echo esc_html( $home_sections['stat_4_label'] ); ?></span>
                      </div>
                   </div>
                </div>
             </div>
          </div>
       </div>
+      <?php endif; ?>
       <!-- funfact area end -->
 
       <!-- team area start -->
@@ -327,7 +337,7 @@ ob_start();
                   </div> 
                </div>
                <div class="col-12">
-                  <div class="swiper cosmotone-about-team-slider">
+                  <div class="swiper-container cosmotone-about-team-slider">
                      <div class="swiper-wrapper">
                <div class="swiper-slide">
                   <div class="tp-team-item text-center">

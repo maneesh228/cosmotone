@@ -47,7 +47,11 @@ function cosmotone_home_sections_schema() {
 			'fields' => array(),
 		),
 		'services' => array(
-			'label' => 'Services',
+			'label'             => 'Services',
+			'admin_manage_only' => true,
+			'admin_actions' => array(
+				array( 'label' => 'Manage Services', 'url' => 'edit.php?post_type=cosmotone_service', 'primary' => true ),
+			),
 			'legacy_section' => 'service',
 			'fields' => array(
 				cosmotone_home_field( 'services_subtitle', 'Subtitle', 'text', 'OUR BUSINESS SEGMENT', array( 'legacy_text' => 0 ) ),
@@ -66,7 +70,11 @@ function cosmotone_home_sections_schema() {
 			),
 		),
 		'products' => array(
-			'label' => 'Products',
+			'label'             => 'Products',
+			'admin_manage_only' => true,
+			'admin_actions' => array(
+				array( 'label' => 'Manage Products', 'url' => 'edit.php?post_type=cosmotone_product', 'primary' => true ),
+			),
 			'legacy_section' => 'project',
 			'fields' => array(
 				cosmotone_home_field( 'products_subtitle', 'Subtitle', 'text', 'TOP PRODUCTS', array( 'legacy_text' => 0 ) ),
@@ -74,34 +82,41 @@ function cosmotone_home_sections_schema() {
 			),
 		),
 		'contact' => array(
-			'label' => 'Vision, Mission & Contact',
+			'label' => 'Vision, Mission, Values & Contact',
 			'legacy_section' => 'contact',
 			'fields' => array(
-				cosmotone_home_field( 'contact_tab_1', 'Tab 1 Label', 'text', 'VISION', array( 'legacy_text' => 0 ) ),
-				cosmotone_home_field( 'contact_tab_2', 'Tab 2 Label', 'text', 'MISSION', array( 'legacy_text' => 1 ) ),
-				cosmotone_home_field( 'contact_tab_3', 'Tab 3 Label', 'text', 'VALUES', array( 'legacy_text' => 2 ) ),
-				cosmotone_home_field( 'contact_vision_title', 'Vision Title', 'editor', 'Shaping the Future of Automotive Components', array( 'legacy_text' => 3 ) ),
-				cosmotone_home_field( 'contact_mission_title', 'Mission Title', 'editor', 'Future Electricity and Problem Solution', array( 'legacy_text' => 7 ) ),
-				cosmotone_home_field( 'contact_values_title', 'Values Title', 'editor', "Electricity can transform people's lives, not just living", array( 'legacy_text' => 11 ) ),
-				cosmotone_home_field( 'contact_subtitle', 'Contact Subtitle', 'text', 'NEED HELP?', array( 'legacy_text' => 15 ) ),
-				cosmotone_home_field( 'contact_title', 'Contact Heading', 'editor', "Have a question?<br>We're ready to help", array( 'legacy_text' => array( 16, 17 ), 'legacy_join' => '<br>' ) ),
-				cosmotone_home_field( 'contact_description', 'Contact Description', 'editor', 'Don’t hesitate to call us on any product related query, our team wait for your call', array( 'legacy_text' => 18 ) ),
-				cosmotone_home_field( 'contact_phone_label', 'Phone Label', 'text', 'For emergency', array( 'legacy_text' => 19 ) ),
-				cosmotone_home_field( 'contact_phone', 'Phone Number', 'text', '+91 485 220 8431', array( 'legacy_text' => 20 ) ),
-				cosmotone_home_field( 'contact_phone_url', 'Phone Link', 'url', 'tel:+914852208431', array( 'legacy_link' => 3 ) ),
-				cosmotone_home_field( 'contact_background', 'Section Background', 'image', 'assets/img/contact/cosmotone-vision-bg.png', array( 'legacy_image' => 0 ) ),
-				cosmotone_home_field( 'contact_vision_image', 'Vision Image', 'image', 'assets/img/contact/contact1-1.jpg', array( 'legacy_image' => 2 ) ),
-				cosmotone_home_field( 'contact_vision_item_1', 'Vision List Item 1', 'text', 'Product Design & Development', array( 'legacy_text' => 4 ) ),
-				cosmotone_home_field( 'contact_vision_item_2', 'Vision List Item 2', 'text', 'Advanced Manufacturing', array( 'legacy_text' => 5 ) ),
-				cosmotone_home_field( 'contact_vision_item_3', 'Vision List Item 3', 'text', 'Quality Assurance', array( 'legacy_text' => 6 ) ),
-				cosmotone_home_field( 'contact_mission_image', 'Mission Image', 'image', 'assets/img/contact/contact1-2.jpg', array( 'legacy_image' => 3 ) ),
-				cosmotone_home_field( 'contact_mission_item_1', 'Mission List Item 1', 'text', 'Full-service electrical layout', array( 'legacy_text' => 8 ) ),
-				cosmotone_home_field( 'contact_mission_item_2', 'Mission List Item 2', 'text', 'AC installation in one hour', array( 'legacy_text' => 9 ) ),
-				cosmotone_home_field( 'contact_mission_item_3', 'Mission List Item 3', 'text', 'Wiring and installation', array( 'legacy_text' => 10 ) ),
-				cosmotone_home_field( 'contact_values_image', 'Values Image', 'image', 'assets/img/contact/contact1-3.jpg', array( 'legacy_image' => 4 ) ),
-				cosmotone_home_field( 'contact_values_item_1', 'Values List Item 1', 'text', 'Full-service electrical layout', array( 'legacy_text' => 12 ) ),
-				cosmotone_home_field( 'contact_values_item_2', 'Values List Item 2', 'text', 'AC installation in one hour', array( 'legacy_text' => 13 ) ),
-				cosmotone_home_field( 'contact_values_item_3', 'Values List Item 3', 'text', 'Wiring and installation', array( 'legacy_text' => 14 ) ),
+				cosmotone_home_field( 'contact_background', 'Section Background', 'image', 'assets/img/contact/cosmotone-vision-bg.png', array( 'legacy_image' => 0, 'admin_group' => 'Section' ) ),
+
+				cosmotone_home_field( 'contact_tab_1', 'Vision Tab Label', 'text', 'VISION', array( 'legacy_text' => 0, 'admin_group' => 'Vision Tab' ) ),
+				cosmotone_home_field( 'contact_vision_image', 'Vision Image', 'image', 'assets/img/contact/contact1-1.jpg', array( 'legacy_image' => 2, 'admin_group' => 'Vision Tab' ) ),
+				cosmotone_home_field( 'contact_vision_video_url', 'Vision YouTube URL', 'url', '', array( 'admin_group' => 'Vision Tab' ) ),
+				cosmotone_home_field( 'contact_vision_title', 'Vision Title', 'editor', 'Shaping the Future of Automotive Components', array( 'legacy_text' => 3, 'admin_group' => 'Vision Tab' ) ),
+				cosmotone_home_field( 'contact_vision_item_1', 'Vision List Item 1', 'text', 'Product Design & Development', array( 'legacy_text' => 4, 'admin_group' => 'Vision Tab' ) ),
+				cosmotone_home_field( 'contact_vision_item_2', 'Vision List Item 2', 'text', 'Advanced Manufacturing', array( 'legacy_text' => 5, 'admin_group' => 'Vision Tab' ) ),
+				cosmotone_home_field( 'contact_vision_item_3', 'Vision List Item 3', 'text', 'Quality Assurance', array( 'legacy_text' => 6, 'admin_group' => 'Vision Tab' ) ),
+
+				cosmotone_home_field( 'contact_tab_2', 'Mission Tab Label', 'text', 'MISSION', array( 'legacy_text' => 1, 'admin_group' => 'Mission Tab' ) ),
+				cosmotone_home_field( 'contact_mission_image', 'Mission Image', 'image', 'assets/img/contact/contact1-2.jpg', array( 'legacy_image' => 3, 'admin_group' => 'Mission Tab' ) ),
+				cosmotone_home_field( 'contact_mission_video_url', 'Mission YouTube URL', 'url', '', array( 'admin_group' => 'Mission Tab' ) ),
+				cosmotone_home_field( 'contact_mission_title', 'Mission Title', 'editor', 'Future Electricity and Problem Solution', array( 'legacy_text' => 7, 'admin_group' => 'Mission Tab' ) ),
+				cosmotone_home_field( 'contact_mission_item_1', 'Mission List Item 1', 'text', 'Full-service electrical layout', array( 'legacy_text' => 8, 'admin_group' => 'Mission Tab' ) ),
+				cosmotone_home_field( 'contact_mission_item_2', 'Mission List Item 2', 'text', 'AC installation in one hour', array( 'legacy_text' => 9, 'admin_group' => 'Mission Tab' ) ),
+				cosmotone_home_field( 'contact_mission_item_3', 'Mission List Item 3', 'text', 'Wiring and installation', array( 'legacy_text' => 10, 'admin_group' => 'Mission Tab' ) ),
+
+				cosmotone_home_field( 'contact_tab_3', 'Values Tab Label', 'text', 'VALUES', array( 'legacy_text' => 2, 'admin_group' => 'Values Tab' ) ),
+				cosmotone_home_field( 'contact_values_image', 'Values Image', 'image', 'assets/img/contact/contact1-3.jpg', array( 'legacy_image' => 4, 'admin_group' => 'Values Tab' ) ),
+				cosmotone_home_field( 'contact_values_video_url', 'Values YouTube URL', 'url', '', array( 'admin_group' => 'Values Tab' ) ),
+				cosmotone_home_field( 'contact_values_title', 'Values Title', 'editor', "Electricity can transform people's lives, not just living", array( 'legacy_text' => 11, 'admin_group' => 'Values Tab' ) ),
+				cosmotone_home_field( 'contact_values_item_1', 'Values List Item 1', 'text', 'Full-service electrical layout', array( 'legacy_text' => 12, 'admin_group' => 'Values Tab' ) ),
+				cosmotone_home_field( 'contact_values_item_2', 'Values List Item 2', 'text', 'AC installation in one hour', array( 'legacy_text' => 13, 'admin_group' => 'Values Tab' ) ),
+				cosmotone_home_field( 'contact_values_item_3', 'Values List Item 3', 'text', 'Wiring and installation', array( 'legacy_text' => 14, 'admin_group' => 'Values Tab' ) ),
+
+				cosmotone_home_field( 'contact_subtitle', 'Contact Subtitle', 'text', 'NEED HELP?', array( 'legacy_text' => 15, 'admin_group' => 'Contact Panel' ) ),
+				cosmotone_home_field( 'contact_title', 'Contact Heading', 'editor', "Have a question?<br>We're ready to help", array( 'legacy_text' => array( 16, 17 ), 'legacy_join' => '<br>', 'admin_group' => 'Contact Panel' ) ),
+				cosmotone_home_field( 'contact_description', 'Contact Description', 'editor', 'Don’t hesitate to call us on any product related query, our team wait for your call', array( 'legacy_text' => 18, 'admin_group' => 'Contact Panel' ) ),
+				cosmotone_home_field( 'contact_phone_label', 'Phone Label', 'text', 'For emergency', array( 'legacy_text' => 19, 'admin_group' => 'Contact Panel' ) ),
+				cosmotone_home_field( 'contact_phone', 'Phone Number', 'text', '+91 485 220 8431', array( 'legacy_text' => 20, 'admin_group' => 'Contact Panel' ) ),
+				cosmotone_home_field( 'contact_phone_url', 'Phone Link', 'url', 'tel:+914852208431', array( 'legacy_link' => 3, 'admin_group' => 'Contact Panel' ) ),
 			),
 		),
 		'stats' => array(
@@ -109,7 +124,8 @@ function cosmotone_home_sections_schema() {
 			'fields' => array(),
 		),
 		'team' => array(
-			'label' => 'Team',
+			'label'         => 'Team',
+			'admin_visible' => false,
 			'legacy_section' => 'team',
 			'fields' => array(
 				cosmotone_home_field( 'team_subtitle', 'Subtitle', 'text', 'OUR EXPERT TEAM', array( 'legacy_text' => 0 ) ),
@@ -120,7 +136,11 @@ function cosmotone_home_sections_schema() {
 			),
 		),
 		'testimonials' => array(
-			'label' => 'Testimonials',
+			'label'             => 'Testimonials',
+			'admin_manage_only' => true,
+			'admin_actions' => array(
+				array( 'label' => 'Manage Testimonials', 'url' => 'edit.php?post_type=cosmotone_review', 'primary' => true ),
+			),
 			'legacy_section' => 'testimonial',
 			'fields' => array(
 				cosmotone_home_field( 'testimonials_subtitle', 'Subtitle', 'text', 'OUR CLIENTS REVIEW', array( 'legacy_text' => 0 ) ),
@@ -128,7 +148,11 @@ function cosmotone_home_sections_schema() {
 			),
 		),
 		'news' => array(
-			'label' => 'News',
+			'label'             => 'News',
+			'admin_manage_only' => true,
+			'admin_actions' => array(
+				array( 'label' => 'Manage News', 'url' => 'edit.php', 'primary' => true ),
+			),
 			'legacy_section' => 'blog',
 			'fields' => array(
 				cosmotone_home_field( 'news_subtitle', 'Subtitle', 'text', 'NEWS & ARTICLES', array( 'legacy_text' => 0 ) ),
@@ -223,19 +247,6 @@ function cosmotone_home_sections_schema() {
 		$schema['team']['fields'][] = cosmotone_home_field( "team_{$number}_facebook", "Member {$number} Facebook", 'url', '#' );
 		$schema['team']['fields'][] = cosmotone_home_field( "team_{$number}_instagram", "Member {$number} Instagram", 'url', '#' );
 		$schema['team']['fields'][] = cosmotone_home_field( "team_{$number}_linkedin", "Member {$number} LinkedIn", 'url', '#' );
-	}
-
-	$testimonial_defaults = array(
-		array( "We've been using Cosmotone automotive electrical components for years. The product quality, consistency, and reliability have always exceeded our expectations.", 'Arun Kumar', 'Project Manager', 'assets/img/testimonial/author-1-1.png' ),
-		array( 'Cosmotone delivers premium-quality wiring harnesses and relays with excellent technical support. A dependable partner for our manufacturing needs', 'Anil Patel', 'OEM Procurement Manager', 'assets/img/testimonial/author-1-2.png' ),
-		array( 'The durability and performance of Cosmotone products have significantly improved our customer satisfaction. Highly recommended', 'Deepak Nair', 'Manager, Automotive Service Centre', 'assets/img/testimonial/author-1-3.png' ),
-	);
-	foreach ( $testimonial_defaults as $index => $item ) {
-		$number = $index + 1;
-		$schema['testimonials']['fields'][] = cosmotone_home_field( "testimonial_{$number}_text", "Testimonial {$number} Text", 'editor', $item[0], array( 'legacy_text' => 3 + $index * 3 ) );
-		$schema['testimonials']['fields'][] = cosmotone_home_field( "testimonial_{$number}_name", "Testimonial {$number} Name", 'text', $item[1], array( 'legacy_text' => 4 + $index * 3 ) );
-		$schema['testimonials']['fields'][] = cosmotone_home_field( "testimonial_{$number}_role", "Testimonial {$number} Role", 'text', $item[2], array( 'legacy_text' => 5 + $index * 3 ) );
-		$schema['testimonials']['fields'][] = cosmotone_home_field( "testimonial_{$number}_image", "Testimonial {$number} Image", 'image', $item[3], array( 'legacy_image' => 2 + $index * 2 ) );
 	}
 
 	$news_defaults = array(
@@ -373,6 +384,7 @@ function cosmotone_render_home_sections_metabox( $post ) {
 		<div class="cosmotone-home-tabs-nav">
 			<button type="button" class="button cosmotone-home-tab active" data-tab="cosmotone-home-slider">Slider</button>
 			<?php foreach ( $schema as $section_key => $section ) : ?>
+				<?php if ( isset( $section['admin_visible'] ) && ! $section['admin_visible'] ) continue; ?>
 				<button type="button" class="button cosmotone-home-tab" data-tab="cosmotone-home-<?php echo esc_attr( $section_key ); ?>"><?php echo esc_html( $section['label'] ); ?></button>
 			<?php endforeach; ?>
 		</div>
@@ -383,11 +395,28 @@ function cosmotone_render_home_sections_metabox( $post ) {
 		</div>
 
 		<?php foreach ( $schema as $section_key => $section ) : ?>
+			<?php if ( isset( $section['admin_visible'] ) && ! $section['admin_visible'] ) continue; ?>
 			<div class="cosmotone-home-pane" id="cosmotone-home-<?php echo esc_attr( $section_key ); ?>">
+				<?php if ( ! empty( $section['admin_actions'] ) ) : ?>
+					<p class="cosmotone-home-actions">
+						<?php foreach ( $section['admin_actions'] as $action ) : ?>
+							<a class="button<?php echo ! empty( $action['primary'] ) ? ' button-primary' : ''; ?>" href="<?php echo esc_url( admin_url( $action['url'] ) ); ?>"><?php echo esc_html( $action['label'] ); ?></a>
+						<?php endforeach; ?>
+					</p>
+				<?php endif; ?>
+				<?php if ( empty( $section['admin_manage_only'] ) ) : ?>
 				<label class="cosmotone-home-enabled"><input type="checkbox" name="cosmotone_home_sections[<?php echo esc_attr( $section_key ); ?>_enabled]" value="1" <?php checked( ! empty( $sections[ $section_key . '_enabled' ] ) ); ?>> Show this section</label>
 				<div class="cosmotone-home-grid">
-				<?php foreach ( $section['fields'] as $field ) :
+				<?php
+				$admin_group = '';
+				foreach ( $section['fields'] as $field ) :
 					$key = $field['key'];
+					if ( ! empty( $field['admin_group'] ) && $admin_group !== $field['admin_group'] ) :
+						$admin_group = $field['admin_group'];
+						?>
+						<h3 class="cosmotone-home-group-title"><?php echo esc_html( $admin_group ); ?></h3>
+						<?php
+					endif;
 					if ( 'image' === $field['type'] ) :
 						$image_id  = isset( $sections[ $key . '_id' ] ) ? absint( $sections[ $key . '_id' ] ) : 0;
 						$image_url = cosmotone_home_image_url( $sections, $key );
@@ -424,11 +453,12 @@ function cosmotone_render_home_sections_metabox( $post ) {
 					<?php endif; ?>
 				<?php endforeach; ?>
 				</div>
+				<?php endif; ?>
 			</div>
 		<?php endforeach; ?>
 	</div>
 	<style>
-	.cosmotone-home-tabs-nav{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 20px;padding-bottom:12px;border-bottom:1px solid #dcdcde}.cosmotone-home-tab.active{color:#fff;background:#2271b1;border-color:#2271b1}.cosmotone-home-pane{display:none}.cosmotone-home-pane.active{display:block}.cosmotone-home-enabled{display:block;margin:0 0 18px;font-weight:600}.cosmotone-home-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.cosmotone-home-field{padding:12px;border:1px solid #dcdcde;background:#fff}.cosmotone-home-field-wide{grid-column:1/-1}.cosmotone-home-field>label{display:block;margin-bottom:8px;font-weight:600}.cosmotone-home-field>input[type=text]{width:100%}.cosmotone-home-image-preview{display:block;width:auto;max-width:220px;height:110px;object-fit:contain;margin:0 0 10px;background:#f0f0f1}.cosmotone-home-image-field .button{margin-right:6px}@media(max-width:782px){.cosmotone-home-grid{grid-template-columns:1fr}.cosmotone-home-field-wide{grid-column:auto}}
+	.cosmotone-home-tabs-nav{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 20px;padding-bottom:12px;border-bottom:1px solid #dcdcde}.cosmotone-home-tab.active{color:#fff;background:#2271b1;border-color:#2271b1}.cosmotone-home-pane{display:none}.cosmotone-home-pane.active{display:block}.cosmotone-home-enabled{display:block;margin:0 0 18px;font-weight:600}.cosmotone-home-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.cosmotone-home-group-title{grid-column:1/-1;margin:8px 0 0;padding:0 0 8px;border-bottom:1px solid #dcdcde}.cosmotone-home-field{padding:12px;border:1px solid #dcdcde;background:#fff}.cosmotone-home-field-wide{grid-column:1/-1}.cosmotone-home-field>label{display:block;margin-bottom:8px;font-weight:600}.cosmotone-home-field>input[type=text]{width:100%}.cosmotone-home-image-preview{display:block;width:auto;max-width:220px;height:110px;object-fit:contain;margin:0 0 10px;background:#f0f0f1}.cosmotone-home-image-field .button{margin-right:6px}@media(max-width:782px){.cosmotone-home-grid{grid-template-columns:1fr}.cosmotone-home-group-title,.cosmotone-home-field-wide{grid-column:auto}}
 	</style>
 	<script>
 	(function(){
@@ -458,8 +488,12 @@ function cosmotone_save_home_sections( $post_id ) {
 	}
 
 	$raw = isset( $_POST['cosmotone_home_sections'] ) && is_array( $_POST['cosmotone_home_sections'] ) ? wp_unslash( $_POST['cosmotone_home_sections'] ) : array();
-	$out = array();
+	$out = get_post_meta( $post_id, '_cosmotone_home_sections', true );
+	$out = is_array( $out ) ? $out : array();
 	foreach ( cosmotone_home_sections_schema() as $section_key => $section ) {
+		if ( ( isset( $section['admin_visible'] ) && ! $section['admin_visible'] ) || ! empty( $section['admin_manage_only'] ) ) {
+			continue;
+		}
 		$out[ $section_key . '_enabled' ] = ! empty( $raw[ $section_key . '_enabled' ] ) ? 1 : 0;
 		foreach ( $section['fields'] as $field ) {
 			$key = $field['key'];

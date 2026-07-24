@@ -21,5 +21,8 @@ if ( ! $cosmotone_product_id ) {
 	}
 }
 
+ob_start();
 require get_template_directory() . '/template-parts/product-detail.php';
+$markup = ob_get_clean();
+echo cosmotone_apply_page_section_fields( $markup, get_queried_object_id(), 'product-details' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 get_footer();

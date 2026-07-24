@@ -19,6 +19,7 @@ $all_services  = cosmotone_get_services();
 $related       = cosmotone_get_services( 3, $service_id );
 ?>
 <main>
+	<!-- breadcrumb area start -->
 	<div class="breadcrumb__area breadcrumb__overlay breadcrumb__height p-relative fix" data-background="<?php echo esc_url( $service_image ); ?>">
 		<div class="container">
 			<div class="row">
@@ -40,6 +41,7 @@ $related       = cosmotone_get_services( 3, $service_id );
 			</div>
 		</div>
 	</div>
+	<!-- breadcrumb area end -->
 
 	<div class="tp-service-details-area pt-120 pb-120">
 		<div class="container">
@@ -107,4 +109,3 @@ $related       = cosmotone_get_services( 3, $service_id );
 	<?php endif; ?>
 	<?php get_template_part( 'template-parts/cta' ); ?>
 </main>
-

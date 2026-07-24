@@ -7,11 +7,23 @@
 
 defined( 'ABSPATH' ) || exit;
 get_header();
-$products = cosmotone_get_products();
+$paged    = max( 1, absint( get_query_var( 'paged' ) ), absint( get_query_var( 'page' ) ) );
+$products = new WP_Query(
+	array(
+		'post_type'      => 'cosmotone_product',
+		'posts_per_page' => 25,
+		'post_status'    => 'publish',
+		'paged'          => $paged,
+		'orderby'        => array( 'menu_order' => 'ASC', 'title' => 'ASC' ),
+		'order'          => 'ASC',
+	)
+);
 $terms    = get_terms( array( 'taxonomy' => 'cosmotone_product_category', 'hide_empty' => false ) );
 $terms    = is_wp_error( $terms ) ? array() : $terms;
+ob_start();
 ?>
 <main>
+	<!-- breadcrumb area start -->
 	<div class="breadcrumb__area breadcrumb__overlay breadcrumb__height p-relative fix" data-background="assets/img/breadcurmb/breadcurmb.jpg">
 		<div class="container">
 			<div class="row">
@@ -31,6 +43,7 @@ $terms    = is_wp_error( $terms ) ? array() : $terms;
 			</div>
 		</div>
 	</div>
+	<!-- breadcrumb area end -->
 
 	<div class="tp-project-area p-relative pt-120 pb-90">
 		<div class="tp-project-shape-1 d-none d-xl-block"><img src="assets/img/project/shape-1-1.png" alt=""></div>
@@ -100,12 +113,29 @@ $terms    = is_wp_error( $terms ) ? array() : $terms;
 					<div class="col-12 text-center"><p>No products have been published yet.</p></div>
 				<?php endif; ?>
 			</div>
+			<?php if ( $products->max_num_pages > 1 ) : ?>
+				<nav class="cosmotone-pagination" aria-label="<?php esc_attr_e( 'Products pagination', 'cosmotone' ); ?>">
+					<?php
+					echo wp_kses_post(
+						paginate_links(
+							array(
+								'total'     => $products->max_num_pages,
+								'current'   => $paged,
+								'type'      => 'list',
+								'prev_text' => '&larr;',
+								'next_text' => '&rarr;',
+							)
+						)
+					);
+					?>
+				</nav>
+			<?php endif; ?>
 		</div>
 	</div>
 	<?php get_template_part( 'template-parts/cta' ); ?>
 </main>
 <style>
-.cosmotone-product-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:14px;align-items:end;padding:22px;background:#f5f5f5;border:1px solid #e5e5e5}.cosmotone-product-filters label{display:block;margin-bottom:6px;font-weight:600;color:#121212}.cosmotone-product-filters select{width:100%;height:48px;padding:0 14px;border:1px solid #d6d6d6;background:#fff}.cosmotone-product-filters button{height:48px;padding:0 24px;border:0;background:var(--tp-theme-1);color:#fff;font-weight:600}@media(max-width:991px){.cosmotone-product-filters{grid-template-columns:1fr 1fr}}@media(max-width:575px){.cosmotone-product-filters{grid-template-columns:1fr}}
+.cosmotone-product-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:14px;align-items:end;padding:22px;background:#f5f5f5;border:1px solid #e5e5e5}.cosmotone-product-filters label{display:block;margin-bottom:6px;font-weight:600;color:#121212}.cosmotone-product-filters select{width:100%;height:48px;padding:0 14px;border:1px solid #d6d6d6;background:#fff}.cosmotone-product-filters button{height:48px;padding:0 24px;border:0;background:var(--tp-theme-1);color:#fff;font-weight:600}.cosmotone-pagination{display:flex;justify-content:center;margin-top:30px}.cosmotone-pagination .page-numbers{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0;padding:0;list-style:none}.cosmotone-pagination a,.cosmotone-pagination span{display:flex;min-width:44px;height:44px;padding:0 12px;align-items:center;justify-content:center;background:#f3f3f3;color:#121212;font-weight:600}.cosmotone-pagination .current,.cosmotone-pagination a:hover{background:var(--tp-theme-1);color:#fff}@media(max-width:991px){.cosmotone-product-filters{grid-template-columns:1fr 1fr}}@media(max-width:575px){.cosmotone-product-filters{grid-template-columns:1fr}}
 </style>
 <script>
 (function(){
@@ -120,4 +150,8 @@ $terms    = is_wp_error( $terms ) ? array() : $terms;
 	filterOptions(subcategory,0);filterOptions(child,0);apply();
 })();
 </script>
-<?php get_footer(); ?>
+<?php
+$markup = ob_get_clean();
+echo cosmotone_apply_page_section_fields( $markup, get_queried_object_id(), 'products' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+get_footer();
+?>

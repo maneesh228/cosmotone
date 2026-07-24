@@ -49,6 +49,7 @@ if ( ! $related->have_posts() && $deepest_term ) {
 }
 ?>
 <main>
+	<!-- breadcrumb area start -->
 	<div class="breadcrumb__area breadcrumb__overlay breadcrumb__height p-relative fix" data-background="<?php echo esc_url( $product_image ); ?>">
 		<div class="container">
 			<div class="row">
@@ -70,6 +71,7 @@ if ( ! $related->have_posts() && $deepest_term ) {
 			</div>
 		</div>
 	</div>
+	<!-- breadcrumb area end -->
 
 	<div class="tp-porfolio-details-area project-details-customize pt-110 pb-105">
 		<div class="container">

@@ -154,7 +154,7 @@ Kerala </a>
    <script src="assets/js/jarallax.js"></script>
    <script src="assets/js/imagesloaded-pkgd.js"></script>
    <script src="assets/js/ajax-form.js"></script>
-   <script src="assets/js/main.js?v=about-team-three-slides"></script>
+   <script src="assets/js/main.js?v=home-news-slider-1"></script>
    <?php wp_footer(); ?>
 
    

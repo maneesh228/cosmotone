@@ -344,84 +344,48 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                   <div class="row">
                      <div class="col-xl-12">
                         <div class="tp-project-wrapper">
-                           <div class="swiper-container tp-project-active">
-                              <div class="swiper-wrapper">
-                                 <div class="swiper-slide">
-                                    <div class="tp-project-item p-relative">
-                                       <div class="tp-project-thumb">
-                                          <a class="popup-image tp-product-popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_1_image' ) ); ?>" title="<?php echo esc_attr( $home_sections['product_1_title'] ); ?>" aria-label="<?php echo esc_attr( 'View ' . $home_sections['product_1_title'] . ' product image' ); ?>">
-                                             <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_1_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['product_1_title'] ); ?>">
-                                          </a>
-                                       </div>
-                                       <div class="tp-project-content">
-                                          <a class="tp-project-read-more" href="<?php echo esc_url( $home_sections['product_1_url'] ); ?>"><span><?php echo esc_html( $home_sections['product_1_button_text'] ); ?></span><i class="flaticon-right-arrow"></i></a>
-                                          <span><?php echo esc_html( $home_sections['product_1_subtitle'] ); ?></span>
-                                          <h4 class="tp-project-title"><a href="<?php echo esc_url( $home_sections['product_1_url'] ); ?>"><?php echo esc_html( $home_sections['product_1_title'] ); ?></a></h4>
-                                          <div><?php echo wp_kses_post( wpautop( $home_sections['product_1_description'] ) ); ?></div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="swiper-slide">
-                                    <div class="tp-project-item p-relative">
-                                       <div class="tp-project-thumb">
-                                          <a class="popup-image tp-product-popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_2_image' ) ); ?>" title="<?php echo esc_attr( $home_sections['product_2_title'] ); ?>" aria-label="<?php echo esc_attr( 'View ' . $home_sections['product_2_title'] . ' product image' ); ?>">
-                                             <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_2_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['product_2_title'] ); ?>">
-                                          </a>
-                                       </div>
-                                       <div class="tp-project-content">
-                                          <a class="tp-project-read-more" href="<?php echo esc_url( $home_sections['product_2_url'] ); ?>"><span><?php echo esc_html( $home_sections['product_2_button_text'] ); ?></span><i class="flaticon-right-arrow"></i></a>
-                                          <span><?php echo esc_html( $home_sections['product_2_subtitle'] ); ?></span>
-                                          <h4 class="tp-project-title"><a href="<?php echo esc_url( $home_sections['product_2_url'] ); ?>"><?php echo esc_html( $home_sections['product_2_title'] ); ?></a></h4>
-                                          <div><?php echo wp_kses_post( wpautop( $home_sections['product_2_description'] ) ); ?></div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="swiper-slide">
-                                    <div class="tp-project-item p-relative">
-                                       <div class="tp-project-thumb">
-                                          <a class="popup-image tp-product-popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_3_image' ) ); ?>" title="<?php echo esc_attr( $home_sections['product_3_title'] ); ?>" aria-label="<?php echo esc_attr( 'View ' . $home_sections['product_3_title'] . ' product image' ); ?>">
-                                             <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_3_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['product_3_title'] ); ?>">
-                                          </a>
-                                       </div>
-                                       <div class="tp-project-content">
-                                          <a class="tp-project-read-more" href="<?php echo esc_url( $home_sections['product_3_url'] ); ?>"><span><?php echo esc_html( $home_sections['product_3_button_text'] ); ?></span><i class="flaticon-right-arrow"></i></a>
-                                          <span><?php echo esc_html( $home_sections['product_3_subtitle'] ); ?></span>
-                                          <h4 class="tp-project-title"><a href="<?php echo esc_url( $home_sections['product_3_url'] ); ?>"><?php echo esc_html( $home_sections['product_3_title'] ); ?></a></h4>
-                                          <div><?php echo wp_kses_post( wpautop( $home_sections['product_3_description'] ) ); ?></div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="swiper-slide">
-                                    <div class="tp-project-item p-relative">
-                                       <div class="tp-project-thumb">
-                                          <a class="popup-image tp-product-popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_4_image' ) ); ?>" title="<?php echo esc_attr( $home_sections['product_4_title'] ); ?>" aria-label="<?php echo esc_attr( 'View ' . $home_sections['product_4_title'] . ' product image' ); ?>">
-                                             <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_4_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['product_4_title'] ); ?>">
-                                          </a>
-                                       </div>
-                                       <div class="tp-project-content">
-                                          <a class="tp-project-read-more" href="<?php echo esc_url( $home_sections['product_4_url'] ); ?>"><span><?php echo esc_html( $home_sections['product_4_button_text'] ); ?></span><i class="flaticon-right-arrow"></i></a>
-                                          <span><?php echo esc_html( $home_sections['product_4_subtitle'] ); ?></span>
-                                          <h4 class="tp-project-title"><a href="<?php echo esc_url( $home_sections['product_4_url'] ); ?>"><?php echo esc_html( $home_sections['product_4_title'] ); ?></a></h4>
-                                          <div><?php echo wp_kses_post( wpautop( $home_sections['product_4_description'] ) ); ?></div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="swiper-slide">
-                                    <div class="tp-project-item p-relative">
-                                       <div class="tp-project-thumb">
-                                          <a class="popup-image tp-product-popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_5_image' ) ); ?>" title="<?php echo esc_attr( $home_sections['product_5_title'] ); ?>" aria-label="<?php echo esc_attr( 'View ' . $home_sections['product_5_title'] . ' product image' ); ?>">
-                                             <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'product_5_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['product_5_title'] ); ?>">
-                                          </a>
-                                       </div>
-                                       <div class="tp-project-content">
-                                          <a class="tp-project-read-more" href="<?php echo esc_url( $home_sections['product_5_url'] ); ?>"><span><?php echo esc_html( $home_sections['product_5_button_text'] ); ?></span><i class="flaticon-right-arrow"></i></a>
-                                          <span><?php echo esc_html( $home_sections['product_5_subtitle'] ); ?></span>
-                                          <h4 class="tp-project-title"><a href="<?php echo esc_url( $home_sections['product_5_url'] ); ?>"><?php echo esc_html( $home_sections['product_5_title'] ); ?></a></h4>
-                                          <div><?php echo wp_kses_post( wpautop( $home_sections['product_5_description'] ) ); ?></div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
+                            <div class="swiper-container tp-project-active">
+                               <div class="swiper-wrapper">
+                                  <?php
+                                  $latest_products = new WP_Query(
+                                     array(
+                                        'post_type'      => 'cosmotone_product',
+                                        'post_status'    => 'publish',
+                                        'posts_per_page' => 10,
+                                        'orderby'        => 'date',
+                                        'order'          => 'DESC',
+                                     )
+                                  );
+                                  while ( $latest_products->have_posts() ) :
+                                     $latest_products->the_post();
+                                     $product_id    = get_the_ID();
+                                     $product_title = get_the_title();
+                                     $product_url   = get_permalink();
+                                     $product_image = cosmotone_catalog_image_url( $product_id, 'large' );
+                                     $term_path     = cosmotone_product_category_path( $product_id );
+                                     $term_label    = $term_path ? implode( ' / ', wp_list_pluck( $term_path, 'name' ) ) : __( 'Product', 'cosmotone' );
+                                     $description   = wp_trim_words( wp_strip_all_tags( strip_shortcodes( get_the_content() ) ), 24 );
+                                     ?>
+                                     <div class="swiper-slide">
+                                        <div class="tp-project-item p-relative">
+                                           <div class="tp-project-thumb">
+                                              <a class="popup-image tp-product-popup-image" href="<?php echo esc_url( $product_image ); ?>" title="<?php echo esc_attr( $product_title ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'View %s product image', 'cosmotone' ), $product_title ) ); ?>">
+                                                 <img src="<?php echo esc_url( $product_image ); ?>" alt="<?php echo esc_attr( $product_title ); ?>">
+                                              </a>
+                                           </div>
+                                           <div class="tp-project-content">
+                                              <a class="tp-project-read-more" href="<?php echo esc_url( $product_url ); ?>"><span><?php esc_html_e( 'Read More', 'cosmotone' ); ?></span><i class="flaticon-right-arrow"></i></a>
+                                              <span><?php echo esc_html( $term_label ); ?></span>
+                                              <h4 class="tp-project-title"><a href="<?php echo esc_url( $product_url ); ?>"><?php echo esc_html( $product_title ); ?></a></h4>
+                                              <?php if ( $description ) : ?>
+                                                 <div><p><?php echo esc_html( $description ); ?></p></div>
+                                              <?php endif; ?>
+                                           </div>
+                                        </div>
+                                     </div>
+                                  <?php endwhile; ?>
+                                  <?php wp_reset_postdata(); ?>
+                               </div>
                            </div>
                         </div>
                      </div>
@@ -435,8 +399,11 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
 
       <!-- contact area start -->
       <?php if ( ! empty( $home_sections['contact_enabled'] ) ) : ?>
+      <?php $contact_background_url = cosmotone_home_image_url( $home_sections, 'contact_background' ); ?>
       <div class="tp-contact-area">
-         <div class="tp-contact-bg p-relative jarallax pt-120" data-background="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_background' ) ); ?>">
+         <div class="tp-contact-bg p-relative jarallax pt-120"
+            data-background="<?php echo esc_url( $contact_background_url ); ?>"
+            style="<?php echo esc_attr( 'background-image: url("' . $contact_background_url . '") !important;' ); ?>">
             <div class="tp-contact-shape-2 d-none d-xl-block">
                <img src="assets/img/contact/shape-1-2.png" alt="">
             </div>
@@ -473,11 +440,14 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                                           <div class="tp-contact-tab-content-thumb">
                                              <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_vision_image' ) ); ?>" alt="">
                                           </div>
-                                          <div class="tp-contact-tab-play-icon">
-                                             <a class="popup-video"
-                                                href="#"><i
-                                                   class="flaticon-play-button"></i></a>
-                                          </div>
+                                          <?php if ( ! empty( $home_sections['contact_vision_video_url'] ) ) : ?>
+                                             <div class="tp-contact-tab-play-icon">
+                                                <a class="popup-video"
+                                                   href="<?php echo esc_url( $home_sections['contact_vision_video_url'] ); ?>"
+                                                   aria-label="<?php esc_attr_e( 'Play Vision video', 'cosmotone' ); ?>"><i
+                                                      class="flaticon-play-button"></i></a>
+                                             </div>
+                                          <?php endif; ?>
                                        </div>
                                     </div>
                                     <div class="col-xl-7 col-lg-7 col-md-7">
@@ -501,11 +471,14 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                                           <div class="tp-contact-tab-content-thumb">
                                              <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_mission_image' ) ); ?>" alt="">
                                           </div>
-                                          <div class="tp-contact-tab-play-icon">
-                                             <a class="popup-video"
-                                                href="#"><i
-                                                   class="flaticon-play-button"></i></a>
-                                          </div>
+                                          <?php if ( ! empty( $home_sections['contact_mission_video_url'] ) ) : ?>
+                                             <div class="tp-contact-tab-play-icon">
+                                                <a class="popup-video"
+                                                   href="<?php echo esc_url( $home_sections['contact_mission_video_url'] ); ?>"
+                                                   aria-label="<?php esc_attr_e( 'Play Mission video', 'cosmotone' ); ?>"><i
+                                                      class="flaticon-play-button"></i></a>
+                                             </div>
+                                          <?php endif; ?>
                                        </div>
                                     </div>
                                     <div class="col-xl-7 col-lg-7 col-md-7">
@@ -529,11 +502,14 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                                           <div class="tp-contact-tab-content-thumb">
                                              <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_values_image' ) ); ?>" alt="">
                                           </div>
-                                          <div class="tp-contact-tab-play-icon">
-                                             <a class="popup-video"
-                                                href="#"><i
-                                                   class="flaticon-play-button"></i></a>
-                                          </div>
+                                          <?php if ( ! empty( $home_sections['contact_values_video_url'] ) ) : ?>
+                                             <div class="tp-contact-tab-play-icon">
+                                                <a class="popup-video"
+                                                   href="<?php echo esc_url( $home_sections['contact_values_video_url'] ); ?>"
+                                                   aria-label="<?php esc_attr_e( 'Play Values video', 'cosmotone' ); ?>"><i
+                                                      class="flaticon-play-button"></i></a>
+                                             </div>
+                                          <?php endif; ?>
                                        </div>
                                     </div>
                                     <div class="col-xl-7 col-lg-7 col-md-7">
@@ -649,96 +625,11 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
       <?php endif; ?>
       <!-- funfact area end -->
 
-      <!-- team area start -->
-      <?php if ( ! empty( $home_sections['team_enabled'] ) ) : ?>
-      <div class="tp-team-area pt-120 pb-120">
-         <div class="container">
-            <div class="row">
-               <div class="col-xl-12">
-                  <div class="tp-team-section-box text-center mb-60">
-                     <span class="tp-section-subtitle"><i class="flaticon-flash"></i><?php echo esc_html( $home_sections['team_subtitle'] ); ?></span>
-                     <h4 class="tp-section-title"><?php echo wp_kses_post( $home_sections['team_title'] ); ?></h4>
-                  </div>
-               </div>
-               <div class="col-xl-4 col-lg-4 col-md-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".3s">
-                  <div class="tp-team-item text-center">
-                     <div class="tp-team-thumb-box p-relative">
-                        <div class="tp-team-thumb">
-                           <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'team_1_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['team_1_name'] ); ?>">
-                        </div>
-                        <div class="tp-team-social-wrap">
-                           <span><i class="fa-solid fa-share-nodes"></i></span>
-                           <div class="tp-team-social-box">
-                              <a href="<?php echo esc_url( $home_sections['team_1_facebook'] ); ?>"><i class="fa-brands fa-facebook-f"></i></a>
-                              <a href="<?php echo esc_url( $home_sections['team_1_instagram'] ); ?>"><i class="fa-brands fa-instagram"></i></a>
-                              <a href="<?php echo esc_url( $home_sections['team_1_linkedin'] ); ?>"><i class="fa-brands fa-linkedin-in"></i></a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="tp-team-content">
-                        <h4 class="tp-team-title"><a href="#"><?php echo esc_html( $home_sections['team_1_name'] ); ?></a></h4>
-                        <span><?php echo esc_html( $home_sections['team_1_role'] ); ?></span>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-4 col-lg-4 col-md-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".5s">
-                  <div class="tp-team-item text-center">
-                     <div class="tp-team-thumb-box p-relative">
-                        <div class="tp-team-thumb">
-                           <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'team_2_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['team_2_name'] ); ?>">
-                        </div>
-                        <div class="tp-team-social-wrap">
-                           <span><i class="fa-solid fa-share-nodes"></i></span>
-                           <div class="tp-team-social-box">
-                              <a href="<?php echo esc_url( $home_sections['team_2_facebook'] ); ?>"><i class="fa-brands fa-facebook-f"></i></a>
-                              <a href="<?php echo esc_url( $home_sections['team_2_instagram'] ); ?>"><i class="fa-brands fa-instagram"></i></a>
-                              <a href="<?php echo esc_url( $home_sections['team_2_linkedin'] ); ?>"><i class="fa-brands fa-linkedin-in"></i></a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="tp-team-content">
-                        <h4 class="tp-team-title"><a href="#"><?php echo esc_html( $home_sections['team_2_name'] ); ?></a></h4>
-                        <span><?php echo esc_html( $home_sections['team_2_role'] ); ?></span>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-4 col-lg-4 col-md-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
-                  <div class="tp-team-item text-center">
-                     <div class="tp-team-thumb-box p-relative">
-                        <div class="tp-team-thumb">
-                           <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'team_3_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['team_3_name'] ); ?>">
-                        </div>
-                        <div class="tp-team-social-wrap">
-                           <span><i class="fa-solid fa-share-nodes"></i></span>
-                           <div class="tp-team-social-box">
-                              <a href="<?php echo esc_url( $home_sections['team_3_facebook'] ); ?>"><i class="fa-brands fa-facebook-f"></i></a>
-                              <a href="<?php echo esc_url( $home_sections['team_3_instagram'] ); ?>"><i class="fa-brands fa-instagram"></i></a>
-                              <a href="<?php echo esc_url( $home_sections['team_3_linkedin'] ); ?>"><i class="fa-brands fa-linkedin-in"></i></a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="tp-team-content">
-                        <h4 class="tp-team-title"><a href="#"><?php echo esc_html( $home_sections['team_3_name'] ); ?></a></h4>
-                        <span><?php echo esc_html( $home_sections['team_3_role'] ); ?></span>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-12 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".3s">
-                  <div class="tp-team-text text-center">
-                     <p><?php echo wp_kses_post( $home_sections['team_footer_text'] ); ?> <a href="<?php echo esc_url( $home_sections['team_footer_link_url'] ); ?>"><?php echo esc_html( $home_sections['team_footer_link_text'] ); ?></a></p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <?php endif; ?>
-      <!-- team area end -->
-
       <!-- testimonial area start -->
       <?php if ( ! empty( $home_sections['testimonials_enabled'] ) ) : ?>
       <div class="tp-testimonial-area p-relative fix grey-bg pt-120 pb-120">
          <div class="tp-testimonial-shape-1">
-            <img src="assets/img/testimonial/shape-1-1.png" alt="">
+            <!-- <img src="assets/img/testimonial/shape-1-1.png" alt=""> -->
          </div>
          <div class="tp-testimonial-shape-2 d-none d-xl-block">
             <img src="assets/img/testimonial/shape-1-2.png" alt="">
@@ -755,96 +646,45 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                   <div class="tp-testimonial-wrapper">
                      <div class="swiper-container tp-testimonial-active">
                         <div class="swiper-wrapper">
-                           <div class="swiper-slide">
-                              <div class="tp-testimonial-item z-index p-relative">
-                                 <div class="tp-testimonial-thumb">
-                                    <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'testimonial_1_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['testimonial_1_name'] ); ?>">
-                                    <div class="tp-testimonial-thumb-quot">
-                                       <span><i class="flaticon-quote"></i></span>
+                           <?php
+                           $testimonials = cosmotone_get_testimonials();
+                           while ( $testimonials->have_posts() ) :
+                              $testimonials->the_post();
+                              $testimonial_id     = get_the_ID();
+                              $testimonial_name   = get_the_title();
+                              $testimonial_role   = get_post_meta( $testimonial_id, '_cosmotone_testimonial_role', true );
+                              $testimonial_rating = absint( get_post_meta( $testimonial_id, '_cosmotone_testimonial_rating', true ) );
+                              $testimonial_rating = $testimonial_rating ? min( 5, $testimonial_rating ) : 5;
+                              ?>
+                              <div class="swiper-slide">
+                                 <div class="tp-testimonial-item z-index p-relative">
+                                    <div class="tp-testimonial-thumb">
+                                       <img src="<?php echo esc_url( cosmotone_testimonial_image_url( $testimonial_id, 'medium' ) ); ?>" alt="<?php echo esc_attr( $testimonial_name ); ?>">
+                                       <div class="tp-testimonial-thumb-quot">
+                                          <span><i class="flaticon-quote"></i></span>
+                                       </div>
                                     </div>
-                                 </div>
-                                 <div class="tp-testimonial-text">
-                                    <?php echo wp_kses_post( wpautop( $home_sections['testimonial_1_text'] ) ); ?>
-                                 </div>
-                                 <div
-                                    class="tp-testimonial-author-box d-flex align-items-center justify-content-between">
-                                    <div class="tp-testimonial-author-info">
-                                       <h6 class="tp-testimonial-author-name"><?php echo esc_html( $home_sections['testimonial_1_name'] ); ?></h6>
-                                       <span><?php echo esc_html( $home_sections['testimonial_1_role'] ); ?></span>
+                                    <div class="tp-testimonial-text">
+                                       <?php echo wp_kses_post( apply_filters( 'the_content', get_the_content() ) ); ?>
                                     </div>
-                                    <div class="tp-testimonial-star d-none d-sm-block">
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
+                                    <div class="tp-testimonial-author-box d-flex align-items-center justify-content-between">
+                                       <div class="tp-testimonial-author-info">
+                                          <h6 class="tp-testimonial-author-name"><?php echo esc_html( $testimonial_name ); ?></h6>
+                                          <span><?php echo esc_html( $testimonial_role ); ?></span>
+                                       </div>
+                                       <div class="tp-testimonial-star d-none d-sm-block">
+                                          <?php for ( $star = 0; $star < $testimonial_rating; $star++ ) : ?>
+                                             <i class="fa-solid fa-star"></i>
+                                          <?php endfor; ?>
+                                       </div>
                                     </div>
-                                 </div>
-                                 <div class="tp-testimonial-shape-3">
-                                    <img src="assets/img/testimonial/shape-1-3.png" alt="">
+                                    <div class="tp-testimonial-shape-3">
+                                       <img src="assets/img/testimonial/shape-1-3.png" alt="">
+                                    </div>
                                  </div>
                               </div>
-                           </div>
-                           <div class="swiper-slide">
-                              <div class="tp-testimonial-item z-index p-relative">
-                                 <div class="tp-testimonial-thumb">
-                                    <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'testimonial_2_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['testimonial_2_name'] ); ?>">
-                                    <div class="tp-testimonial-thumb-quot">
-                                       <span><i class="flaticon-quote"></i></span>
-                                    </div>
-                                 </div>
-                                 <div class="tp-testimonial-text">
-                                    <?php echo wp_kses_post( wpautop( $home_sections['testimonial_2_text'] ) ); ?>
-                                 </div>
-                                 <div
-                                    class="tp-testimonial-author-box d-flex align-items-center justify-content-between">
-                                    <div class="tp-testimonial-author-info">
-                                       <h6 class="tp-testimonial-author-name"><?php echo esc_html( $home_sections['testimonial_2_name'] ); ?></h6>
-                                       <span><?php echo esc_html( $home_sections['testimonial_2_role'] ); ?></span>
-                                    </div>
-                                    <div class="tp-testimonial-star d-none d-sm-block">
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                    </div>
-                                 </div>
-                                 <div class="tp-testimonial-shape-3">
-                                    <img src="assets/img/testimonial/shape-1-3.png" alt="">
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="swiper-slide">
-                              <div class="tp-testimonial-item z-index p-relative">
-                                 <div class="tp-testimonial-thumb">
-                                    <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'testimonial_3_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['testimonial_3_name'] ); ?>">
-                                    <div class="tp-testimonial-thumb-quot">
-                                       <span><i class="flaticon-quote"></i></span>
-                                    </div>
-                                 </div>
-                                 <div class="tp-testimonial-text">
-                                    <?php echo wp_kses_post( wpautop( $home_sections['testimonial_3_text'] ) ); ?>
-                                 </div>
-                                 <div
-                                    class="tp-testimonial-author-box d-flex align-items-center justify-content-between">
-                                    <div class="tp-testimonial-author-info">
-                                       <h6 class="tp-testimonial-author-name"><?php echo esc_html( $home_sections['testimonial_3_name'] ); ?></h6>
-                                       <span><?php echo esc_html( $home_sections['testimonial_3_role'] ); ?></span>
-                                    </div>
-                                    <div class="tp-testimonial-star d-none d-sm-block">
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                       <i class="fa-solid fa-star"></i>
-                                    </div>
-                                 </div>
-                                 <div class="tp-testimonial-shape-3">
-                                    <img src="assets/img/testimonial/shape-1-3.png" alt="">
-                                 </div>
-                              </div>
-                           </div>
+                           <?php endwhile; ?>
+                           <?php wp_reset_postdata(); ?>
                         </div>
                      </div>
                   </div>
@@ -869,101 +709,74 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                      <h4 class="tp-section-title"><?php echo wp_kses_post( $home_sections['news_title'] ); ?></h4>
                   </div>
                </div>
-               <div class="col-xl-4 col-lg-4 col-md-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".3s">
-                  <div class="tp-blog-item">
-                     <div class="tp-blog-thumb-wrap p-relative">
-                        <div class="tp-blog-thumb-box p-relative">
-                           <div class="tp-blog-thumb-main z-index-3 fix">
-                              <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'news_1_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['news_1_title'] ); ?>">
-                           </div>
-                           <div class="tp-blog-thumb-icon">
-                              <a class="popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'news_1_image' ) ); ?>"><i
-                                    class="fa-sharp fa-light fa-eye"></i></a>
-                           </div>
-                        </div>
-                        <div class="tp-blog-thumb-shape-1">
-                           <img src="assets/img/blog/shape-1-1.png" alt="">
-                        </div>
-                        <div class="tp-blog-thumb-shape-2">
-                           <img src="assets/img/blog/shape-1-2.png" alt="">
-                        </div>
-                     </div>
-                     <div class="tp-blog-content">
-                        <div class="tp-blog-meta">
-                           <span><i class="fa-light fa-circle-user"></i><?php echo esc_html( $home_sections['news_1_author'] ); ?></span>
-                           <span><i class="flaticon-price-tag"></i><?php echo esc_html( $home_sections['news_1_category'] ); ?></span>
-                        </div>
-                        <h4 class="tp-blog-title"><a href="<?php echo esc_url( $home_sections['news_1_url'] ); ?>"><?php echo esc_html( $home_sections['news_1_title'] ); ?></a></h4>
-                        <div class="tp-blog-link d-flex justify-content-between align-items-center">
-                           <a href="<?php echo esc_url( $home_sections['news_1_url'] ); ?>"><?php echo esc_html( $home_sections['news_1_button_text'] ); ?></a>
-                           <a href="<?php echo esc_url( $home_sections['news_1_url'] ); ?>"><i class="flaticon-right-arrow"></i></a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-4 col-lg-4 col-md-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".5s">
-                  <div class="tp-blog-item">
-                     <div class="tp-blog-thumb-wrap p-relative">
-                        <div class="tp-blog-thumb-box p-relative">
-                           <div class="tp-blog-thumb-main z-index-3 fix">
-                              <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'news_2_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['news_2_title'] ); ?>">
-                           </div>
-                           <div class="tp-blog-thumb-icon">
-                              <a class="popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'news_2_image' ) ); ?>"><i
-                                    class="fa-sharp fa-light fa-eye"></i></a>
-                           </div>
-                        </div>
-                        <div class="tp-blog-thumb-shape-1">
-                           <img src="assets/img/blog/shape-1-1.png" alt="">
-                        </div>
-                        <div class="tp-blog-thumb-shape-2">
-                           <img src="assets/img/blog/shape-1-2.png" alt="">
-                        </div>
-                     </div>
-                     <div class="tp-blog-content">
-                        <div class="tp-blog-meta">
-                           <span><i class="fa-light fa-circle-user"></i><?php echo esc_html( $home_sections['news_2_author'] ); ?></span>
-                           <span><i class="flaticon-price-tag"></i><?php echo esc_html( $home_sections['news_2_category'] ); ?></span>
-                        </div>
-                        <h4 class="tp-blog-title"><a href="<?php echo esc_url( $home_sections['news_2_url'] ); ?>"><?php echo esc_html( $home_sections['news_2_title'] ); ?></a></h4>
-                        <div class="tp-blog-link d-flex justify-content-between align-items-center">
-                           <a href="<?php echo esc_url( $home_sections['news_2_url'] ); ?>"><?php echo esc_html( $home_sections['news_2_button_text'] ); ?></a>
-                           <a href="<?php echo esc_url( $home_sections['news_2_url'] ); ?>"><i class="flaticon-right-arrow"></i></a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-4 col-lg-4 col-md-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
-                  <div class="tp-blog-item">
-                     <div class="tp-blog-thumb-wrap p-relative">
-                        <div class="tp-blog-thumb-box p-relative">
-                           <div class="tp-blog-thumb-main z-index-3 fix">
-                              <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'news_3_image' ) ); ?>" alt="<?php echo esc_attr( $home_sections['news_3_title'] ); ?>">
-                           </div>
-                           <div class="tp-blog-thumb-icon">
-                              <a class="popup-image" href="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'news_3_image' ) ); ?>"><i
-                                    class="fa-sharp fa-light fa-eye"></i></a>
-                           </div>
-                        </div>
-                        <div class="tp-blog-thumb-shape-1">
-                           <img src="assets/img/blog/shape-1-1.png" alt="">
-                        </div>
-                        <div class="tp-blog-thumb-shape-2">
-                           <img src="assets/img/blog/shape-1-2.png" alt="">
+               <div class="col-xl-12">
+                  <?php
+                  $latest_news = new WP_Query(
+                     array(
+                        'post_type'           => 'post',
+                        'post_status'         => 'publish',
+                        'posts_per_page'      => 5,
+                        'orderby'             => 'date',
+                        'order'               => 'DESC',
+                        'ignore_sticky_posts' => true,
+                        'no_found_rows'        => true,
+                     )
+                  );
+                  ?>
+                  <?php if ( $latest_news->have_posts() ) : ?>
+                     <div class="swiper-container tp-blog-active">
+                        <div class="swiper-wrapper">
+                           <?php
+                           while ( $latest_news->have_posts() ) :
+                              $latest_news->the_post();
+                              $news_id         = get_the_ID();
+                              $news_title      = get_the_title();
+                              $news_url        = get_permalink();
+                              $news_image      = get_the_post_thumbnail_url( $news_id, 'large' );
+                              $news_categories = get_the_category( $news_id );
+                              $news_category   = $news_categories ? $news_categories[0]->name : __( 'News', 'cosmotone' );
+
+                              if ( ! $news_image ) {
+                                 $news_image = trailingslashit( get_template_directory_uri() ) . 'assets/img/blog/blog-1-1.jpg';
+                              }
+                              ?>
+                              <div class="swiper-slide">
+                                 <div class="tp-blog-item">
+                                    <div class="tp-blog-thumb-wrap p-relative">
+                                       <div class="tp-blog-thumb-box p-relative">
+                                          <div class="tp-blog-thumb-main z-index-3 fix">
+                                             <img src="<?php echo esc_url( $news_image ); ?>" alt="<?php echo esc_attr( $news_title ); ?>">
+                                          </div>
+                                          <div class="tp-blog-thumb-icon">
+                                             <a class="popup-image" href="<?php echo esc_url( $news_image ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'View image for %s', 'cosmotone' ), $news_title ) ); ?>"><i
+                                                   class="fa-sharp fa-light fa-eye"></i></a>
+                                          </div>
+                                       </div>
+                                       <div class="tp-blog-thumb-shape-1">
+                                          <img src="assets/img/blog/shape-1-1.png" alt="">
+                                       </div>
+                                       <div class="tp-blog-thumb-shape-2">
+                                          <img src="assets/img/blog/shape-1-2.png" alt="">
+                                       </div>
+                                    </div>
+                                    <div class="tp-blog-content">
+                                       <div class="tp-blog-meta">
+                                          <span><i class="fa-light fa-circle-user"></i><?php echo esc_html( sprintf( __( 'By %s', 'cosmotone' ), get_the_author() ) ); ?></span>
+                                          <span><i class="flaticon-price-tag"></i><?php echo esc_html( $news_category ); ?></span>
+                                       </div>
+                                       <h4 class="tp-blog-title"><a href="<?php echo esc_url( $news_url ); ?>"><?php echo esc_html( $news_title ); ?></a></h4>
+                                       <div class="tp-blog-link d-flex justify-content-between align-items-center">
+                                          <a href="<?php echo esc_url( $news_url ); ?>"><?php esc_html_e( 'Read More', 'cosmotone' ); ?></a>
+                                          <a href="<?php echo esc_url( $news_url ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Read %s', 'cosmotone' ), $news_title ) ); ?>"><i class="flaticon-right-arrow"></i></a>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           <?php endwhile; ?>
                         </div>
                      </div>
-                     <div class="tp-blog-content">
-                        <div class="tp-blog-meta">
-                           <span><i class="fa-light fa-circle-user"></i><?php echo esc_html( $home_sections['news_3_author'] ); ?></span>
-                           <span><i class="flaticon-price-tag"></i><?php echo esc_html( $home_sections['news_3_category'] ); ?></span>
-                        </div>
-                        <h4 class="tp-blog-title"><a href="<?php echo esc_url( $home_sections['news_3_url'] ); ?>"><?php echo esc_html( $home_sections['news_3_title'] ); ?></a></h4>
-                        <div class="tp-blog-link d-flex justify-content-between align-items-center">
-                           <a href="<?php echo esc_url( $home_sections['news_3_url'] ); ?>"><?php echo esc_html( $home_sections['news_3_button_text'] ); ?></a>
-                           <a href="<?php echo esc_url( $home_sections['news_3_url'] ); ?>"><i class="flaticon-right-arrow"></i></a>
-                        </div>
-                     </div>
-                  </div>
+                  <?php endif; ?>
+                  <?php wp_reset_postdata(); ?>
                </div>
             </div>
          </div>
