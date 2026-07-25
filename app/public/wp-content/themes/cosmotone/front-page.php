@@ -69,9 +69,9 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                      <div class="tp-about-shape-1 d-none d-lg-block">
                         <img src="assets/img/about/shape-1-2.png?v=blue-theme" alt="">
                      </div>
-                     <div class="tp-about-shape-2  d-none d-lg-block">
+                     <!-- <div class="tp-about-shape-2  d-none d-lg-block">
                         <img src="assets/img/about/shape-1-3.png" alt="">
-                     </div>
+                     </div> -->
                   </div>
                </div>
             </div>
