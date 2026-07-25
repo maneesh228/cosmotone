@@ -36,7 +36,7 @@
 
 
 	// 08. Nice Select Js
-	$('select').niceSelect();
+	$('select').not('.cosmotone-native-select').niceSelect();
 
 
 	///////////////////////////////////////////////////

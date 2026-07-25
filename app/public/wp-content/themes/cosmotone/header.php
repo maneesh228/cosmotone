@@ -5,6 +5,9 @@
  * @package Cosmotone
  */
 defined( 'ABSPATH' ) || exit;
+$header_page        = get_page_by_path( 'header', OBJECT, 'page' );
+$header_settings_id = $header_page instanceof WP_Post ? $header_page->ID : 0;
+ob_start();
 ?>
 <!doctype html>
 <html class="no-js" <?php language_attributes(); ?>>
@@ -66,6 +69,7 @@ defined( 'ABSPATH' ) || exit;
    </div>
    <!-- back to top end -->
 
+   <!-- header-mobile-search area start -->
    <!-- search popup start -->
    <div class="search__popup">
       <div class="container">
@@ -74,7 +78,7 @@ defined( 'ABSPATH' ) || exit;
                <div class="search__wrapper">
                   <div class="search__top d-flex justify-content-between align-items-center">
                      <div class="search__logo">
-                        <a href="#">
+                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
                            <img src="assets/img/logo/white-logo.png" alt="">
                         </a>
                      </div>
@@ -91,9 +95,9 @@ defined( 'ABSPATH' ) || exit;
                      </div>
                   </div>
                   <div class="search__form">
-                     <form action="#">
+                     <form action="<?php echo esc_url( home_url( '/' ) ); ?>" method="get">
                         <div class="search__input">
-                           <input class="search-input-field" type="text" placeholder="Type here to search...">
+                           <input class="search-input-field" type="search" name="s" placeholder="Type here to search...">
                            <span class="search-focus-border"></span>
                            <button type="submit">
                               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -123,7 +127,7 @@ defined( 'ABSPATH' ) || exit;
             <button class="close-btn"><i class="fal fa-times"></i></button>
          </div>
          <div class="tpoffcanvas__logo">
-            <a href="#">
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
                      <img src="assets/img/logo/white-logo.png" alt="">
             </a>
          </div>
@@ -139,22 +143,21 @@ defined( 'ABSPATH' ) || exit;
             <ul>
                <li>
                   <i class="fa-light fa-location-dot"></i>
-                  <a href="#" target="_blank">Melbone st,
-                     Australia, Ny 12099</a>
+                  <a href="#" target="_blank">Melbone st,<br>Australia, Ny 12099</a>
                </li>
                <li>
                   <i class="fas fa-envelope"></i>
-                  <a href="#">themepure@gmail.com</a>
+                  <a href="mailto:themepure@gmail.com">themepure@gmail.com</a>
                </li>
                <li>
                   <i class="fal fa-phone-alt"></i>
-                  <a href="#">+48 555 223 224</a>
+                  <a href="tel:+48555223224">+48 555 223 224</a>
                </li>
             </ul>
          </div>
-         <div class="tpoffcanvas__input">
+         <!-- <div class="tpoffcanvas__input">
             <div class="tpoffcanvas__input-title">
-               <h4>Get UPdate</h4>
+               <h4>Get Update</h4>
             </div>
             <form action="#">
                <div class="p-relative">
@@ -164,7 +167,7 @@ defined( 'ABSPATH' ) || exit;
                   </button>
                </div>
             </form>
-         </div>
+         </div> -->
          <div class="tpoffcanvas__social">
             <div class="social-icon">
                <a href="#"><i class="fab fa-twitter"></i></a>
@@ -177,9 +180,10 @@ defined( 'ABSPATH' ) || exit;
    </div>
    <div class="body-overlay"></div>
    <!-- tp-offcanvus-area-end -->
+   <!-- header-mobile-search area end -->
 
    <header class="tp-header-height">
-      <!-- header top area start -->
+      <!-- header-top area start -->
       <div class="tp-header-top-area tp-header-top-space black-bg">
          <div class="container custom-container-1">
             <div class="row align-items-center">
@@ -188,11 +192,11 @@ defined( 'ABSPATH' ) || exit;
                      <ul>
                         <li>
                            <i class="flaticon-mail-1"></i>
-                           <a href="#">info@cosmotone.com</a>
+                           <a href="mailto:info@cosmotone.com">info@cosmotone.com</a>
                         </li>
                         <li class="d-none d-md-inline-block">
                            <i class="flaticon-phone-call"></i>
-                           <a href="#">+91 9554 48 1761</a>
+                           <a href="tel:+919554481761">+91 9554 48 1761</a>
                         </li>
                         <li class="d-none d-lg-inline-block">
                            <i class="fa-regular fa-clock"></i>
@@ -225,15 +229,15 @@ defined( 'ABSPATH' ) || exit;
             </div>
          </div>
       </div>
-      <!-- header top area end -->
+      <!-- header-top area end -->
 
-      <!-- header area start -->
+      <!-- header-main area start -->
       <div id="header-sticky" class="tp-header-area">
          <div class="container custom-container-1">
             <div class="row align-items-center">
                <div class="col-xxl-2 col-xl-2 col-lg-4 col-md-4 col-6">
                   <div class="tp-header-logo">
-                     <a href="/">
+                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
                         <img src="assets/img/logo/black-logo.png" alt="">
                      </a>
                   </div>
@@ -290,7 +294,7 @@ defined( 'ABSPATH' ) || exit;
                               <i class="flaticon-phone-call"></i>
                               <div class="tp-header-right-tel-content">
                                  <span>Talk to an expert </span>
-                                 <a href="#"><span>Free</span> +99 (786) 8765</a>
+                                 <a href="tel:+997868765"><span>Free</span> +99 (786) 8765</a>
                               </div>
                            </div>
                         </div>
@@ -303,7 +307,12 @@ defined( 'ABSPATH' ) || exit;
             </div>
          </div>
       </div>
-      <!-- header area end -->
+      <!-- header-main area end -->
    </header>
+
+<?php
+$header_markup = ob_get_clean();
+echo $header_settings_id ? cosmotone_apply_page_section_fields( $header_markup, $header_settings_id, 'header' ) : $header_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+?>
 
 

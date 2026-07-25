@@ -2,6 +2,9 @@
    if ( ! is_front_page() ) {
       get_template_part( 'template-parts/cta' );
    }
+   $footer_page        = get_page_by_path( 'footer', OBJECT, 'page' );
+   $footer_settings_id = $footer_page instanceof WP_Post ? $footer_page->ID : 0;
+   ob_start();
    ?>
 
    <footer>
@@ -16,26 +19,27 @@
          </div>
          <div class="container">
             <div class="row">
+               <!-- footer-about area start -->
                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-50 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".3s">
                   <div class="tp-footer-widget footer-cols-1">
                      <div class="tp-footer-logo">
-                        <a href="#"><img src="assets/img/logo/white-logo.png" alt=""></a>
+                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="assets/img/logo/white-logo.png" alt=""></a>
                      </div>
                      <div class="tp-footer-text">
-                        <p>osmotone Conductors Pvt. Ltd. is a leading manufacturer of Auto Electric Wires, Wiring Harnesses, Relays, and Automotive Electrical Components.</p>
+                        <p>Cosmotone Conductors Pvt. Ltd. is a leading manufacturer of Auto Electric Wires, Wiring Harnesses, Relays, and Automotive Electrical Components.</p>
                      </div>
                      <div class="tp-footer-contact">
-                        <a href="#"><i
+                        <a href="mailto:info@cosmotone.com"><i
                               class="flaticon-mail-1"></i>info@cosmotone.com</a>
-                        <br href="#"><i class="flaticon-location-1"></i>Amballoor Mahadeva Temple Rd </br>
-Valakom, Ernakulam Dist.
-Kerala </a>
+                        <a href="#"><i class="flaticon-location-1"></i>Amballoor Mahadeva Temple Rd<br>Valakom, Ernakulam Dist.<br>Kerala</a>
                      </div>
                   </div>
                </div>
+               <!-- footer-about area end -->
+               <!-- footer-links area start -->
                <div class="col-xl-2 col-lg-4 col-md-6 col-sm-6 mb-50 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".5s">
                   <div class="tp-footer-widget footer-cols-2">
-                     <h4 class="tp-footer-title">Usefull Links</h4>
+                     <h4 class="tp-footer-title">Useful Links</h4>
                      <div class="tp-footer-list">
                         <ul>
                            <li><a href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>"><i class="fa-sharp fa-solid fa-plus"></i>About Cosmotone</a></li>
@@ -52,15 +56,17 @@ Kerala </a>
                      <h4 class="tp-footer-title">Services</h4>
                      <div class="tp-footer-list">
                         <ul>
-                           <li><a href="#"><i class="fa-sharp fa-solid fa-plus"></i>Air Conditioning</a></li>
-                           <li><a href="#"><i class="fa-sharp fa-solid fa-plus"></i>Electrical Panels</a></li>
-                           <li><a href="#"><i class="fa-sharp fa-solid fa-plus"></i>Security System</a></li>
-                           <li><a href="#"><i class="fa-sharp fa-solid fa-plus"></i>Indoor Lighting</a></li>
-                           <li><a href="#"><i class="fa-sharp fa-solid fa-plus"></i> Electrical Services</a></li>
+                           <li><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>"><i class="fa-sharp fa-solid fa-plus"></i>Air Conditioning</a></li>
+                           <li><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>"><i class="fa-sharp fa-solid fa-plus"></i>Electrical Panels</a></li>
+                           <li><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>"><i class="fa-sharp fa-solid fa-plus"></i>Security System</a></li>
+                           <li><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>"><i class="fa-sharp fa-solid fa-plus"></i>Indoor Lighting</a></li>
+                           <li><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>"><i class="fa-sharp fa-solid fa-plus"></i>Electrical Services</a></li>
                         </ul>
                      </div>
                   </div>
                </div>
+               <!-- footer-links area end -->
+               <!-- footer-instagram area start -->
                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-50 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".9s">
                   <div class="tp-footer-widget footer-cols-4">
                      <h4 class="tp-footer-title">Instagram</h4>
@@ -108,12 +114,13 @@ Kerala </a>
                      </div>
                   </div>
                </div>
+               <!-- footer-instagram area end -->
             </div>
          </div>
       </div>
       <!-- footer area end -->
 
-      <!-- copy-right area start -->
+      <!-- copyright area start -->
       <div class="tp-copyright-area tp-copyright-space black-bg-2">
          <div class="container">
             <div class="row align-items-center">
@@ -134,9 +141,14 @@ Kerala </a>
             </div>
          </div>
       </div>
-      <!-- copy-right area end -->
+      <!-- copyright area end -->
 
    </footer>
+
+   <?php
+   $footer_markup = ob_get_clean();
+   echo $footer_settings_id ? cosmotone_apply_page_section_fields( $footer_markup, $footer_settings_id, 'footer' ) : $footer_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+   ?>
 
 
    <!-- JS here -->
@@ -154,7 +166,7 @@ Kerala </a>
    <script src="assets/js/jarallax.js"></script>
    <script src="assets/js/imagesloaded-pkgd.js"></script>
    <script src="assets/js/ajax-form.js"></script>
-   <script src="assets/js/main.js?v=home-news-slider-1"></script>
+   <script src="assets/js/main.js?v=product-filters-native-1"></script>
    <?php wp_footer(); ?>
 
    

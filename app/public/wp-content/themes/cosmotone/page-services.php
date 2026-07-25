@@ -59,7 +59,7 @@ ob_start();
 	</div>
 
 	<div class="tp-service-area tp-service-bg p-relative pt-120 pb-90" data-background="assets/img/service/bg-1-2.jpg">
-		<div class="tp-service-shape-2 d-none d-xxl-block"><img src="assets/img/service/shape-1-3.png" alt=""></div>
+		<!-- <div class="tp-service-shape-2 d-none d-xxl-block"><img src="assets/img/service/shape-1-3.png" alt=""></div> -->
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-12">

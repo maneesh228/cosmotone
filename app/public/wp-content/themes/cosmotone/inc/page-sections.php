@@ -81,6 +81,32 @@ function cosmotone_page_sections_config() {
 				'media'      => 'Media',
 			),
 		),
+		'header' => array(
+			'slug'     => 'header',
+			'template' => 'header.php',
+			'sections' => array(
+				'header-top'           => 'Top Bar',
+				'header-main'          => 'Main Header',
+				'header-mobile-search' => 'Mobile & Search',
+			),
+		),
+		'footer' => array(
+			'slug'     => 'footer',
+			'template' => 'footer.php',
+			'sections' => array(
+				'footer-about'     => 'Company Information',
+				'footer-links'     => 'Footer Links',
+				'footer-instagram' => 'Instagram',
+				'copyright'        => 'Copyright & Social Links',
+			),
+		),
+		'cta' => array(
+			'slug'     => 'cta',
+			'template' => 'template-parts/cta.php',
+			'sections' => array(
+				'cta' => 'CTA & Subscription Form',
+			),
+		),
 	);
 }
 
@@ -353,6 +379,207 @@ function cosmotone_page_section_custom_schema( $type, $key ) {
 		);
 	}
 
+	if ( 'header' === $type && 'header-top' === $key ) {
+		return array(
+			'texts' => array(
+				0 => array( 'label' => 'Email Address', 'default' => 'info@cosmotone.com' ),
+				1 => array( 'label' => 'Phone Number', 'default' => '+91 9554 48 1761' ),
+				2 => array( 'label' => 'Business Hours', 'default' => 'Mon–Sat, 9:00 AM–6:00 PM' ),
+				3 => array( 'label' => 'Support Link Text', 'default' => 'Support' ),
+				4 => array( 'label' => 'Download Link Text', 'default' => 'Download' ),
+			),
+			'links' => array(
+				0 => array( 'label' => 'Email Link', 'default' => 'mailto:info@cosmotone.com' ),
+				1 => array( 'label' => 'Phone Link', 'default' => 'tel:+919554481761' ),
+				2 => array( 'label' => 'Support Link', 'default' => home_url( '/contact/' ) ),
+				3 => array( 'label' => 'Download Link', 'default' => home_url( '/downloads/' ) ),
+				4 => array( 'label' => 'Facebook URL', 'default' => '#' ),
+				5 => array( 'label' => 'Instagram URL', 'default' => '#' ),
+				6 => array( 'label' => 'LinkedIn URL', 'default' => '#' ),
+				7 => array( 'label' => 'Twitter URL', 'default' => '#' ),
+			),
+		);
+	}
+
+	if ( 'header' === $type && 'header-main' === $key ) {
+		return array(
+			'texts' => array(
+				0  => array( 'label' => 'Home Menu Label', 'default' => 'Home' ),
+				1  => array( 'label' => 'About Menu Label', 'default' => 'About Us' ),
+				2  => array( 'label' => 'Services Menu Label', 'default' => 'Services' ),
+				3  => array( 'label' => 'Products Menu Label', 'default' => 'Products' ),
+				4  => array( 'label' => 'Career Menu Label', 'default' => 'Career' ),
+				5  => array( 'label' => 'News Menu Label', 'default' => 'News & Articles' ),
+				6  => array( 'label' => 'Contact Menu Label', 'default' => 'Contact' ),
+				7  => array( 'label' => 'Appointment Button Text', 'default' => 'MAKE APPOINTMENT' ),
+				8  => array( 'label' => 'Expert Phone Label', 'default' => 'Talk to an expert' ),
+				9  => array( 'label' => 'Expert Phone Prefix', 'default' => 'Free' ),
+				10 => array( 'label' => 'Expert Phone Number', 'default' => '+99 (786) 8765' ),
+			),
+			'links' => array(
+				0  => array( 'label' => 'Logo Link', 'default' => home_url( '/' ) ),
+				1  => array( 'label' => 'Home Menu Link', 'default' => home_url( '/' ) ),
+				2  => array( 'label' => 'About Menu Link', 'default' => home_url( '/about-us/' ) ),
+				3  => array( 'label' => 'Services Menu Link', 'default' => home_url( '/services/' ) ),
+				4  => array( 'label' => 'Products Menu Link', 'default' => home_url( '/products/' ) ),
+				5  => array( 'label' => 'Career Menu Link', 'default' => home_url( '/career/' ) ),
+				6  => array( 'label' => 'News Menu Link', 'default' => home_url( '/news/' ) ),
+				7  => array( 'label' => 'Contact Menu Link', 'default' => home_url( '/contact/' ) ),
+				8  => array( 'label' => 'Appointment Button Link', 'default' => home_url( '/contact/' ) ),
+				9  => array( 'label' => 'WhatsApp Link', 'default' => 'https://wa.me/919554481761' ),
+				10 => array( 'label' => 'Expert Phone Link', 'default' => 'tel:+997868765' ),
+			),
+			'images' => array(
+				0 => array( 'label' => 'Header Logo', 'default' => 'assets/img/logo/black-logo.png' ),
+			),
+		);
+	}
+
+	if ( 'header' === $type && 'header-mobile-search' === $key ) {
+		return array(
+			'texts' => array(
+				0 => array( 'label' => 'Mobile Introduction', 'default' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima incidunt eaque ab cumque, porro maxime autem sed.', 'type' => 'textarea' ),
+				1 => array( 'label' => 'Mobile Contact Title', 'default' => 'Contact us' ),
+				2 => array( 'label' => 'Mobile Address (one line per row)', 'default' => "Melbone st,\nAustralia, Ny 12099", 'type' => 'textarea', 'indexes' => array( 2, 3 ) ),
+				4 => array( 'label' => 'Mobile Email', 'default' => 'themepure@gmail.com' ),
+				5 => array( 'label' => 'Mobile Phone', 'default' => '+48 555 223 224' ),
+				6 => array( 'label' => 'Mobile Newsletter Title', 'default' => 'Get Update' ),
+			),
+			'attributes' => array(
+				'search_placeholder' => array(
+					'label' => 'Search Placeholder', 'default' => 'Type here to search...', 'xpath' => './/input[contains(concat(" ", normalize-space(@class), " "), " search-input-field ")]', 'attribute' => 'placeholder',
+				),
+				'newsletter_placeholder' => array(
+					'label' => 'Newsletter Email Placeholder', 'default' => 'Enter mail', 'xpath' => './/*[contains(concat(" ", normalize-space(@class), " "), " tpoffcanvas__input ")]//input', 'attribute' => 'placeholder',
+				),
+			),
+			'links' => array(
+				0 => array( 'label' => 'Search Logo Link', 'default' => home_url( '/' ) ),
+				1 => array( 'label' => 'Mobile Logo Link', 'default' => home_url( '/' ) ),
+				2 => array( 'label' => 'Mobile Address Link', 'default' => '#' ),
+				3 => array( 'label' => 'Mobile Email Link', 'default' => 'mailto:themepure@gmail.com' ),
+				4 => array( 'label' => 'Mobile Phone Link', 'default' => 'tel:+48555223224' ),
+				5 => array( 'label' => 'Mobile Twitter URL', 'default' => '#' ),
+				6 => array( 'label' => 'Mobile Instagram URL', 'default' => '#' ),
+				7 => array( 'label' => 'Mobile Facebook URL', 'default' => '#' ),
+				8 => array( 'label' => 'Mobile Pinterest URL', 'default' => '#' ),
+			),
+			'images' => array(
+				0 => array( 'label' => 'Search Popup Logo', 'default' => 'assets/img/logo/white-logo.png' ),
+				1 => array( 'label' => 'Mobile Menu Logo', 'default' => 'assets/img/logo/white-logo.png' ),
+			),
+		);
+	}
+
+	if ( 'footer' === $type && 'footer-about' === $key ) {
+		return array(
+			'texts' => array(
+				0 => array( 'label' => 'Company Description', 'default' => 'Cosmotone Conductors Pvt. Ltd. is a leading manufacturer of Auto Electric Wires, Wiring Harnesses, Relays, and Automotive Electrical Components.', 'type' => 'textarea' ),
+				1 => array( 'label' => 'Contact Email', 'default' => 'info@cosmotone.com' ),
+				2 => array( 'label' => 'Address (one line per row)', 'default' => "Amballoor Mahadeva Temple Rd\nValakom, Ernakulam Dist.\nKerala", 'type' => 'textarea', 'indexes' => array( 2, 3, 4 ) ),
+			),
+			'links' => array(
+				0 => array( 'label' => 'Footer Logo Link', 'default' => home_url( '/' ) ),
+				1 => array( 'label' => 'Email Link', 'default' => 'mailto:info@cosmotone.com' ),
+				2 => array( 'label' => 'Address Link', 'default' => '#' ),
+			),
+			'images' => array(
+				0 => array( 'label' => 'Footer Logo', 'default' => 'assets/img/logo/white-logo.png' ),
+			),
+		);
+	}
+
+	if ( 'footer' === $type && 'footer-links' === $key ) {
+		return array(
+			'texts' => array(
+				0  => array( 'label' => 'Useful Links Title', 'default' => 'Useful Links' ),
+				1  => array( 'label' => 'Useful Link 1 Text', 'default' => 'About Cosmotone' ),
+				2  => array( 'label' => 'Useful Link 2 Text', 'default' => 'Careers' ),
+				3  => array( 'label' => 'Useful Link 3 Text', 'default' => 'Our Products' ),
+				4  => array( 'label' => 'Useful Link 4 Text', 'default' => 'Media' ),
+				5  => array( 'label' => 'Useful Link 5 Text', 'default' => 'Downloads' ),
+				6  => array( 'label' => 'Services Links Title', 'default' => 'Services' ),
+				7  => array( 'label' => 'Service Link 1 Text', 'default' => 'Air Conditioning' ),
+				8  => array( 'label' => 'Service Link 2 Text', 'default' => 'Electrical Panels' ),
+				9  => array( 'label' => 'Service Link 3 Text', 'default' => 'Security System' ),
+				10 => array( 'label' => 'Service Link 4 Text', 'default' => 'Indoor Lighting' ),
+				11 => array( 'label' => 'Service Link 5 Text', 'default' => 'Electrical Services' ),
+			),
+			'links' => array(
+				0 => array( 'label' => 'Useful Link 1 URL', 'default' => home_url( '/about-us/' ) ),
+				1 => array( 'label' => 'Useful Link 2 URL', 'default' => home_url( '/career/' ) ),
+				2 => array( 'label' => 'Useful Link 3 URL', 'default' => home_url( '/products/' ) ),
+				3 => array( 'label' => 'Useful Link 4 URL', 'default' => home_url( '/media/' ) ),
+				4 => array( 'label' => 'Useful Link 5 URL', 'default' => home_url( '/downloads/' ) ),
+				5 => array( 'label' => 'Service Link 1 URL', 'default' => home_url( '/services/' ) ),
+				6 => array( 'label' => 'Service Link 2 URL', 'default' => home_url( '/services/' ) ),
+				7 => array( 'label' => 'Service Link 3 URL', 'default' => home_url( '/services/' ) ),
+				8 => array( 'label' => 'Service Link 4 URL', 'default' => home_url( '/services/' ) ),
+				9 => array( 'label' => 'Service Link 5 URL', 'default' => home_url( '/services/' ) ),
+			),
+		);
+	}
+
+	if ( 'footer' === $type && 'footer-instagram' === $key ) {
+		$links  = array();
+		$images = array();
+		for ( $index = 0; $index < 6; $index++ ) {
+			$number           = $index + 1;
+			$links[ $index ]  = array( 'label' => "Instagram Item {$number} Link", 'default' => '#' );
+			$images[ $index ] = array( 'label' => "Instagram Image {$number}", 'default' => "assets/img/footer/footer-1-{$number}.jpg" );
+		}
+		return array(
+			'texts'  => array( 0 => array( 'label' => 'Instagram Section Title', 'default' => 'Instagram' ) ),
+			'links'  => $links,
+			'images' => $images,
+		);
+	}
+
+	if ( 'footer' === $type && 'copyright' === $key ) {
+		return array(
+			'texts' => array(
+				0 => array( 'label' => 'Copyright Text', 'default' => '© 2026 Cosmotone. All rights reserved.' ),
+			),
+			'links' => array(
+				0 => array( 'label' => 'Facebook URL', 'default' => '#' ),
+				1 => array( 'label' => 'Instagram URL', 'default' => '#' ),
+				2 => array( 'label' => 'LinkedIn URL', 'default' => '#' ),
+				3 => array( 'label' => 'Twitter URL', 'default' => '#' ),
+				4 => array( 'label' => 'WhatsApp URL', 'default' => 'https://wa.me/919554481761' ),
+			),
+		);
+	}
+
+	if ( 'cta' === $type && 'cta' === $key ) {
+		return array(
+			'texts' => array(
+				0 => array( 'label' => 'CTA Heading', 'default' => 'Dedicated to bring the world powerful energy solutions', 'type' => 'textarea' ),
+				1 => array( 'label' => 'Email Field Accessible Label', 'default' => 'Email address' ),
+				2 => array( 'label' => 'Submit Button Text', 'default' => 'CHECK AVAILABILITY' ),
+			),
+			'attributes' => array(
+				'email_placeholder' => array(
+					'label' => 'Email Placeholder', 'default' => 'Email address', 'xpath' => './/input[@name="email"]', 'attribute' => 'placeholder',
+				),
+				'success_message' => array(
+					'label' => 'Success Message', 'default' => 'Thank you. Your email has been subscribed successfully.', 'xpath' => './/*[@data-cosmotone-private-settings]', 'attribute' => 'data-success-message',
+				),
+				'duplicate_message' => array(
+					'label' => 'Already Subscribed Message', 'default' => 'This email address is already subscribed.', 'xpath' => './/*[@data-cosmotone-private-settings]', 'attribute' => 'data-duplicate-message',
+				),
+				'invalid_message' => array(
+					'label' => 'Invalid Email Message', 'default' => 'Please enter a valid email address.', 'xpath' => './/*[@data-cosmotone-private-settings]', 'attribute' => 'data-invalid-message',
+				),
+				'notification_email' => array(
+					'label' => 'New Subscription Notification Email', 'default' => get_option( 'admin_email' ), 'type' => 'email', 'xpath' => './/*[@data-cosmotone-private-settings]', 'attribute' => 'data-notification-email',
+				),
+			),
+			'images' => array(
+				0 => array( 'label' => 'CTA Decorative Image', 'default' => 'assets/img/cta/shape-1-1.png' ),
+			),
+		);
+	}
+
 	if ( 'about' !== $type ) {
 		return array();
 	}
@@ -520,7 +747,7 @@ function cosmotone_render_custom_page_section_fields( $section_key, $section, $s
 		<?php foreach ( $visible_attributes as $field_key => $field ) :
 			$default = isset( $field['default'] ) ? $field['default'] : '';
 			$value   = isset( $section['attributes'][ $field_key ] ) ? $section['attributes'][ $field_key ] : $default;
-			$type    = isset( $field['type'] ) && 'number' === $field['type'] ? 'number' : 'text';
+			$type    = isset( $field['type'] ) && in_array( $field['type'], array( 'number', 'email', 'url' ), true ) ? $field['type'] : 'text';
 			?>
 			<label class="cosmotone-field"><span><?php echo esc_html( $field['label'] ); ?></span><input type="<?php echo esc_attr( $type ); ?>"<?php echo 'number' === $type ? ' min="0"' : ''; ?> name="cosmotone_sections[<?php echo esc_attr( $section_key ); ?>][attributes][<?php echo esc_attr( $field_key ); ?>]" value="<?php echo esc_attr( $value ); ?>" data-default="<?php echo esc_attr( $default ); ?>"></label>
 		<?php endforeach; ?>
@@ -642,6 +869,9 @@ function cosmotone_render_page_sections_box( $post ) {
 	?>
 	<div class="cosmotone-page-tabs">
 		<p class="description"><?php esc_html_e( 'Edit the visible text, paragraphs, links, and images for each section. Theme layout and styling are kept automatically.', 'cosmotone' ); ?></p>
+		<?php if ( in_array( $type, array( 'header', 'footer', 'cta' ), true ) ) : ?>
+			<p class="description"><strong><?php esc_html_e( 'These settings apply site-wide on every public page.', 'cosmotone' ); ?></strong></p>
+		<?php endif; ?>
 		<?php if ( 'about' === $type ) :
 			$home_page_id = absint( get_option( 'page_on_front' ) );
 			?>
@@ -694,6 +924,9 @@ function cosmotone_render_page_sections_box( $post ) {
 				<?php else : ?>
 					<p class="notice notice-warning inline"><?php esc_html_e( 'Contact Form 7 must be installed and activated before the shortcode can render.', 'cosmotone' ); ?></p>
 				<?php endif; ?>
+			<?php endif; ?>
+			<?php if ( 'cta' === $type && 'cta' === $key ) : ?>
+				<p><a class="button button-primary" href="<?php echo esc_url( admin_url( 'edit.php?post_type=cosmotone_subscriber' ) ); ?>"><?php esc_html_e( 'Manage Newsletter Subscribers', 'cosmotone' ); ?></a></p>
 			<?php endif; ?>
 			<label class="cosmotone-section-toggle"><input type="checkbox" name="cosmotone_sections[<?php echo esc_attr( $key ); ?>][enabled]" value="1" <?php checked( $enabled ); ?>> <?php esc_html_e( 'Show this section', 'cosmotone' ); ?></label>
 
@@ -862,6 +1095,8 @@ function cosmotone_save_page_sections( $post_id ) {
 					$out[ $key ]['attributes'][ $field_key ] = (string) absint( $value );
 				} elseif ( isset( $field['type'] ) && 'url' === $field['type'] ) {
 					$out[ $key ]['attributes'][ $field_key ] = cosmotone_sanitize_page_section_media_url( $value );
+				} elseif ( isset( $field['type'] ) && 'email' === $field['type'] ) {
+					$out[ $key ]['attributes'][ $field_key ] = sanitize_email( $value );
 				} else {
 					$out[ $key ]['attributes'][ $field_key ] = sanitize_text_field( $value );
 				}
