@@ -34,7 +34,7 @@ ob_start();
    <link rel="stylesheet" href="assets/css/spacing.css">
    <link rel="stylesheet" href="assets/css/custom-animation.css">
    <link rel="stylesheet" href="assets/css/main.css">
-   <link rel="stylesheet" href="assets/css/cosmotone.css?v=about-team-compact-1">
+   <link rel="stylesheet" href="assets/css/cosmotone.css?v=top-product-category-height-1">
    <?php wp_head(); ?>
 </head>
 

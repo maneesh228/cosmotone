@@ -441,7 +441,7 @@
 	if (document.querySelector('.tp-blog-active')) {
 		new Swiper('.tp-blog-active', {
 			speed: 1000,
-			loop: true,
+			loop: false,
 			slidesPerView: 3,
 			autoplay: true,
 			spaceBetween: 30,

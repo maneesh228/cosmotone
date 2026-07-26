@@ -18,6 +18,7 @@ if ( ! $product || 'cosmotone_product' !== $product->post_type ) {
 $product_id    = $product->ID;
 $product_title = get_the_title( $product_id );
 $product_image = cosmotone_catalog_image_url( $product_id, 'full' );
+$product_code  = cosmotone_product_code( $product_id );
 $category_path = cosmotone_product_category_path( $product_id );
 $category_text = $category_path ? implode( ' / ', wp_list_pluck( $category_path, 'name' ) ) : 'Uncategorized';
 $deepest_term  = $category_path ? end( $category_path ) : false;
@@ -83,6 +84,9 @@ if ( ! $related->have_posts() && $deepest_term ) {
 					<div class="evn-thumb-wrap mb-40 p-relative">
 						<div class="evn-avata-content-wrap z-index">
 							<div class="evn-related-info d-flex justify-content-lg-start align-items-center">
+								<?php if ( $product_code ) : ?>
+									<span><b>Product Code:</b><br><?php echo esc_html( $product_code ); ?></span>
+								<?php endif; ?>
 								<?php if ( isset( $category_path[0] ) ) : ?>
 									<span><b>Category:</b><br><?php echo esc_html( $category_path[0]->name ); ?></span>
 								<?php endif; ?>
@@ -123,7 +127,7 @@ if ( ! $related->have_posts() && $deepest_term ) {
 					</div>
 				</div>
 				<div class="row">
-					<?php while ( $related->have_posts() ) : $related->the_post(); $related_id = get_the_ID(); ?>
+					<?php while ( $related->have_posts() ) : $related->the_post(); $related_id = get_the_ID(); $related_code = cosmotone_product_code( $related_id ); ?>
 						<div class="col-xl-4 col-lg-4 col-md-6 mb-30">
 							<div class="tp-project-item p-relative">
 								<div class="tp-project-thumb">
@@ -133,6 +137,9 @@ if ( ! $related->have_posts() && $deepest_term ) {
 									<a href="<?php the_permalink(); ?>"><i class="flaticon-right-arrow"></i></a>
 									<span><?php echo esc_html( implode( ' / ', wp_list_pluck( cosmotone_product_category_path( $related_id ), 'name' ) ) ); ?></span>
 									<h4 class="tp-project-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+									<?php if ( $related_code ) : ?>
+										<div class="cosmotone-product-code"><?php esc_html_e( 'Product Code:', 'cosmotone' ); ?> <strong><?php echo esc_html( $related_code ); ?></strong></div>
+									<?php endif; ?>
 								</div>
 							</div>
 						</div>
@@ -144,3 +151,6 @@ if ( ! $related->have_posts() && $deepest_term ) {
 
 	<?php get_template_part( 'template-parts/cta' ); ?>
 </main>
+<style>
+.cosmotone-product-code{margin-top:8px;color:#5b6678;font-size:14px;line-height:1.4}.cosmotone-product-code strong{color:#102444;font-weight:700}
+</style>

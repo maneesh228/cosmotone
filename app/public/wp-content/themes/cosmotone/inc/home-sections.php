@@ -167,7 +167,7 @@ function cosmotone_home_sections_schema() {
 				cosmotone_home_field( 'certificates_title', 'Heading', 'editor', 'ISO 9001:2015<br>Certified Company', array( 'legacy_text' => array( 1, 2 ), 'legacy_join' => '<br>' ) ),
 				cosmotone_home_field( 'certificates_description', 'Description', 'editor', 'We are committed to quality and continuous improvement. Our products comply with international standards and undergo rigorous testing to ensure reliability and safety.', array( 'legacy_text' => 3 ) ),
 				cosmotone_home_field( 'certificates_button_text', 'Button Text', 'text', 'VIEW CERTIFICATES', array( 'legacy_text' => 4 ) ),
-				cosmotone_home_field( 'certificates_button_url', 'Button Link', 'url', '/downloads', array( 'legacy_link' => 0 ) ),
+				cosmotone_home_field( 'certificates_button_url', 'Button Link', 'url', '/certificates/', array( 'legacy_link' => 0 ) ),
 			),
 		),
 	);
@@ -346,7 +346,7 @@ function cosmotone_home_image_url( $sections, $key ) {
 		}
 	}
 	if ( ! empty( $sections[ $key . '_url' ] ) ) {
-		$url = $sections[ $key . '_url' ];
+		$url = cosmotone_page_section_normalize_asset_url( $sections[ $key . '_url' ] );
 		return preg_match( '#^https?://#i', $url ) ? $url : trailingslashit( get_template_directory_uri() ) . ltrim( $url, '/' );
 	}
 	foreach ( cosmotone_home_sections_schema() as $section ) {
@@ -499,7 +499,7 @@ function cosmotone_save_home_sections( $post_id ) {
 			$key = $field['key'];
 			if ( 'image' === $field['type'] ) {
 				$out[ $key . '_id' ]  = isset( $raw[ $key . '_id' ] ) ? absint( $raw[ $key . '_id' ] ) : 0;
-				$out[ $key . '_url' ] = isset( $raw[ $key . '_url' ] ) ? esc_url_raw( $raw[ $key . '_url' ] ) : '';
+				$out[ $key . '_url' ] = isset( $raw[ $key . '_url' ] ) ? cosmotone_sanitize_page_section_media_url( $raw[ $key . '_url' ] ) : '';
 			} elseif ( 'editor' === $field['type'] ) {
 				$out[ $key ] = isset( $raw[ $key ] ) ? wp_kses_post( $raw[ $key ] ) : '';
 			} elseif ( 'url' === $field['type'] ) {

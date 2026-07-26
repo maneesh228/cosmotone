@@ -107,14 +107,21 @@ ob_start();
 						$term_ids    = array_values( array_unique( array_map( 'absint', $term_ids ) ) );
 						$term_path   = cosmotone_product_category_path( $product_id );
 						$term_label  = $term_path ? implode( ' / ', wp_list_pluck( $term_path, 'name' ) ) : 'Uncategorized';
+						$product_code = cosmotone_product_code( $product_id );
 						?>
 						<div class="col-xl-4 col-lg-4 col-md-6 mb-30 wow tpfadeUp cosmotone-product-card" data-categories="<?php echo esc_attr( implode( ' ', $term_ids ) ); ?>" data-wow-duration=".9s" data-wow-delay="<?php echo esc_attr( $delay ); ?>s">
 							<div class="tp-project-item p-relative">
 								<div class="tp-project-thumb"><a href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( cosmotone_catalog_image_url( $product_id, 'large' ) ); ?>" alt="<?php the_title_attribute(); ?>"></a></div>
 								<div class="tp-project-content">
-									<a href="<?php the_permalink(); ?>"><i class="flaticon-right-arrow"></i></a>
 									<span><?php echo esc_html( $term_label ); ?></span>
 									<h4 class="tp-project-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+									<?php if ( $product_code ) : ?>
+										<div class="cosmotone-product-code"><?php esc_html_e( 'Product Code:', 'cosmotone' ); ?> <strong><?php echo esc_html( $product_code ); ?></strong></div>
+									<?php endif; ?>
+									<a class="cosmotone-listing-read-more" href="<?php the_permalink(); ?>">
+										<span style="padding-top: 2px;"><?php esc_html_e( 'Read More', 'cosmotone' ); ?></span>
+										<i class="flaticon-right-arrow" aria-hidden="true"></i>
+									</a>
 								</div>
 							</div>
 						</div>
@@ -169,6 +176,8 @@ ob_start();
 .cosmotone-product-filters button:hover{color:#fff;background:#043f9f;transform:translateY(-1px)}
 .cosmotone-product-filters .cosmotone-filter-reset{color:#243a57;background:#e4edf6}
 .cosmotone-product-filters .cosmotone-filter-reset:hover{color:#fff;background:#526b88;transform:translateY(-1px)}
+.cosmotone-product-code{margin-top:8px;color:#5b6678;font-size:14px;line-height:1.4}.cosmotone-product-code strong{color:#102444;font-weight:700}
+.cosmotone-product-card .tp-project-item{display:flex;height:100%;flex-direction:column;border:1px solid #dbe8f5!important;border-radius:10px!important;background:#fff!important;box-shadow:0 10px 28px rgba(16,36,68,.08)!important;transition:border-color .3s ease,box-shadow .3s ease,transform .3s ease}.cosmotone-product-card .tp-project-item:hover{border-color:#a9cef3!important;box-shadow:0 18px 38px rgba(7,92,229,.14)!important;transform:translateY(-5px)}.cosmotone-product-card .tp-project-thumb{border-radius:10px 10px 0 0!important}.cosmotone-product-card .tp-project-content{display:flex!important;flex:1;flex-direction:column;min-height:245px;padding:24px!important}.cosmotone-product-card .cosmotone-product-code{padding:9px 12px;border-left:3px solid var(--tp-theme-1);border-radius:3px;background:#f2f8ff}.cosmotone-product-card .cosmotone-listing-read-more{position:static!important;display:inline-flex!important;flex-wrap:nowrap!important;align-self:flex-end;width:auto!important;height:42px!important;margin:22px 0 0!important;padding:0 18px!important;align-items:center;justify-content:center;gap:9px;border:1px solid var(--tp-theme-1);border-radius:5px!important;color:var(--tp-theme-1)!important;background:#fff!important;font-size:14px!important;font-weight:700;line-height:1!important;white-space:nowrap!important;transition:color .25s ease,background .25s ease,transform .25s ease}.cosmotone-product-card .cosmotone-listing-read-more span{display:inline-block!important;flex:0 0 auto!important;width:auto!important;height:auto!important;overflow:visible!important;color:inherit!important;font-size:inherit!important;font-weight:inherit!important;line-height:1!important;white-space:nowrap!important;opacity:1!important;transform:none!important}.cosmotone-product-card .cosmotone-listing-read-more i{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;height:auto!important;align-items:center;line-height:1!important;white-space:nowrap!important;transform:none!important}.cosmotone-product-card .cosmotone-listing-read-more:hover{color:#fff!important;background:var(--tp-theme-1)!important;transform:translateX(2px)}
 .cosmotone-pagination{display:flex;justify-content:center;margin-top:30px}.cosmotone-pagination .page-numbers{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0;padding:0;list-style:none}.cosmotone-pagination a,.cosmotone-pagination span{display:flex;min-width:44px;height:44px;padding:0 12px;align-items:center;justify-content:center;background:#f3f3f3;color:#121212;font-weight:600}.cosmotone-pagination .current,.cosmotone-pagination a:hover{background:var(--tp-theme-1);color:#fff}
 @media(max-width:991px){.cosmotone-product-filters{grid-template-columns:1fr 1fr}.cosmotone-product-filters button,.cosmotone-product-filters .cosmotone-filter-reset{width:100%}}
 @media(max-width:575px){.cosmotone-product-filters{grid-template-columns:1fr;padding:18px}}

@@ -166,7 +166,7 @@
    <script src="assets/js/jarallax.js"></script>
    <script src="assets/js/imagesloaded-pkgd.js"></script>
    <script src="assets/js/ajax-form.js"></script>
-   <script src="assets/js/main.js?v=product-filters-native-1"></script>
+   <script src="assets/js/main.js?v=blog-no-duplicates-1"></script>
    <?php wp_footer(); ?>
 
    

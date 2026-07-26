@@ -158,96 +158,53 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                   <div class="tp-service-wrapper">
                      <div class="swiper-container tp-service-active">
                         <div class="swiper-wrapper">
-                           <div class="swiper-slide">
-                              <div class="tp-service-item p-relative">
-                                 <div class="tp-service-thumb">
-                                    <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'service_1_image' ) ); ?>" alt="">
-                                 </div>
-                                 <div class="tp-service-content-box">
-                                    <div class="tp-service-content fix">
-                                       <div class="tp-service-icon p-relative">
-                                          <span><i class="flaticon-battery"></i></span>
-                                          <div class="tp-service-icon-shape">
-                                             <img src="assets/img/service/shape-1-1.png" alt="">
+                           <?php
+                           $front_page_services = cosmotone_get_services();
+                           while ( $front_page_services->have_posts() ) :
+                              $front_page_services->the_post();
+                              $service_id          = get_the_ID();
+                              $service_url         = get_permalink( $service_id );
+                              $service_icon        = get_post_meta( $service_id, '_cosmotone_service_icon', true );
+                              $service_icon        = $service_icon ? $service_icon : 'flaticon-lamp';
+                              $service_description = trim( wp_strip_all_tags( get_the_content() ) );
+                              $description_length  = function_exists( 'mb_strlen' ) ? mb_strlen( $service_description ) : strlen( $service_description );
+                              if ( $description_length > 100 ) {
+                                 $service_description = function_exists( 'mb_substr' ) ? mb_substr( $service_description, 0, 97 ) : substr( $service_description, 0, 97 );
+                                 $service_description = rtrim( $service_description ) . '...';
+                              }
+                              ?>
+                              <div class="swiper-slide">
+                                 <div class="tp-service-item p-relative">
+                                    <div class="tp-service-thumb">
+                                       <img src="<?php echo esc_url( cosmotone_catalog_image_url( $service_id, 'large' ) ); ?>" alt="<?php the_title_attribute(); ?>">
+                                    </div>
+                                    <div class="tp-service-content-box">
+                                       <div class="tp-service-content fix">
+                                          <div class="tp-service-icon p-relative">
+                                             <span><i class="<?php echo esc_attr( $service_icon ); ?>"></i></span>
+                                             <div class="tp-service-icon-shape">
+                                                <img src="assets/img/service/shape-1-1.png" alt="">
+                                             </div>
+                                          </div>
+                                          <div class="tp-service-text pb-5">
+                                             <h4 class="tp-service-title">
+                                                <a href="<?php echo esc_url( $service_url ); ?>"><?php the_title(); ?></a>
+                                             </h4>
+                                             <?php if ( $service_description ) : ?>
+                                                <p class="cosmotone-service-card-description"><?php echo esc_html( $service_description ); ?></p>
+                                             <?php endif; ?>
+                                          </div>
+                                          <div class="tp-service-arrow">
+                                             <a href="<?php echo esc_url( $service_url ); ?>"><?php esc_html_e( 'Read More', 'cosmotone' ); ?><i class="flaticon-right-arrow"></i></a>
                                           </div>
                                        </div>
-                                       <div class="tp-service-text pb-5">
-                                          <h4 class="tp-service-title">
-                                             <a href="<?php echo esc_url( $home_sections['service_1_url'] ); ?>"><?php echo esc_html( $home_sections['service_1_title'] ); ?></a>
-                                          </h4>
-                                          <div><?php echo wp_kses_post( wpautop( $home_sections['service_1_description'] ) ); ?></div>
-                                       </div>
-                                       <div class="tp-service-arrow">
-                                          <a href="<?php echo esc_url( $home_sections['service_1_url'] ); ?>"><?php echo esc_html( $home_sections['service_1_button_text'] ); ?><i
-                                                class="flaticon-right-arrow"></i></a>
-                                       </div>
+                                    </div>
+                                    <div class="tp-service-shape-1">
+                                       <img src="assets/img/service/shape-1-2.png" alt="">
                                     </div>
                                  </div>
-                                 <div class="tp-service-shape-1">
-                                    <img src="assets/img/service/shape-1-2.png" alt="">
-                                 </div>
                               </div>
-                           </div>
-                           <div class="swiper-slide">
-                              <div class="tp-service-item p-relative">
-                                 <div class="tp-service-thumb">
-                                    <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'service_2_image' ) ); ?>" alt="">
-                                 </div>
-                                 <div class="tp-service-content-box">
-                                    <div class="tp-service-content fix">
-                                       <div class="tp-service-icon p-relative">
-                                          <span><i class="flaticon-plug-1"></i></span>
-                                          <div class="tp-service-icon-shape">
-                                             <img src="assets/img/service/shape-1-1.png" alt="">
-                                          </div>
-                                       </div>
-                                       <div class="tp-service-text pb-5">
-                                          <h4 class="tp-service-title">
-                                             <a href="<?php echo esc_url( $home_sections['service_2_url'] ); ?>"><?php echo esc_html( $home_sections['service_2_title'] ); ?></a>
-                                          </h4>
-                                          <div><?php echo wp_kses_post( wpautop( $home_sections['service_2_description'] ) ); ?></div>
-                                       </div>
-                                       <div class="tp-service-arrow">
-                                          <a href="<?php echo esc_url( $home_sections['service_2_url'] ); ?>"><?php echo esc_html( $home_sections['service_2_button_text'] ); ?><i
-                                                class="flaticon-right-arrow"></i></a>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="tp-service-shape-1">
-                                    <img src="assets/img/service/shape-1-2.png" alt="">
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="swiper-slide">
-                              <div class="tp-service-item p-relative">
-                                 <div class="tp-service-thumb">
-                                    <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'service_3_image' ) ); ?>" alt="">
-                                 </div>
-                                 <div class="tp-service-content-box">
-                                    <div class="tp-service-content fix">
-                                       <div class="tp-service-icon p-relative">
-                                          <span><i class="flaticon-short-circuit"></i></span>
-                                          <div class="tp-service-icon-shape">
-                                             <img src="assets/img/service/shape-1-1.png" alt="">
-                                          </div>
-                                       </div>
-                                       <div class="tp-service-text pb-5">
-                                          <h4 class="tp-service-title">
-                                             <a href="<?php echo esc_url( $home_sections['service_3_url'] ); ?>"><?php echo esc_html( $home_sections['service_3_title'] ); ?></a>
-                                          </h4>
-                                          <div><?php echo wp_kses_post( wpautop( $home_sections['service_3_description'] ) ); ?></div>
-                                       </div>
-                                       <div class="tp-service-arrow">
-                                          <a href="<?php echo esc_url( $home_sections['service_3_url'] ); ?>"><?php echo esc_html( $home_sections['service_3_button_text'] ); ?><i
-                                                class="flaticon-right-arrow"></i></a>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="tp-service-shape-1">
-                                    <img src="assets/img/service/shape-1-2.png" alt="">
-                                 </div>
-                              </div>
-                           </div>
+                           <?php endwhile; wp_reset_postdata(); ?>
                         </div>
                      </div>
                   </div>
@@ -361,11 +318,16 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                                      $product_id    = get_the_ID();
                                      $product_title = get_the_title();
                                      $product_url   = get_permalink();
-                                     $product_image = cosmotone_catalog_image_url( $product_id, 'large' );
-                                     $term_path     = cosmotone_product_category_path( $product_id );
-                                     $term_label    = $term_path ? implode( ' / ', wp_list_pluck( $term_path, 'name' ) ) : __( 'Product', 'cosmotone' );
-                                     $description   = wp_trim_words( wp_strip_all_tags( strip_shortcodes( get_the_content() ) ), 24 );
-                                     ?>
+                                      $product_image = cosmotone_catalog_image_url( $product_id, 'large' );
+                                      $term_path     = cosmotone_product_category_path( $product_id );
+                                      $term_label    = $term_path ? implode( ' / ', wp_list_pluck( $term_path, 'name' ) ) : __( 'Product', 'cosmotone' );
+                                      $description   = trim( wp_strip_all_tags( strip_shortcodes( get_the_content() ) ) );
+                                      $description_length = function_exists( 'mb_strlen' ) ? mb_strlen( $description ) : strlen( $description );
+                                      if ( $description_length > 70 ) {
+                                         $description = function_exists( 'mb_substr' ) ? mb_substr( $description, 0, 67 ) : substr( $description, 0, 67 );
+                                         $description = rtrim( $description ) . '...';
+                                      }
+                                      ?>
                                      <div class="swiper-slide">
                                         <div class="tp-project-item p-relative">
                                            <div class="tp-project-thumb">
@@ -375,7 +337,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                                            </div>
                                            <div class="tp-project-content">
                                               <a class="tp-project-read-more" href="<?php echo esc_url( $product_url ); ?>"><span><?php esc_html_e( 'Read More', 'cosmotone' ); ?></span><i class="flaticon-right-arrow"></i></a>
-                                              <span><?php echo esc_html( $term_label ); ?></span>
+                                              <span class="tp-product-category-label"><?php echo esc_html( $term_label ); ?></span>
                                               <h4 class="tp-project-title"><a href="<?php echo esc_url( $product_url ); ?>"><?php echo esc_html( $product_title ); ?></a></h4>
                                               <?php if ( $description ) : ?>
                                                  <div><p><?php echo esc_html( $description ); ?></p></div>
@@ -733,10 +695,16 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                               $news_title      = get_the_title();
                               $news_url        = get_permalink();
                               $news_image      = get_the_post_thumbnail_url( $news_id, 'large' );
-                              $news_categories = get_the_category( $news_id );
-                              $news_category   = $news_categories ? $news_categories[0]->name : __( 'News', 'cosmotone' );
+                               $news_categories = get_the_category( $news_id );
+                               $news_category   = $news_categories ? $news_categories[0]->name : __( 'News', 'cosmotone' );
+                               $news_card_title = $news_title;
+                               $news_title_length = function_exists( 'mb_strlen' ) ? mb_strlen( $news_card_title ) : strlen( $news_card_title );
+                               if ( $news_title_length > 50 ) {
+                                  $news_card_title = function_exists( 'mb_substr' ) ? mb_substr( $news_card_title, 0, 47 ) : substr( $news_card_title, 0, 47 );
+                                  $news_card_title = rtrim( $news_card_title ) . '...';
+                               }
 
-                              if ( ! $news_image ) {
+                               if ( ! $news_image ) {
                                  $news_image = trailingslashit( get_template_directory_uri() ) . 'assets/img/blog/blog-1-1.jpg';
                               }
                               ?>
@@ -764,7 +732,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                                           <span><i class="fa-light fa-circle-user"></i><?php echo esc_html( sprintf( __( 'By %s', 'cosmotone' ), get_the_author() ) ); ?></span>
                                           <span><i class="flaticon-price-tag"></i><?php echo esc_html( $news_category ); ?></span>
                                        </div>
-                                       <h4 class="tp-blog-title"><a href="<?php echo esc_url( $news_url ); ?>"><?php echo esc_html( $news_title ); ?></a></h4>
+                                       <h4 class="tp-blog-title"><a href="<?php echo esc_url( $news_url ); ?>"><?php echo esc_html( $news_card_title ); ?></a></h4>
                                        <div class="tp-blog-link d-flex justify-content-between align-items-center">
                                           <a href="<?php echo esc_url( $news_url ); ?>"><?php esc_html_e( 'Read More', 'cosmotone' ); ?></a>
                                           <a href="<?php echo esc_url( $news_url ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Read %s', 'cosmotone' ), $news_title ) ); ?>"><i class="flaticon-right-arrow"></i></a>
@@ -808,7 +776,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                   </div>
                   <div class="col-lg-3">
                      <div class="tp-certificate-action">
-                        <a href="<?php echo esc_url( $home_sections['certificates_button_url'] ); ?>" class="tp-certificate-btn"><?php echo esc_html( $home_sections['certificates_button_text'] ); ?> <i class="fa-regular fa-arrow-right-long"></i></a>
+                        <a href="<?php echo esc_url( get_post_type_archive_link( 'cosmotone_cert' ) ); ?>" class="tp-certificate-btn"><?php echo esc_html( $home_sections['certificates_button_text'] ); ?> <i class="fa-regular fa-arrow-right-long"></i></a>
                      </div>
                   </div>
                </div>

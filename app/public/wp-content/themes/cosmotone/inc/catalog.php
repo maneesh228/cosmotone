@@ -79,6 +79,32 @@ function cosmotone_catalog_use_classic_editor( $use_block_editor, $post_type ) {
 }
 add_filter( 'use_block_editor_for_post_type', 'cosmotone_catalog_use_classic_editor', 10, 2 );
 
+function cosmotone_product_editor_toolbar( $buttons, $editor_id ) {
+	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+	if ( ! $screen || 'cosmotone_product' !== $screen->post_type || 'content' !== $editor_id ) {
+		return $buttons;
+	}
+
+	$format_controls = array( 'fontselect', 'fontsizeselect', 'forecolor', 'backcolor' );
+	foreach ( $format_controls as $control ) {
+		if ( ! in_array( $control, $buttons, true ) ) {
+			$buttons[] = $control;
+		}
+	}
+
+	return $buttons;
+}
+add_filter( 'mce_buttons_2', 'cosmotone_product_editor_toolbar', 10, 2 );
+
+function cosmotone_product_editor_settings( $settings, $editor_id ) {
+	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+	if ( $screen && 'cosmotone_product' === $screen->post_type && 'content' === $editor_id ) {
+		$settings['fontsize_formats'] = '10px 12px 14px 16px 18px 20px 24px 28px 32px 36px 48px 60px';
+	}
+	return $settings;
+}
+add_filter( 'tiny_mce_before_init', 'cosmotone_product_editor_settings', 10, 2 );
+
 function cosmotone_catalog_admin_media( $hook ) {
 	if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ), true ) ) {
 		return;
@@ -110,8 +136,20 @@ function cosmotone_catalog_admin_columns( $columns ) {
 	}
 	return $updated;
 }
+
+function cosmotone_product_admin_columns( $columns ) {
+	$columns = cosmotone_catalog_admin_columns( $columns );
+	$updated = array();
+	foreach ( $columns as $key => $label ) {
+		$updated[ $key ] = $label;
+		if ( 'title' === $key ) {
+			$updated['cosmotone_product_code'] = 'Product Code';
+		}
+	}
+	return $updated;
+}
 add_filter( 'manage_cosmotone_service_posts_columns', 'cosmotone_catalog_admin_columns' );
-add_filter( 'manage_cosmotone_product_posts_columns', 'cosmotone_catalog_admin_columns' );
+add_filter( 'manage_cosmotone_product_posts_columns', 'cosmotone_product_admin_columns' );
 
 function cosmotone_catalog_admin_column_content( $column, $post_id ) {
 	if ( 'cosmotone_catalog_image' === $column ) {
@@ -119,6 +157,9 @@ function cosmotone_catalog_admin_column_content( $column, $post_id ) {
 			'<img src="%1$s" alt="" style="width:56px;height:56px;object-fit:cover;border-radius:3px">',
 			esc_url( cosmotone_catalog_image_url( $post_id, 'thumbnail' ) )
 		);
+	} elseif ( 'cosmotone_product_code' === $column && 'cosmotone_product' === get_post_type( $post_id ) ) {
+		$product_code = cosmotone_product_code( $post_id );
+		echo $product_code ? esc_html( $product_code ) : '&mdash;';
 	} elseif ( 'cosmotone_catalog_order' === $column ) {
 		echo esc_html( (string) absint( get_post_meta( $post_id, '_cosmotone_catalog_order', true ) ) );
 	}
@@ -141,12 +182,17 @@ function cosmotone_catalog_image_url( $post_id, $size = 'large' ) {
 	return get_template_directory_uri() . '/assets/img/project/pro-1-1.jpg';
 }
 
+function cosmotone_product_code( $post_id ) {
+	return (string) get_post_meta( $post_id, '_cosmotone_product_code', true );
+}
+
 function cosmotone_render_catalog_details_metabox( $post ) {
 	wp_nonce_field( 'cosmotone_save_catalog_details', 'cosmotone_catalog_details_nonce' );
 	$order      = absint( get_post_meta( $post->ID, '_cosmotone_catalog_order', true ) );
 	$image_id   = absint( get_post_meta( $post->ID, '_cosmotone_catalog_image_id', true ) );
 	$image_url  = cosmotone_catalog_image_url( $post->ID, 'medium' );
 	$icon_class = get_post_meta( $post->ID, '_cosmotone_service_icon', true );
+	$product_code = cosmotone_product_code( $post->ID );
 	?>
 	<p class="description">Use the WordPress title field for the card title and the main WordPress editor below it for the full description. The editor supports formatted text through TinyMCE.</p>
 	<div class="cosmotone-catalog-grid">
@@ -155,6 +201,13 @@ function cosmotone_render_catalog_details_metabox( $post ) {
 			<input type="number" min="0" step="1" id="cosmotone_catalog_order" name="cosmotone_catalog_order" value="<?php echo esc_attr( $order ); ?>">
 			<p class="description">Lower numbers appear first.</p>
 		</div>
+		<?php if ( 'cosmotone_product' === $post->post_type ) : ?>
+			<div class="cosmotone-catalog-field">
+				<label for="cosmotone_product_code">Product Code</label>
+				<input class="widefat" type="text" id="cosmotone_product_code" name="cosmotone_product_code" value="<?php echo esc_attr( $product_code ); ?>" placeholder="e.g. CT-1001">
+				<p class="description">Shown on the product listing and product detail pages.</p>
+			</div>
+		<?php endif; ?>
 		<?php if ( 'cosmotone_service' === $post->post_type ) : ?>
 			<div class="cosmotone-catalog-field">
 				<label for="cosmotone_service_icon">Icon Class</label>
@@ -265,6 +318,9 @@ function cosmotone_save_catalog_details( $post_id ) {
 	update_post_meta( $post_id, '_cosmotone_catalog_image_id', isset( $_POST['cosmotone_catalog_image_id'] ) ? absint( $_POST['cosmotone_catalog_image_id'] ) : 0 );
 	if ( 'cosmotone_service' === get_post_type( $post_id ) ) {
 		update_post_meta( $post_id, '_cosmotone_service_icon', isset( $_POST['cosmotone_service_icon'] ) ? sanitize_html_class( wp_unslash( $_POST['cosmotone_service_icon'] ) ) : '' );
+	}
+	if ( 'cosmotone_product' === get_post_type( $post_id ) ) {
+		update_post_meta( $post_id, '_cosmotone_product_code', isset( $_POST['cosmotone_product_code'] ) ? sanitize_text_field( wp_unslash( $_POST['cosmotone_product_code'] ) ) : '' );
 	}
 	remove_action( 'save_post_cosmotone_service', 'cosmotone_save_catalog_details' );
 	remove_action( 'save_post_cosmotone_product', 'cosmotone_save_catalog_details' );
