@@ -11,6 +11,7 @@ require_once get_template_directory() . '/inc/sliders.php';
 require_once get_template_directory() . '/inc/page-sections.php';
 require_once get_template_directory() . '/inc/home-sections.php';
 require_once get_template_directory() . '/inc/catalog.php';
+require_once get_template_directory() . '/inc/product-importer.php';
 require_once get_template_directory() . '/inc/testimonials.php';
 require_once get_template_directory() . '/inc/resources.php';
 require_once get_template_directory() . '/inc/certificates.php';
