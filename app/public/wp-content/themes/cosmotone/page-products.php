@@ -9,16 +9,31 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 $paged          = max( 1, absint( get_query_var( 'paged' ) ), absint( get_query_var( 'page' ) ) );
 $product_search = isset( $_GET['product_search'] ) ? sanitize_text_field( wp_unslash( $_GET['product_search'] ) ) : '';
+$category_filter    = isset( $_GET['product_category'] ) ? absint( $_GET['product_category'] ) : 0;
+$subcategory_filter = isset( $_GET['product_subcategory'] ) ? absint( $_GET['product_subcategory'] ) : 0;
+$child_filter       = isset( $_GET['product_child_category'] ) ? absint( $_GET['product_child_category'] ) : 0;
+$selected_term      = $child_filter ? $child_filter : ( $subcategory_filter ? $subcategory_filter : $category_filter );
+$query_args = array(
+	'post_type'      => 'cosmotone_product',
+	'posts_per_page' => 25,
+	'post_status'    => 'publish',
+	'paged'          => $paged,
+	's'              => $product_search,
+	'orderby'        => array( 'menu_order' => 'ASC', 'title' => 'ASC' ),
+	'order'          => 'ASC',
+);
+if ( $selected_term ) {
+	$query_args['tax_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+		array(
+			'taxonomy'         => 'cosmotone_product_category',
+			'field'            => 'term_id',
+			'terms'            => array( $selected_term ),
+			'include_children' => true,
+		),
+	);
+}
 $products = new WP_Query(
-	array(
-		'post_type'      => 'cosmotone_product',
-		'posts_per_page' => 25,
-		'post_status'    => 'publish',
-		'paged'          => $paged,
-		's'              => $product_search,
-		'orderby'        => array( 'menu_order' => 'ASC', 'title' => 'ASC' ),
-		'order'          => 'ASC',
-	)
+	$query_args
 );
 $terms    = get_terms( array( 'taxonomy' => 'cosmotone_product_category', 'hide_empty' => false ) );
 $terms    = is_wp_error( $terms ) ? array() : $terms;
@@ -62,28 +77,28 @@ ob_start();
 			<form class="cosmotone-product-filters mb-50" id="cosmotone-product-filters" action="<?php echo esc_url( get_permalink() ); ?>" method="get" role="search">
 				<div>
 					<label for="cosmotone-filter-category">Category</label>
-					<select id="cosmotone-filter-category" class="cosmotone-native-select">
+					<select id="cosmotone-filter-category" name="product_category" class="cosmotone-native-select">
 						<option value="0">All categories</option>
 						<?php foreach ( $terms as $term ) : if ( 0 !== (int) $term->parent ) continue; ?>
-							<option value="<?php echo esc_attr( $term->term_id ); ?>"><?php echo esc_html( $term->name ); ?></option>
+							<option value="<?php echo esc_attr( $term->term_id ); ?>" <?php selected( $category_filter, $term->term_id ); ?>><?php echo esc_html( $term->name ); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</div>
 				<div>
 					<label for="cosmotone-filter-subcategory">Subcategory</label>
-					<select id="cosmotone-filter-subcategory" class="cosmotone-native-select" disabled>
+					<select id="cosmotone-filter-subcategory" name="product_subcategory" class="cosmotone-native-select" disabled>
 						<option value="0">All subcategories</option>
 						<?php foreach ( $terms as $term ) : if ( 1 !== count( get_ancestors( $term->term_id, 'cosmotone_product_category', 'taxonomy' ) ) ) continue; ?>
-							<option value="<?php echo esc_attr( $term->term_id ); ?>" data-parent="<?php echo esc_attr( $term->parent ); ?>"><?php echo esc_html( $term->name ); ?></option>
+							<option value="<?php echo esc_attr( $term->term_id ); ?>" data-parent="<?php echo esc_attr( $term->parent ); ?>" <?php selected( $subcategory_filter, $term->term_id ); ?>><?php echo esc_html( $term->name ); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</div>
 				<div>
 					<label for="cosmotone-filter-child">Child Category</label>
-					<select id="cosmotone-filter-child" class="cosmotone-native-select" disabled>
+					<select id="cosmotone-filter-child" name="product_child_category" class="cosmotone-native-select" disabled>
 						<option value="0">All child categories</option>
 						<?php foreach ( $terms as $term ) : if ( 2 !== count( get_ancestors( $term->term_id, 'cosmotone_product_category', 'taxonomy' ) ) ) continue; ?>
-							<option value="<?php echo esc_attr( $term->term_id ); ?>" data-parent="<?php echo esc_attr( $term->parent ); ?>"><?php echo esc_html( $term->name ); ?></option>
+							<option value="<?php echo esc_attr( $term->term_id ); ?>" data-parent="<?php echo esc_attr( $term->parent ); ?>" <?php selected( $child_filter, $term->term_id ); ?>><?php echo esc_html( $term->name ); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</div>
@@ -142,7 +157,14 @@ ob_start();
 								'type'      => 'list',
 								'prev_text' => '&larr;',
 								'next_text' => '&rarr;',
-								'add_args'  => $product_search ? array( 'product_search' => $product_search ) : false,
+								'add_args'  => array_filter(
+									array(
+										'product_search'         => $product_search,
+										'product_category'       => $category_filter,
+										'product_subcategory'    => $subcategory_filter,
+										'product_child_category' => $child_filter,
+									)
+								),
 							)
 						)
 					);
@@ -186,12 +208,12 @@ ob_start();
 (function(){
 	var filters=document.getElementById('cosmotone-product-filters');if(!filters)return;
 	var category=document.getElementById('cosmotone-filter-category'),subcategory=document.getElementById('cosmotone-filter-subcategory'),child=document.getElementById('cosmotone-filter-child'),cards=document.querySelectorAll('.cosmotone-product-card'),empty=document.querySelector('.cosmotone-filter-empty');
-	function filterOptions(select,parent){select.value='0';var visible=0;Array.prototype.forEach.call(select.options,function(option,index){if(index===0)return;var show=String(option.dataset.parent)===String(parent);option.hidden=!show;option.disabled=!show;if(show)visible++;});select.disabled=!parent||!visible;}
+	function filterOptions(select,parent,reset){if(reset)select.value='0';var visible=0;Array.prototype.forEach.call(select.options,function(option,index){if(index===0)return;var show=String(option.dataset.parent)===String(parent);option.hidden=!show;option.disabled=!show;if(show)visible++;});select.disabled=!parent||!visible;}
 	function apply(){var selected=[category.value,subcategory.value,child.value].filter(function(value){return value!=='0';}),shown=0;cards.forEach(function(card){var ids=card.dataset.categories.split(' '),show=selected.every(function(value){return ids.indexOf(value)!==-1;});card.style.display=show?'':'none';if(show)shown++;});if(empty)empty.style.display=shown?'none':'';}
-	category.addEventListener('change',function(){filterOptions(subcategory,category.value);filterOptions(child,0);apply();});
-	subcategory.addEventListener('change',function(){filterOptions(child,subcategory.value);apply();});
-	child.addEventListener('change',apply);
-	filterOptions(subcategory,0);filterOptions(child,0);apply();
+	category.addEventListener('change',function(){filterOptions(subcategory,category.value,true);filterOptions(child,0,true);filters.submit();});
+	subcategory.addEventListener('change',function(){filterOptions(child,subcategory.value,true);filters.submit();});
+	child.addEventListener('change',function(){filters.submit();});
+	filterOptions(subcategory,category.value,false);filterOptions(child,subcategory.value,false);apply();
 })();
 </script>
 <?php
