@@ -7386,9 +7386,9 @@ body .ui-tooltip {
 .tp-footer-contact a:not(:last-child) {
   margin-bottom: 12px;
 }
-.tp-footer-contact a:hover {
+/* .tp-footer-contact a:hover {
   color: var(--tp-common-white);
-}
+} */
 .tp-footer-contact a i {
   color: var(--tp-theme-1);
   display: inline-block;

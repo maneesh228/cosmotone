@@ -724,10 +724,29 @@ function cosmotone_render_custom_page_section_fields( $section_key, $section, $s
 			}
 			$type    = isset( $field['type'] ) ? $field['type'] : 'text';
 			$name_group = ! empty( $field['indexes'] ) ? 'combined_texts' : 'texts';
+			$editor_id = 'cosmotone_editor_' . sanitize_key( $section_key ) . '_' . $name_group . '_' . $index;
 			?>
 			<label class="cosmotone-field"><span><?php echo esc_html( $field['label'] ); ?></span>
 			<?php if ( 'textarea' === $type ) : ?>
-				<textarea rows="4" name="cosmotone_sections[<?php echo esc_attr( $section_key ); ?>][<?php echo esc_attr( $name_group ); ?>][<?php echo esc_attr( $index ); ?>]" data-default="<?php echo esc_attr( $default ); ?>"><?php echo esc_textarea( $value ); ?></textarea>
+				<?php
+				wp_editor(
+					$value,
+					$editor_id,
+					array(
+						'textarea_name' => 'cosmotone_sections[' . $section_key . '][' . $name_group . '][' . $index . ']',
+						'media_buttons' => true,
+						'textarea_rows' => 4,
+						'teeny' => false,
+						'wpautop' => false,
+						'quicktags' => true,
+						'tinymce' => array(
+							'toolbar1' => 'bold,italic,underline,strikethrough,forecolor,backcolor,hr,bullist,numlist,blockquote,alignleft,aligncenter,alignright,link,unlink,wp_more,spellchecker,fullscreen',
+							'toolbar2' => '',
+							'plugins' => 'lists,textcolor,fullscreen,spellchecker,charmap,hr,media',
+						),
+					)
+				);
+				?>
 			<?php else : ?>
 				<input type="text" name="cosmotone_sections[<?php echo esc_attr( $section_key ); ?>][<?php echo esc_attr( $name_group ); ?>][<?php echo esc_attr( $index ); ?>]" value="<?php echo esc_attr( $value ); ?>" data-default="<?php echo esc_attr( $default ); ?>">
 			<?php endif; ?>
@@ -793,6 +812,10 @@ add_action( 'add_meta_boxes', 'cosmotone_register_page_sections_box', 10, 2 );
 function cosmotone_page_sections_media_assets( $hook ) {
 	if ( in_array( $hook, array( 'post.php', 'post-new.php' ), true ) ) {
 		wp_enqueue_media();
+		wp_enqueue_editor();
+		wp_enqueue_script( 'tinymce' );
+		wp_enqueue_script( 'wp-tinymce' );
+		wp_enqueue_style( 'editor-buttons' );
 	}
 }
 add_action( 'admin_enqueue_scripts', 'cosmotone_page_sections_media_assets' );
@@ -952,7 +975,26 @@ function cosmotone_render_page_sections_box( $post ) {
 				$is_paragraph = 'Paragraph' === $type_label || strlen( $default ) > 110;
 			?>
 			<label class="cosmotone-field"><span><?php echo esc_html( $label_text ); ?></span>
-			<?php if ( $is_paragraph ) : ?><textarea rows="4" name="cosmotone_sections[<?php echo esc_attr( $key ); ?>][texts][<?php echo esc_attr( $index ); ?>]" data-default="<?php echo esc_attr( $default ); ?>"><?php echo esc_textarea( $value ); ?></textarea><?php else : ?><input type="text" name="cosmotone_sections[<?php echo esc_attr( $key ); ?>][texts][<?php echo esc_attr( $index ); ?>]" value="<?php echo esc_attr( $value ); ?>" data-default="<?php echo esc_attr( $default ); ?>"><?php endif; ?>
+			<?php if ( $is_paragraph ) :
+				$editor_id = 'cosmotone_section_editor_' . sanitize_key( $key ) . '_' . $index;
+				wp_editor(
+					$value,
+					$editor_id,
+					array(
+						'textarea_name' => 'cosmotone_sections[' . $key . '][texts][' . $index . ']',
+						'media_buttons' => true,
+						'textarea_rows' => 4,
+						'teeny' => false,
+						'wpautop' => false,
+						'quicktags' => true,
+						'tinymce' => array(
+							'toolbar1' => 'bold,italic,underline,strikethrough,forecolor,backcolor,hr,bullist,numlist,blockquote,alignleft,aligncenter,alignright,link,unlink,wp_more,spellchecker,fullscreen',
+							'toolbar2' => '',
+							'plugins' => 'lists,textcolor,fullscreen,spellchecker,charmap,hr,media',
+						),
+					)
+				);
+			 else : ?><input type="text" name="cosmotone_sections[<?php echo esc_attr( $key ); ?>][texts][<?php echo esc_attr( $index ); ?>]" value="<?php echo esc_attr( $value ); ?>" data-default="<?php echo esc_attr( $default ); ?>"><?php endif; ?>
 			</label>
 			<?php endforeach; ?>
 			<?php if ( $nodes['texts'] ) : ?></div><?php endif; ?>
@@ -1072,7 +1114,7 @@ function cosmotone_save_page_sections( $post_id ) {
 	foreach ( $config[ $type ]['sections'] as $key => $label ) {
 		$item = isset( $raw[ $key ] ) && is_array( $raw[ $key ] ) ? $raw[ $key ] : array();
 		$out[ $key ] = array( 'enabled' => ! empty( $item['enabled'] ) ? 1 : 0, 'texts' => array(), 'attributes' => array(), 'links' => array(), 'images' => array() );
-		foreach ( isset( $item['texts'] ) && is_array( $item['texts'] ) ? $item['texts'] : array() as $i => $value ) $out[ $key ]['texts'][ absint( $i ) ] = sanitize_textarea_field( $value );
+		foreach ( isset( $item['texts'] ) && is_array( $item['texts'] ) ? $item['texts'] : array() as $i => $value ) $out[ $key ]['texts'][ absint( $i ) ] = wp_kses_post( $value );
 
 		$custom_schema = cosmotone_page_section_custom_schema( $type, $key );
 		if ( ! empty( $custom_schema['texts'] ) && ! empty( $item['combined_texts'] ) && is_array( $item['combined_texts'] ) ) {
@@ -1126,11 +1168,39 @@ function cosmotone_apply_section_values( $html, $values, $schema = array() ) {
 	$dom = cosmotone_page_section_dom( $html );
 	if ( ! $dom ) return $html;
 	$nodes = cosmotone_page_section_nodes( $dom );
+	
 	foreach ( $nodes['texts'] as $i => $node ) {
 		if ( ! isset( $values['texts'][ $i ] ) ) continue;
-		$old = $node->nodeValue; preg_match( '/^\s*/u', $old, $left ); preg_match( '/\s*$/u', $old, $right );
-		$node->nodeValue = $left[0] . $values['texts'][ $i ] . $right[0];
+		$old = $node->nodeValue; 
+		preg_match( '/^\s*/u', $old, $left ); 
+		preg_match( '/\s*$/u', $old, $right );
+		
+		// Check if the text contains HTML tags
+		$text_content = $values['texts'][ $i ];
+		if ( preg_match( '/<[^>]+>/', $text_content ) ) {
+			// HTML content detected - replace the entire node
+			$temp_html = '<div>' . $left[0] . $text_content . $right[0] . '</div>';
+			$temp_dom = new DOMDocument( '1.0', 'UTF-8' );
+			$old_errors = libxml_use_internal_errors( true );
+			$temp_dom->loadHTML( '<?xml encoding="utf-8"?>' . $temp_html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
+			libxml_clear_errors();
+			libxml_use_internal_errors( $old_errors );
+			
+			$temp_root = $temp_dom->documentElement;
+			if ( $temp_root && $temp_root->hasChildNodes() ) {
+				$fragment = $dom['document']->createDocumentFragment();
+				foreach ( $temp_root->childNodes as $child ) {
+					$imported = $dom['document']->importNode( $child->cloneNode( true ), true );
+					$fragment->appendChild( $imported );
+				}
+				$node->parentNode->replaceChild( $fragment, $node );
+			}
+		} else {
+			// Plain text - use nodeValue
+			$node->nodeValue = $left[0] . $text_content . $right[0];
+		}
 	}
+	
 	foreach ( $nodes['links'] as $i => $node ) {
 		if ( ! isset( $values['links'][ $i ] ) || '' === $values['links'][ $i ] ) continue;
 		$node->setAttribute( 'href', cosmotone_page_section_normalize_asset_url( $values['links'][ $i ] ) );

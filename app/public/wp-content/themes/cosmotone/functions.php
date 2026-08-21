@@ -80,3 +80,38 @@ function cosmotone_maybe_create_theme_pages() {
 	}
 }
 add_action( 'init', 'cosmotone_maybe_create_theme_pages' );
+
+/**
+ * Get header section logo image URL.
+ *
+ * @return string The logo image URL, or empty string if not found.
+ */
+function cosmotone_get_header_logo_url() {
+	$header_page = get_page_by_path( 'header', OBJECT, 'page' );
+	if ( ! $header_page ) {
+		return '';
+	}
+
+	$sections = get_post_meta( $header_page->ID, '_cosmotone_page_sections', true );
+	if ( ! is_array( $sections ) || ! isset( $sections['header-main']['images'][0]['url'] ) ) {
+		return '';
+	}
+
+	$image_url = $sections['header-main']['images'][0]['url'];
+	if ( empty( $image_url ) ) {
+		return '';
+	}
+
+	// Normalize the URL
+	$image_url = trim( $image_url );
+	if ( preg_match( '#^https?://assets/(.+)$#i', $image_url, $match ) ) {
+		$image_url = 'assets/' . $match[1];
+	}
+
+	// Return as full URL if it's relative
+	if ( ! preg_match( '#^https?://#i', $image_url ) ) {
+		$image_url = esc_url_raw( trailingslashit( get_template_directory_uri() ) . ltrim( $image_url, '/' ) );
+	}
+
+	return esc_url( $image_url );
+}

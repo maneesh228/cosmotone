@@ -78,9 +78,26 @@ ob_start();
                <div class="search__wrapper">
                   <div class="search__top d-flex justify-content-between align-items-center">
                      <div class="search__logo">
-                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                           <img src="assets/img/logo/white-logo.png" alt="">
-                        </a>
+                        <?php
+                        $header_page = get_page_by_path( 'header', OBJECT, 'page' );
+                        $search_logo_url = get_template_directory_uri() . '/assets/img/logo/white-logo.png';
+                        if ( $header_page ) {
+                           $sections = get_post_meta( $header_page->ID, '_cosmotone_page_sections', true );
+                           if ( is_array( $sections ) && isset( $sections['header-mobile-search']['images'][0]['url'] ) && ! empty( $sections['header-mobile-search']['images'][0]['url'] ) ) {
+                              $image_url = $sections['header-mobile-search']['images'][0]['url'];
+                              $image_url = trim( $image_url );
+                              if ( preg_match( '#^https?://assets/(.+)$#i', $image_url, $match ) ) {
+                                 $image_url = 'assets/' . $match[1];
+                              }
+                              if ( ! preg_match( '#^https?://#i', $image_url ) ) {
+                                 $search_logo_url = esc_url( trailingslashit( get_template_directory_uri() ) . ltrim( $image_url, '/' ) );
+                              } else {
+                                 $search_logo_url = esc_url( $image_url );
+                              }
+                           }
+                        }
+                        ?>
+                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="background-image: url('<?php echo esc_url( $search_logo_url ); ?>'); background-size: contain; background-repeat: no-repeat; background-position: center left; display: block; height: 50px;"></a>
                      </div>
                      <div class="search__close">
                         <button type="button" class="search__close-btn search-close-btn">
@@ -127,9 +144,26 @@ ob_start();
             <button class="close-btn"><i class="fal fa-times"></i></button>
          </div>
          <div class="tpoffcanvas__logo">
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                     <img src="assets/img/logo/white-logo.png" alt="">
-            </a>
+            <?php
+            $header_page = get_page_by_path( 'header', OBJECT, 'page' );
+            $mobile_logo_url = get_template_directory_uri() . '/assets/img/logo/white-logo.png';
+            if ( $header_page ) {
+               $sections = get_post_meta( $header_page->ID, '_cosmotone_page_sections', true );
+               if ( is_array( $sections ) && isset( $sections['header-mobile-search']['images'][1]['url'] ) && ! empty( $sections['header-mobile-search']['images'][1]['url'] ) ) {
+                  $image_url = $sections['header-mobile-search']['images'][1]['url'];
+                  $image_url = trim( $image_url );
+                  if ( preg_match( '#^https?://assets/(.+)$#i', $image_url, $match ) ) {
+                     $image_url = 'assets/' . $match[1];
+                  }
+                  if ( ! preg_match( '#^https?://#i', $image_url ) ) {
+                     $mobile_logo_url = esc_url( trailingslashit( get_template_directory_uri() ) . ltrim( $image_url, '/' ) );
+                  } else {
+                     $mobile_logo_url = esc_url( $image_url );
+                  }
+               }
+            }
+            ?>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="background-image: url('<?php echo esc_url( $mobile_logo_url ); ?>'); background-size: contain; background-repeat: no-repeat; background-position: center left; display: block; height: 50px;"></a>
          </div>
          <div class="tpoffcanvas__title">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima incidunt eaque ab cumque, porro maxime
@@ -237,9 +271,11 @@ ob_start();
             <div class="row align-items-center">
                <div class="col-xxl-2 col-xl-2 col-lg-4 col-md-4 col-6">
                   <div class="tp-header-logo">
-                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                        <img src="assets/img/logo/black-logo.png" alt="">
-                     </a>
+                     <?php
+                     $logo_url = cosmotone_get_header_logo_url();
+                     $logo_url = $logo_url ?: get_template_directory_uri() . '/assets/img/logo/black-logo.png';
+                     ?>
+                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="background-image: url('<?php echo esc_url( $logo_url ); ?>'); background-size: contain; background-repeat: no-repeat; background-position: center left; display: block; height: 50px;"></a>
                   </div>
                </div>
                <div class="col-xxl-5 col-xl-6 d-none d-xl-block">
