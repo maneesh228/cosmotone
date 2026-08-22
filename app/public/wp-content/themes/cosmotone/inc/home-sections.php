@@ -32,7 +32,7 @@ function cosmotone_home_sections_schema() {
 				cosmotone_home_field( 'about_subtitle', 'Subtitle', 'text', 'ABOUT COSMOTONE', array( 'legacy_text' => 0 ) ),
 				cosmotone_home_field( 'about_title', 'Heading', 'editor', 'Empowering Mobility with Reliable Electrical Solutions', array( 'legacy_text' => 1 ) ),
 				cosmotone_home_field( 'about_description', 'Description', 'editor', 'Cosmotone manufactures automotive electrical components, wiring harnesses, relays and sensors engineered for dependable performance.', array( 'legacy_text' => 2 ) ),
-				cosmotone_home_field( 'about_highlight', 'Highlight Text', 'text', 'A legacy of quality, reliability, and innovation.', array( 'legacy_text' => 3 ) ),
+				cosmotone_home_field( 'about_highlight', 'Highlight Text', 'textarea', 'A legacy of quality, reliability, and innovation.', array( 'legacy_text' => 3 ) ),
 				cosmotone_home_field( 'about_feature_1', 'Feature 1', 'editor', 'Driven by<br>Excellence', array( 'legacy_text' => array( 4, 5 ), 'legacy_join' => '<br>' ) ),
 				cosmotone_home_field( 'about_feature_2', 'Feature 2', 'editor', 'Powering<br>Connections', array( 'legacy_text' => array( 6, 7 ), 'legacy_join' => '<br>' ) ),
 				cosmotone_home_field( 'about_button_text', 'Button Text', 'text', 'KNOW MORE', array( 'legacy_text' => 8 ) ),
@@ -48,7 +48,6 @@ function cosmotone_home_sections_schema() {
 		),
 		'services' => array(
 			'label'             => 'Services',
-			'admin_manage_only' => true,
 			'admin_actions' => array(
 				array( 'label' => 'Manage Services', 'url' => 'edit.php?post_type=cosmotone_service', 'primary' => true ),
 			),
@@ -56,7 +55,7 @@ function cosmotone_home_sections_schema() {
 			'fields' => array(
 				cosmotone_home_field( 'services_subtitle', 'Subtitle', 'text', 'OUR BUSINESS SEGMENT', array( 'legacy_text' => 0 ) ),
 				cosmotone_home_field( 'services_title', 'Heading', 'editor', 'Engineered for Performance and Reliability', array( 'legacy_text' => 1 ) ),
-				cosmotone_home_field( 'services_background', 'Section Background', 'image', 'assets/img/service/bg-1-1.png', array( 'legacy_image' => 0 ) ),
+				// cosmotone_home_field( 'services_background', 'Section Background', 'image', 'assets/img/service/bg-1-1.png', array( 'legacy_image' => 0 ) ),
 			),
 		),
 		'choose' => array(
@@ -184,19 +183,19 @@ function cosmotone_home_sections_schema() {
 		$schema['quality']['fields'][] = cosmotone_home_field( "quality_{$number}_description", "Item {$number} Description", 'editor', $item[1], array( 'legacy_text' => $index * 2 + 1 ) );
 	}
 
-	$service_defaults = array(
-		array( 'Automotive Electrical', 'Reliable electrical components engineered for vehicle safety and performance.', 'assets/img/service/sv-1-1.jpg' ),
-		array( 'Wires and Cables', 'Precision-engineered wires and cables ensuring secure connections and dependable performance.', 'assets/img/service/sv-1-2.jpg' ),
-		array( 'Automotive', 'High-quality automotive solutions designed to deliver reliable power, safety, and long-lasting performance.', 'assets/img/service/sv-1-3.jpg' ),
-	);
-	foreach ( $service_defaults as $index => $item ) {
-		$number = $index + 1;
-		$schema['services']['fields'][] = cosmotone_home_field( "service_{$number}_title", "Service {$number} Title", 'text', $item[0], array( 'legacy_text' => 2 + $index * 3 ) );
-		$schema['services']['fields'][] = cosmotone_home_field( "service_{$number}_description", "Service {$number} Description", 'editor', $item[1], array( 'legacy_text' => 3 + $index * 3 ) );
-		$schema['services']['fields'][] = cosmotone_home_field( "service_{$number}_button_text", "Service {$number} Button Text", 'text', 'Read More', array( 'legacy_text' => 4 + $index * 3 ) );
-		$schema['services']['fields'][] = cosmotone_home_field( "service_{$number}_url", "Service {$number} Link", 'url', '#', array( 'legacy_link' => 1 + $index * 2 ) );
-		$schema['services']['fields'][] = cosmotone_home_field( "service_{$number}_image", "Service {$number} Image", 'image', $item[2], array( 'legacy_image' => 1 + $index * 3 ) );
-	}
+	// $service_defaults = array(
+	// 	array( 'Automotive Electrical', 'Reliable electrical components engineered for vehicle safety and performance.', 'assets/img/service/sv-1-1.jpg' ),
+	// 	array( 'Wires and Cables', 'Precision-engineered wires and cables ensuring secure connections and dependable performance.', 'assets/img/service/sv-1-2.jpg' ),
+	// 	array( 'Automotive', 'High-quality automotive solutions designed to deliver reliable power, safety, and long-lasting performance.', 'assets/img/service/sv-1-3.jpg' ),
+	// );
+	// foreach ( $service_defaults as $index => $item ) {
+	// 	$number = $index + 1;
+	// 	$schema['services']['fields'][] = cosmotone_home_field( "service_{$number}_title", "Service {$number} Title", 'text', $item[0], array( 'legacy_text' => 2 + $index * 3 ) );
+	// 	$schema['services']['fields'][] = cosmotone_home_field( "service_{$number}_description", "Service {$number} Description", 'editor', $item[1], array( 'legacy_text' => 3 + $index * 3 ) );
+	// 	$schema['services']['fields'][] = cosmotone_home_field( "service_{$number}_button_text", "Service {$number} Button Text", 'text', 'Read More', array( 'legacy_text' => 4 + $index * 3 ) );
+	// 	$schema['services']['fields'][] = cosmotone_home_field( "service_{$number}_url", "Service {$number} Link", 'url', '#', array( 'legacy_link' => 1 + $index * 2 ) );
+	// 	$schema['services']['fields'][] = cosmotone_home_field( "service_{$number}_image", "Service {$number} Image", 'image', $item[2], array( 'legacy_image' => 1 + $index * 3 ) );
+	// }
 
 	$choose_items = array( 'Industry Expertise', 'Superior Product Quality', 'ISO 9001:2015 Certified', 'Innovative Solutions' );
 	foreach ( $choose_items as $index => $title ) {
@@ -371,6 +370,7 @@ add_action( 'add_meta_boxes', 'cosmotone_register_home_sections_metabox' );
 function cosmotone_home_admin_assets( $hook ) {
 	if ( in_array( $hook, array( 'post.php', 'post-new.php' ), true ) ) {
 		wp_enqueue_media();
+		wp_enqueue_editor();
 	}
 }
 add_action( 'admin_enqueue_scripts', 'cosmotone_home_admin_assets' );
@@ -428,6 +428,23 @@ function cosmotone_render_home_sections_metabox( $post ) {
 							<input class="cosmotone-home-image-url" type="hidden" name="cosmotone_home_sections[<?php echo esc_attr( $key ); ?>_url]" value="<?php echo esc_attr( isset( $sections[ $key . '_url' ] ) ? $sections[ $key . '_url' ] : '' ); ?>">
 							<button type="button" class="button cosmotone-home-image-select">Select Image</button>
 							<button type="button" class="button cosmotone-home-image-remove">Remove Image</button>
+						</div>
+					<?php elseif ( 'textarea' === $field['type'] ) : ?>
+						<div class="cosmotone-home-field cosmotone-home-field-wide">
+							<label><?php echo esc_html( $field['label'] ); ?></label>
+							<?php
+							wp_editor(
+								isset( $sections[ $key ] ) ? $sections[ $key ] : $field['default'],
+								'cosmotone_home_' . sanitize_key( $key ),
+								array(
+									'textarea_name' => 'cosmotone_home_sections[' . $key . ']',
+									'textarea_rows' => 4,
+									'media_buttons' => true,
+									'teeny'         => false,
+									'quicktags'     => true,
+								)
+							);
+							?>
 						</div>
 					<?php elseif ( 'editor' === $field['type'] ) : ?>
 						<div class="cosmotone-home-field cosmotone-home-field-wide">
@@ -500,6 +517,8 @@ function cosmotone_save_home_sections( $post_id ) {
 			if ( 'image' === $field['type'] ) {
 				$out[ $key . '_id' ]  = isset( $raw[ $key . '_id' ] ) ? absint( $raw[ $key . '_id' ] ) : 0;
 				$out[ $key . '_url' ] = isset( $raw[ $key . '_url' ] ) ? cosmotone_sanitize_page_section_media_url( $raw[ $key . '_url' ] ) : '';
+			} elseif ( 'textarea' === $field['type'] ) {
+				$out[ $key ] = isset( $raw[ $key ] ) ? wp_kses_post( $raw[ $key ] ) : '';
 			} elseif ( 'editor' === $field['type'] ) {
 				$out[ $key ] = isset( $raw[ $key ] ) ? wp_kses_post( $raw[ $key ] ) : '';
 			} elseif ( 'url' === $field['type'] ) {
