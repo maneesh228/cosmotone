@@ -60,6 +60,7 @@ $related       = cosmotone_get_services( 3, $service_id );
 								</ul>
 							</div>
 						</div>
+						<!-- service-details-sidebar area start -->
 						<div class="tp-service-details-widget mb-30">
 							<div class="tp-service-details-thumb-box text-center">
 								<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/logo/black-logo.png' ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>"></a>
@@ -67,6 +68,7 @@ $related       = cosmotone_get_services( 3, $service_id );
 								<div class="tp-service-details-thumb"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/service/Service-Details.png' ); ?>" alt=""></div>
 							</div>
 						</div>
+						<!-- service-details-sidebar area end -->
 						<div class="tp-service-details-widget mb-30">
 							<div class="tp-service-details-contact-box d-flex align-items-center">
 								<div class="tp-service-details-contact-icon"><span><i class="flaticon-phone-call"></i></span></div>

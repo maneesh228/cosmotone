@@ -63,7 +63,10 @@ function cosmotone_page_sections_config() {
 		'service-details' => array(
 			'slug'     => 'service-details',
 			'template' => 'template-parts/service-detail.php',
-			'sections' => array( 'breadcrumb' => 'Page Banner' ),
+			'sections' => array(
+				'breadcrumb'             => 'Page Banner',
+				'service-details-sidebar' => 'Service Details Sidebar',
+			),
 		),
 		'downloads' => array(
 			'slug'     => 'downloads',
@@ -286,6 +289,21 @@ function cosmotone_page_section_custom_schema( $type, $key ) {
 			),
 			'images' => array(
 				0 => array( 'label' => 'Banner Background Image', 'default' => 'assets/img/breadcurmb/breadcurmb.jpg' ),
+			),
+		);
+	}
+
+	if ( 'service-details' === $type && 'service-details-sidebar' === $key ) {
+		return array(
+			'texts' => array(
+				0 => array( 'label' => 'Sidebar Heading', 'default' => "Get the full range\nof Cosmotone services", 'type' => 'textarea', 'indexes' => array( 0, 1 ) ),
+			),
+			'links' => array(
+				0 => array( 'label' => 'Sidebar Logo Link', 'default' => home_url( '/' ) ),
+			),
+			'images' => array(
+				0 => array( 'label' => 'Sidebar Logo', 'default' => 'assets/img/logo/black-logo.png' ),
+				1 => array( 'label' => 'Sidebar Illustration', 'default' => 'assets/img/service/Service-Details.png' ),
 			),
 		);
 	}

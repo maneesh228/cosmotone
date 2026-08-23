@@ -32,7 +32,7 @@ ob_start();
 				<div class="col-xxl-12">
 					<div class="breadcrumb__content z-index d-flex justify-content-between align-items-end">
 						<div class="breadcrumb__section-title-box">
-							<h4 class="breadcrumb__subtitle">NEWS &amp; ARTICLES</h4>
+							<h4 class="breadcrumb__subtitle">NEWS & ARTICLES</h4>
 							<h3 class="breadcrumb__title">Our blog</h3>
 						</div>
 						<div class="breadcrumb__list">
