@@ -758,9 +758,10 @@ function cosmotone_render_custom_page_section_fields( $section_key, $section, $s
 						'wpautop' => false,
 						'quicktags' => true,
 						'tinymce' => array(
-							'toolbar1' => 'bold,italic,underline,strikethrough,forecolor,backcolor,hr,bullist,numlist,blockquote,alignleft,aligncenter,alignright,link,unlink,wp_more,spellchecker,fullscreen',
+							'forced_root_block' => false,
+							'toolbar1' => 'bold,italic,underline,strikethrough,forecolor,backcolor,hr,bullist,numlist,blockquote,alignleft,aligncenter,alignright,link,unlink,wp_more,fullscreen',
 							'toolbar2' => '',
-							'plugins' => 'lists,textcolor,fullscreen,spellchecker,charmap,hr,media',
+							'plugins' => 'lists,textcolor,fullscreen,charmap,hr,media',
 						),
 					)
 				);
@@ -1006,9 +1007,10 @@ function cosmotone_render_page_sections_box( $post ) {
 						'wpautop' => false,
 						'quicktags' => true,
 						'tinymce' => array(
-							'toolbar1' => 'bold,italic,underline,strikethrough,forecolor,backcolor,hr,bullist,numlist,blockquote,alignleft,aligncenter,alignright,link,unlink,wp_more,spellchecker,fullscreen',
+							'forced_root_block' => false,
+							'toolbar1' => 'bold,italic,underline,strikethrough,forecolor,backcolor,hr,bullist,numlist,blockquote,alignleft,aligncenter,alignright,link,unlink,wp_more,fullscreen',
 							'toolbar2' => '',
-							'plugins' => 'lists,textcolor,fullscreen,spellchecker,charmap,hr,media',
+							'plugins' => 'lists,textcolor,fullscreen,charmap,hr,media',
 						),
 					)
 				);
@@ -1143,7 +1145,8 @@ function cosmotone_save_page_sections( $post_id ) {
 
 				$parts = preg_split( '/\R/u', (string) $item['combined_texts'][ $field_index ], count( $field['indexes'] ) );
 				foreach ( $field['indexes'] as $part_index => $text_index ) {
-					$out[ $key ]['texts'][ absint( $text_index ) ] = sanitize_text_field( isset( $parts[ $part_index ] ) ? $parts[ $part_index ] : '' );
+					$part = isset( $parts[ $part_index ] ) ? $parts[ $part_index ] : '';
+					$out[ $key ]['texts'][ absint( $text_index ) ] = 'textarea' === ( isset( $field['type'] ) ? $field['type'] : '' ) ? wp_kses_post( $part ) : sanitize_text_field( $part );
 				}
 			}
 		}

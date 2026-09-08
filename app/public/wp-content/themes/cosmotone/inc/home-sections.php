@@ -136,7 +136,6 @@ function cosmotone_home_sections_schema() {
 		),
 		'testimonials' => array(
 			'label'             => 'Testimonials',
-			'admin_manage_only' => true,
 			'admin_actions' => array(
 				array( 'label' => 'Manage Testimonials', 'url' => 'edit.php?post_type=cosmotone_review', 'primary' => true ),
 			),
@@ -441,7 +440,9 @@ function cosmotone_render_home_sections_metabox( $post ) {
 									'textarea_rows' => 4,
 									'media_buttons' => true,
 									'teeny'         => false,
+									'wpautop'       => false,
 									'quicktags'     => true,
+									'tinymce'       => array( 'forced_root_block' => false ),
 								)
 							);
 							?>
@@ -458,6 +459,8 @@ function cosmotone_render_home_sections_metabox( $post ) {
 									'textarea_rows' => 5,
 									'media_buttons' => false,
 									'teeny'         => false,
+									'wpautop'       => false,
+									'tinymce'       => array( 'forced_root_block' => false ),
 								)
 							);
 							?>

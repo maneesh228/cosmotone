@@ -108,6 +108,9 @@ a:hover,.tp-header-main-menu nav>ul>li:hover>a,.tp-service-title a:hover,.tp-pro
 /* Re-enable testimonials */
 .tp-testimonial-area{display:block!important}
 
+/* Keep TinyMCE formatting in footer contact text aligned with the footer palette. */
+.tp-footer-contact a{color:var(--ct-navy)!important}.tp-footer-contact a>:not(i){color:inherit!important}
+
 /* Cosmotone branding in mobile sidebar and search overlay */
 .tpoffcanvas__logo img,.search__logo img{display:none!important}
 .tpoffcanvas__logo a::after,.search__logo a::after{content:'⬢  COSMOTONE';display:block;color:#fff;font-size:22px;font-weight:800;letter-spacing:-.6px;white-space:nowrap}
