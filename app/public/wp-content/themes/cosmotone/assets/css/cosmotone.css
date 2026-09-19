@@ -12,6 +12,10 @@ body{color:#526078;background:#fff}h1,h2,h3,h4,h5,h6{color:var(--ct-navy)}
 @media(prefers-reduced-motion:reduce){.tp-slider-video-bg video{display:none}}
 
 /* Shared inner-page theme -------------------------------------------------- */
+.breadcrumb__height{padding-top:270px;padding-bottom:90px}
+@media(min-width:768px) and (max-width:1399px){.breadcrumb__height{padding-top:240px}}
+@media(max-width:767px){.breadcrumb__height{padding-top:202.5px;padding-bottom:75px}}
+@media(min-width:576px) and (max-width:767px){.breadcrumb__height{padding-top:225px;padding-bottom:90px}}
 .breadcrumb__area{background-color:var(--ct-navy)!important}.breadcrumb__overlay::after{background:linear-gradient(90deg,rgba(7,26,64,.96),rgba(7,92,229,.70))!important}.breadcrumb__subtitle{color:#8fd4ff!important}.breadcrumb__title,.breadcrumb__list span,.breadcrumb__list a{color:#fff!important}.breadcrumb__list a:hover{color:#8fd4ff!important}
 .theme-bg,.tp-theme-bg{background-color:var(--ct-blue)!important}.grey-bg,.tp-grey-bg{background-color:var(--ct-soft)!important}
 .tp-contact-3-item,.tp-team-item,.tp-pricing-item,.tp-blog-3-item,.tp-shop-widget,.tp-service-2-item{border:1px solid #d5e8fb!important;border-radius:8px;background:#fff;box-shadow:0 10px 30px rgba(7,92,229,.07)}

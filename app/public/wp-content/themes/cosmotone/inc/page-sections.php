@@ -1198,6 +1198,11 @@ function cosmotone_apply_section_values( $html, $values, $schema = array() ) {
 		
 		// Check if the text contains HTML tags
 		$text_content = $values['texts'][ $i ];
+		if ( $dom['xpath']->query( 'ancestor::*[contains(concat(" ", normalize-space(@class), " "), " tp-footer-contact ")]', $node )->length ) {
+			// Contact labels stay inline; preserve breaks between editor paragraphs.
+			$text_content = preg_replace( '#</p>\s*<p\b[^>]*>#i', '<br>', $text_content );
+			$text_content = preg_replace( '#</?p\b[^>]*>#i', '', $text_content );
+		}
 		if ( preg_match( '/<[^>]+>/', $text_content ) ) {
 			// HTML content detected - replace the entire node
 			$temp_html = '<div>' . $left[0] . $text_content . $right[0] . '</div>';
@@ -1217,8 +1222,8 @@ function cosmotone_apply_section_values( $html, $values, $schema = array() ) {
 				$node->parentNode->replaceChild( $fragment, $node );
 			}
 		} else {
-			// Plain text - use nodeValue
-			$node->nodeValue = $left[0] . $text_content . $right[0];
+			// Decode saved entities; the text node safely escapes them when serialized.
+			$node->nodeValue = $left[0] . html_entity_decode( $text_content, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) . $right[0];
 		}
 	}
 	
