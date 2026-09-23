@@ -84,6 +84,11 @@ function cosmotone_page_sections_config() {
 				'media'      => 'Media',
 			),
 		),
+		'faq' => array(
+			'slug' => 'faq',
+			'template' => 'page-faq.php',
+			'sections' => array( 'breadcrumb' => 'Page Banner' ),
+		),
 		'header' => array(
 			'slug'     => 'header',
 			'template' => 'header.php',
@@ -236,6 +241,7 @@ function cosmotone_page_banner_defaults( $type ) {
 		'contact'   => array( 'GET IN TOUCH', 'Contact us', 'Contact us' ),
 		'downloads' => array( 'RESOURCE CENTRE', 'Downloads', 'Downloads' ),
 		'media'     => array( 'OUR GALLERY', 'Media', 'Media' ),
+		'faq'       => array( 'HOW CAN WE HELP?', 'FAQ', 'FAQ' ),
 	);
 	return isset( $defaults[ $type ] ) ? $defaults[ $type ] : array( 'COSMOTONE', 'Page', 'Page' );
 }

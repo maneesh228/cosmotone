@@ -16,6 +16,7 @@ require_once get_template_directory() . '/inc/testimonials.php';
 require_once get_template_directory() . '/inc/resources.php';
 require_once get_template_directory() . '/inc/certificates.php';
 require_once get_template_directory() . '/inc/subscribers.php';
+require_once get_template_directory() . '/inc/faqs.php';
 
 function cosmotone_setup() {
 	add_theme_support( 'title-tag' );
@@ -44,6 +45,7 @@ function cosmotone_create_theme_pages() {
 		'news-details'    => 'News Details',
 		'downloads'       => 'Downloads',
 		'media'           => 'Media',
+		'faq'             => 'FAQ',
 		'header'          => 'Header',
 		'footer'          => 'Footer',
 		'cta'             => 'CTA',
@@ -69,13 +71,13 @@ function cosmotone_create_theme_pages() {
 	}
 
 	flush_rewrite_rules();
-	update_option( 'cosmotone_pages_version', '1.6.0' );
+	update_option( 'cosmotone_pages_version', '1.7.0' );
 }
 add_action( 'after_switch_theme', 'cosmotone_create_theme_pages' );
 
 /** Create pages once for installations where the theme was already active. */
 function cosmotone_maybe_create_theme_pages() {
-	if ( '1.6.0' !== get_option( 'cosmotone_pages_version' ) ) {
+	if ( '1.7.0' !== get_option( 'cosmotone_pages_version' ) ) {
 		cosmotone_create_theme_pages();
 	}
 }

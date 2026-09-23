@@ -12,6 +12,21 @@ body{color:#526078;background:#fff}h1,h2,h3,h4,h5,h6{color:var(--ct-navy)}
 @media(prefers-reduced-motion:reduce){.tp-slider-video-bg video{display:none}}
 
 /* Shared inner-page theme -------------------------------------------------- */
+.cosmotone-faq-section{padding:80px 0;background:#f7fbff}
+.cosmotone-faq-list{max-width:900px;margin:0 auto}
+.cosmotone-faq-item{margin-bottom:16px;border:1px solid #d5e8fb;border-radius:8px;background:#fff;overflow:hidden}
+.cosmotone-faq-item summary{position:relative;padding:24px 60px 24px 24px;color:var(--ct-navy);font-size:19px;font-weight:600;cursor:pointer;list-style:none;overflow-wrap:anywhere}
+.cosmotone-faq-item summary::-webkit-details-marker{display:none}
+.cosmotone-faq-item summary::after{content:'+';position:absolute;right:24px;top:24px;color:var(--ct-blue);font-size:24px}
+.cosmotone-faq-item[open] summary::after{content:'−'}
+.cosmotone-faq-item summary:focus-visible{outline:3px solid var(--ct-blue);outline-offset:-4px}
+.cosmotone-faq-item[open] summary{border-bottom:1px solid #e5eef8}
+.cosmotone-faq-answer{padding:24px;overflow-wrap:anywhere}
+.cosmotone-faq-answer p:last-child{margin-bottom:0}
+.cosmotone-faq-answer a{color:var(--ct-blue);text-decoration:underline}
+.cosmotone-faq-answer ul,.cosmotone-faq-answer ol{padding-left:24px}
+.cosmotone-faq-answer img{max-width:100%;height:auto}
+@media(max-width:767px){.cosmotone-faq-section{padding:50px 0}.cosmotone-faq-item summary{font-size:17px;padding:20px 50px 20px 20px}.cosmotone-faq-answer{padding:20px}}
 .breadcrumb__height{padding-top:270px;padding-bottom:90px}
 @media(min-width:768px) and (max-width:1399px){.breadcrumb__height{padding-top:240px}}
 @media(max-width:767px){.breadcrumb__height{padding-top:202.5px;padding-bottom:75px}}

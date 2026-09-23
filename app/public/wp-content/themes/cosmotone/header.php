@@ -34,7 +34,7 @@ ob_start();
    <link rel="stylesheet" href="assets/css/spacing.css">
    <link rel="stylesheet" href="assets/css/custom-animation.css">
    <link rel="stylesheet" href="assets/css/main.css">
-   <link rel="stylesheet" href="assets/css/cosmotone.css?v=inner-banner-height-2">
+   <link rel="stylesheet" href="assets/css/cosmotone.css?v=faq-1">
    <?php wp_head(); ?>
 </head>
 
