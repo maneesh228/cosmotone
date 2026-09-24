@@ -147,7 +147,16 @@
 
    <?php
    $footer_markup = ob_get_clean();
-   echo $footer_settings_id ? cosmotone_apply_page_section_fields( $footer_markup, $footer_settings_id, 'footer' ) : $footer_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+   $footer_markup = $footer_settings_id ? cosmotone_apply_page_section_fields( $footer_markup, $footer_settings_id, 'footer' ) : $footer_markup;
+   if ( is_front_page() ) {
+      $footer_images = new WP_HTML_Tag_Processor( $footer_markup );
+      while ( $footer_images->next_tag( 'IMG' ) ) {
+         $footer_images->set_attribute( 'loading', 'lazy' );
+         $footer_images->set_attribute( 'decoding', 'async' );
+      }
+      $footer_markup = $footer_images->get_updated_html();
+   }
+   echo $footer_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
    ?>
 
 
@@ -166,7 +175,7 @@
    <script src="assets/js/jarallax.js"></script>
    <script src="assets/js/imagesloaded-pkgd.js"></script>
    <script src="assets/js/ajax-form.js"></script>
-   <script src="assets/js/main.js?v=blog-no-duplicates-1"></script>
+   <script src="assets/js/main.js?v=home-performance-1"></script>
    <?php wp_footer(); ?>
 
    

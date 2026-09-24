@@ -46,6 +46,7 @@ ob_start();
 
 
    <!-- pre loader area start -->
+   <?php if ( ! is_front_page() ) : ?>
    <div id="loading">
       <div id="loading-center">
          <div id="loading-center-absolute">
@@ -57,6 +58,7 @@ ob_start();
       </div>
    </div>
    <!-- pre loader area end -->
+   <?php endif; ?>
 
    <!-- back to top start -->
    <div class="back-to-top-wrapper">

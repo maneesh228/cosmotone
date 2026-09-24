@@ -130,8 +130,22 @@
 
 	////////////////////////////////////////////////////
 	// 03. Common Js
-	$("[data-background").each(function () {
-		$(this).css("background-image", "url( " + $(this).attr("data-background") + "  )");
+	function applyBackground(element, attribute) {
+		var url = element.getAttribute(attribute);
+		if (url) element.style.backgroundImage = 'url(' + JSON.stringify(url) + ')';
+	}
+	var backgroundObserver = document.body.classList.contains('home') && 'IntersectionObserver' in window
+		? new IntersectionObserver(function (entries, observer) {
+			entries.forEach(function (entry) {
+				if (entry.isIntersecting) {
+					applyBackground(entry.target, 'data-background');
+					observer.unobserve(entry.target);
+				}
+			});
+		}, { rootMargin: '300px' }) : null;
+	$('[data-background]').each(function () {
+		if (backgroundObserver) backgroundObserver.observe(this);
+		else applyBackground(this, 'data-background');
 	});
 
 	$("[data-width]").each(function () {
@@ -848,6 +862,7 @@
 	}
 
 	/* Play a video slide once in full, then continue through image slides. */
+	var heroVideoReady = false;
 	function syncHeroSliderMedia() {
 		/* Inner pages do not contain the homepage hero slider. */
 		if (!sliderswiper || !sliderswiper.el || typeof sliderswiper.el.querySelectorAll !== 'function') {
@@ -857,6 +872,11 @@
 		var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		var activeSlide = sliderswiper.slides[sliderswiper.activeIndex];
 		var activeVideo = activeSlide ? activeSlide.querySelector('.tp-slider-video-bg video') : null;
+		if (activeSlide) {
+			activeSlide.querySelectorAll('[data-slider-background]').forEach(function (background) {
+				applyBackground(background, 'data-slider-background');
+			});
+		}
 
 		sliderswiper.el.querySelectorAll('.tp-slider-video-bg video').forEach(function (video) {
 			if (video !== activeVideo) {
@@ -865,12 +885,20 @@
 			}
 		});
 
-		if (activeVideo && !prefersReducedMotion) {
+		if (activeVideo && !prefersReducedMotion && !(navigator.connection && navigator.connection.saveData)) {
 			sliderswiper.autoplay.stop();
+			if (!heroVideoReady) return;
+			var source = activeVideo.querySelector('source[data-src]');
+			if (source) {
+				source.src = source.dataset.src;
+				source.removeAttribute('data-src');
+				activeVideo.load();
+			}
 			activeVideo.currentTime = 0;
 			activeVideo.onended = function () {
 				sliderswiper.slideNext();
 			};
+			activeVideo.onerror = function () { sliderswiper.autoplay.start(); };
 			activeVideo.play().catch(function () {
 				sliderswiper.autoplay.start();
 			});
@@ -882,6 +910,13 @@
 	if (sliderswiper && sliderswiper.el && typeof sliderswiper.el.querySelectorAll === 'function') {
 		sliderswiper.on('slideChangeTransitionStart', syncHeroSliderMedia);
 		syncHeroSliderMedia();
+		function scheduleHeroVideo() {
+			var start = function () { heroVideoReady = true; syncHeroSliderMedia(); };
+			if ('requestIdleCallback' in window) window.requestIdleCallback(start, { timeout: 1500 });
+			else window.setTimeout(start, 200);
+		}
+		if (document.readyState === 'complete') scheduleHeroVideo();
+		else window.addEventListener('load', scheduleHeroVideo, { once: true });
 	}
 	$('.tp-product-popup-image').magnificPopup({
 		type: 'image',

@@ -322,6 +322,27 @@ function cosmotone_save_slider_post( $post_id ) {
 }
 add_action( 'save_post_cosmotone_slider', 'cosmotone_save_slider_post' );
 
+/** Use a lightweight poster for videos and the optimized bundled hero image. */
+function cosmotone_slider_background_url( $slide ) {
+	$is_video = isset( $slide['media_type'] ) && 'video' === $slide['media_type'];
+	$url = cosmotone_home_slider_url( ! empty( $slide['poster_url'] ) ? $slide['poster_url'] : ( $is_video ? 'assets/img/hero/cosmotone-blue-hero.png' : $slide['media_url'] ) );
+	if ( cosmotone_home_slider_url( 'assets/img/hero/cosmotone-blue-hero.png' ) === $url ) {
+		$url = cosmotone_home_slider_url( 'assets/img/hero/cosmotone-blue-hero.webp' );
+	}
+	return $url;
+}
+
+/** Discover the first visible hero image before the footer scripts run. */
+function cosmotone_preload_home_slider_image() {
+	if ( ! is_front_page() ) return;
+	foreach ( cosmotone_get_home_slider_items() as $slide ) {
+		if ( empty( $slide['enabled'] ) || empty( $slide['media_url'] ) ) continue;
+		echo '<link rel="preload" as="image" fetchpriority="high" href="' . esc_url( cosmotone_slider_background_url( $slide ) ) . '">' . "\n";
+		break;
+	}
+}
+add_action( 'wp_head', 'cosmotone_preload_home_slider_image', 2 );
+
 /** Render the managed image/MP4 homepage slider. */
 function cosmotone_render_managed_home_slider() {
 	$slides = array_values( array_filter( cosmotone_get_home_slider_items(), static function ( $slide ) { return ! empty( $slide['enabled'] ) && ! empty( $slide['media_url'] ); } ) );
@@ -330,14 +351,14 @@ function cosmotone_render_managed_home_slider() {
 	<div class="tp-slider-area z-index p-relative">
 		<div class="tp-slider-arrow-box"><button class="slider-prev" type="button" aria-label="Previous slide"><i class="fa-regular fa-arrow-left-long"></i></button><button class="slider-next active" type="button" aria-label="Next slide"><i class="fa-regular fa-arrow-right-long"></i></button></div>
 		<div class="tp-slider-wrapper"><div class="swiper-container tp-slider-active"><div class="swiper-wrapper">
-		<?php foreach ( $slides as $slide ) :
+		<?php foreach ( $slides as $index => $slide ) :
 			$type   = isset( $slide['media_type'] ) && 'video' === $slide['media_type'] ? 'video' : 'image';
 			$media  = cosmotone_home_slider_url( $slide['media_url'] );
-			$poster = cosmotone_home_slider_url( ! empty( $slide['poster_url'] ) ? $slide['poster_url'] : ( 'image' === $type ? $slide['media_url'] : '' ) );
+			$poster = cosmotone_slider_background_url( $slide );
 		?>
 		<div class="swiper-slide"><div class="tp-slider-height tp-slider-overly">
 			<div class="tp-slider-shape-2 d-none d-xl-block"><img src="assets/img/hero/bg-1-2.png" alt=""></div><div class="tp-slider-shape-3 d-none d-md-block"><img src="assets/img/hero/bg-1-3.png" alt=""></div>
-			<div class="tp-slider-bg<?php echo 'video' === $type ? ' tp-slider-video-bg' : ''; ?>" data-background="<?php echo esc_url( $poster ? $poster : $media ); ?>"><?php if ( 'video' === $type ) : ?><video muted playsinline preload="metadata"<?php echo $poster ? ' poster="' . esc_url( $poster ) . '"' : ''; ?> aria-hidden="true"><source src="<?php echo esc_url( $media ); ?>" type="video/mp4"></video><?php endif; ?></div>
+			<div class="tp-slider-bg<?php echo 'video' === $type ? ' tp-slider-video-bg' : ''; ?>" data-slider-background="<?php echo esc_url( $poster ); ?>"<?php if ( 0 === $index ) : ?> style="<?php echo esc_attr( 'background-image:url(' . wp_json_encode( $poster ) . ')' ); ?>"<?php endif; ?>><?php if ( 'video' === $type ) : ?><video muted playsinline preload="none" aria-hidden="true"><source data-src="<?php echo esc_url( $media ); ?>" type="video/mp4"></video><?php endif; ?></div>
 			<div class="container z-index-5"><div class="row"><div class="col-xl-8 col-lg-8"><div class="tp-slider-content z-index-5"><div class="tp-slider-title-box"><h1 class="tp-slider-title"><?php echo wp_kses( $slide['title'], array( 'br' => array(), 'span' => array( 'class' => true, 'style' => true ), 'strong' => array(), 'em' => array(), 'b' => array(), 'i' => array() ) ); ?></h1></div><div class="tp-slider-text"><?php echo wp_kses_post( wpautop( $slide['description'] ) ); ?><?php if ( ! empty( $slide['button_text'] ) ) : ?><a class="tp-btn" href="<?php echo esc_url( $slide['button_url'] ); ?>"><span><?php echo esc_html( $slide['button_text'] ); ?></span></a><?php endif; ?></div></div></div></div></div>
 		</div></div>
 		<?php endforeach; ?>

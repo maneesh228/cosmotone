@@ -14,10 +14,10 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
       <?php if ( ! empty( $home_sections['about_enabled'] ) ) : ?>
       <div class="tp-about-area p-relative pt-120 pb-120">
          <div class="tp-about-shape-3">
-            <img src="assets/img/about/shape-1-4.png" alt="">
+            <img loading="lazy" decoding="async" src="assets/img/about/shape-1-4.png" alt="">
          </div>
          <div class="tp-about-shape-4 d-none d-xl-block">
-            <img src="assets/img/about/shape-1-5.png" alt="">
+            <img loading="lazy" decoding="async" src="assets/img/about/shape-1-5.png" alt="">
          </div>
          <div class="container">
             <div class="row">
@@ -32,7 +32,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                         <span><?php echo esc_html( $home_sections['about_highlight'] ); ?></span>
                         <div class="tp-about-icon-wrap p-relative d-flex justify-content-between mb-45">
                            <!-- <div class="tp-about-icon-shape d-none d-xl-block">
-                              <img src="assets/img/about/shape-1-6.png" alt="">
+                              <img loading="lazy" decoding="async" src="assets/img/about/shape-1-6.png" alt="">
                            </div> -->
                            <div class="tp-about-icon-box d-flex align-items-center mb-20">
                               <div class="tp-about-icon">
@@ -53,7 +53,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                         </div>
                         <div class="tp-about-button-box d-flex align-items-center">
                            <a class="tp-btn-black" href="<?php echo esc_url( $home_sections['about_button_url'] ); ?>"><span><?php echo esc_html( $home_sections['about_button_text'] ); ?></span></a>
-                           <img src="assets/img/about/shape-1-1.png" alt="">
+                           <img loading="lazy" decoding="async" src="assets/img/about/shape-1-1.png" alt="">
                         </div>
                      </div>
                   </div>
@@ -61,16 +61,16 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                <div class="col-xl-6 col-lg-6 wow tpfadeRight" data-wow-duration=".9s" data-wow-delay=".7s">
                   <div class="tp-about-right-box p-relative text-end">
                      <div class="tp-about-main-thumb">
-                        <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'about_main_image' ) ); ?>" alt="">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'about_main_image' ) ); ?>" alt="">
                      </div>
                      <div class="tp-about-thumb-sm">
-                        <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'about_small_image' ) ); ?>" alt="">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'about_small_image' ) ); ?>" alt="">
                      </div>
                      <div class="tp-about-shape-1 d-none d-lg-block">
-                        <img src="assets/img/about/shape-1-2.png?v=blue-theme" alt="">
+                        <img loading="lazy" decoding="async" src="assets/img/about/shape-1-2.png?v=blue-theme" alt="">
                      </div>
                      <!-- <div class="tp-about-shape-2  d-none d-lg-block">
-                        <img src="assets/img/about/shape-1-3.png" alt="">
+                        <img loading="lazy" decoding="async" src="assets/img/about/shape-1-3.png" alt="">
                      </div> -->
                   </div>
                </div>
@@ -134,7 +134,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
       <div class="tp-service-area tp-service-bg p-relative pt-120 pb-120"
          data-background="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'services_background' ) ); ?>">
          <div class="tp-service-shape-2 d-none d-xxl-block">
-            <!-- <img src="assets/img/service/shape-1-3.png" alt=""> -->
+            <!-- <img loading="lazy" decoding="async" src="assets/img/service/shape-1-3.png" alt=""> -->
          </div>
          <div class="container">
             <div class="tp-service-wrap mb-50">
@@ -176,14 +176,14 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                               <div class="swiper-slide">
                                  <div class="tp-service-item p-relative">
                                     <div class="tp-service-thumb">
-                                       <img src="<?php echo esc_url( cosmotone_catalog_image_url( $service_id, 'large' ) ); ?>" alt="<?php the_title_attribute(); ?>">
+                                       <img loading="lazy" decoding="async" src="<?php echo esc_url( cosmotone_catalog_image_url( $service_id, 'large' ) ); ?>" alt="<?php the_title_attribute(); ?>">
                                     </div>
                                     <div class="tp-service-content-box">
                                        <div class="tp-service-content fix">
                                           <div class="tp-service-icon p-relative">
                                              <span><i class="<?php echo esc_attr( $service_icon ); ?>"></i></span>
                                              <div class="tp-service-icon-shape">
-                                                <img src="assets/img/service/shape-1-1.png" alt="">
+                                                <img loading="lazy" decoding="async" src="assets/img/service/shape-1-1.png" alt="">
                                              </div>
                                           </div>
                                           <div class="tp-service-text pb-5">
@@ -200,7 +200,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                                        </div>
                                     </div>
                                     <div class="tp-service-shape-1">
-                                       <img src="assets/img/service/shape-1-2.png" alt="">
+                                       <img loading="lazy" decoding="async" src="assets/img/service/shape-1-2.png" alt="">
                                     </div>
                                  </div>
                               </div>
@@ -219,19 +219,19 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
       <?php if ( ! empty( $home_sections['choose_enabled'] ) ) : ?>
       <div class="tp-choose-area tp-choose-space fix p-relative black-bg">
          <div class="tp-choose-shape-1 d-none d-lg-block">
-            <img src="assets/img/choose/shape-1-1.png" alt="">
+            <img loading="lazy" decoding="async" src="assets/img/choose/shape-1-1.png" alt="">
          </div>
          <div class="tp-choose-shape-2 d-none d-xl-block">
-            <img src="assets/img/choose/shape-1-2.png" alt="">
+            <img loading="lazy" decoding="async" src="assets/img/choose/shape-1-2.png" alt="">
          </div>
          <div class="tp-choose-shape-3 d-none d-md-block">
-            <img src="assets/img/choose/shape-1-3.png" alt="">
+            <img loading="lazy" decoding="async" src="assets/img/choose/shape-1-3.png" alt="">
          </div>
          <div class="tp-choose-shape-4 d-none d-md-block">
-            <img src="assets/img/choose/shape-1-4.png" alt="">
+            <img loading="lazy" decoding="async" src="assets/img/choose/shape-1-4.png" alt="">
          </div>
          <div class="tp-choose-shape-5 d-none d-xl-block">
-            <img src="assets/img/choose/shape-1-5.png" alt="">
+            <img loading="lazy" decoding="async" src="assets/img/choose/shape-1-5.png" alt="">
          </div>
          <div class="container">
             <div class="row">
@@ -277,7 +277,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
             </div>
          </div>
          <div class="tp-choose-thumb-box">
-            <img src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'choose_image' ) ); ?>" alt="Automotive wiring harness, relays and electrical components">
+            <img loading="lazy" decoding="async" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'choose_image' ) ); ?>" alt="Automotive wiring harness, relays and electrical components">
          </div>
       </div>
       <?php endif; ?>
@@ -287,7 +287,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
       <?php if ( ! empty( $home_sections['products_enabled'] ) ) : ?>
       <div class="tp-project-area p-relative pt-120 pb-120">
          <div class="tp-project-shape-1 d-none d-xl-block">
-            <img src="assets/img/project/shape-1-1.png" alt="">
+            <img loading="lazy" decoding="async" src="assets/img/project/shape-1-1.png" alt="">
          </div>
          <div class="container-fluid">
             <div class="row">
@@ -332,7 +332,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                                         <div class="tp-project-item p-relative">
                                            <div class="tp-project-thumb">
                                               <a class="popup-image tp-product-popup-image" href="<?php echo esc_url( $product_image ); ?>" title="<?php echo esc_attr( $product_title ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'View %s product image', 'cosmotone' ), $product_title ) ); ?>">
-                                                 <img src="<?php echo esc_url( $product_image ); ?>" alt="<?php echo esc_attr( $product_title ); ?>">
+                                                 <img loading="lazy" decoding="async" src="<?php echo esc_url( $product_image ); ?>" alt="<?php echo esc_attr( $product_title ); ?>">
                                               </a>
                                            </div>
                                            <div class="tp-project-content">
@@ -367,7 +367,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
             data-background="<?php echo esc_url( $contact_background_url ); ?>"
             style="<?php echo esc_attr( 'background-image: url("' . $contact_background_url . '") !important;' ); ?>">
             <div class="tp-contact-shape-2 d-none d-xl-block">
-               <img src="assets/img/contact/shape-1-2.png" alt="">
+               <img loading="lazy" decoding="async" src="assets/img/contact/shape-1-2.png" alt="">
             </div>
             <div class="container">
                <div class="row">
@@ -400,7 +400,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                                     <div class="col-xl-5 col-lg-5 col-md-5">
                                        <div class="tp-contact-tab-content-left p-relative">
                                           <div class="tp-contact-tab-content-thumb">
-                                             <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_vision_image' ) ); ?>" alt="">
+                                             <img loading="lazy" decoding="async" class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_vision_image' ) ); ?>" alt="">
                                           </div>
                                           <?php if ( ! empty( $home_sections['contact_vision_video_url'] ) ) : ?>
                                              <div class="tp-contact-tab-play-icon">
@@ -431,7 +431,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                                     <div class="col-xl-5 col-lg-5 col-md-5">
                                        <div class="tp-contact-tab-content-left p-relative">
                                           <div class="tp-contact-tab-content-thumb">
-                                             <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_mission_image' ) ); ?>" alt="">
+                                             <img loading="lazy" decoding="async" class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_mission_image' ) ); ?>" alt="">
                                           </div>
                                           <?php if ( ! empty( $home_sections['contact_mission_video_url'] ) ) : ?>
                                              <div class="tp-contact-tab-play-icon">
@@ -462,7 +462,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                                     <div class="col-xl-5 col-lg-5 col-md-5">
                                        <div class="tp-contact-tab-content-left p-relative">
                                           <div class="tp-contact-tab-content-thumb">
-                                             <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_values_image' ) ); ?>" alt="">
+                                             <img loading="lazy" decoding="async" class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_values_image' ) ); ?>" alt="">
                                           </div>
                                           <?php if ( ! empty( $home_sections['contact_values_video_url'] ) ) : ?>
                                              <div class="tp-contact-tab-play-icon">
@@ -511,7 +511,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                            </div>
                         </div>
                         <div class="tp-contact-shape-1">
-                           <img src="assets/img/contact/shape-1-1.png" alt="">
+                           <img loading="lazy" decoding="async" src="assets/img/contact/shape-1-1.png" alt="">
                         </div>
                      </div>
                   </div>
@@ -526,10 +526,10 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
       <?php if ( ! empty( $home_sections['stats_enabled'] ) ) : ?>
       <div class="tp-funfact-area fix p-relative grey-bg pt-180 pb-85">
          <div class="tp-funfact-shape-1">
-            <img src="assets/img/funfact/shape-1-1.png" alt="">
+            <img loading="lazy" decoding="async" src="assets/img/funfact/shape-1-1.png" alt="">
          </div>
          <!-- <div class="tp-funfact-shape-2 d-none d-xl-block">
-            <img src="assets/img/funfact/shape-1-2.png" alt="">
+            <img loading="lazy" decoding="async" src="assets/img/funfact/shape-1-2.png" alt="">
          </div> -->
          <div class="container">
             <div class="row">
@@ -591,10 +591,10 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
       <?php if ( ! empty( $home_sections['testimonials_enabled'] ) ) : ?>
       <div class="tp-testimonial-area p-relative fix grey-bg pt-120 pb-120">
          <div class="tp-testimonial-shape-1">
-            <!-- <img src="assets/img/testimonial/shape-1-1.png" alt=""> -->
+            <!-- <img loading="lazy" decoding="async" src="assets/img/testimonial/shape-1-1.png" alt=""> -->
          </div>
          <div class="tp-testimonial-shape-2 d-none d-xl-block">
-            <img src="assets/img/testimonial/shape-1-2.png" alt="">
+            <img loading="lazy" decoding="async" src="assets/img/testimonial/shape-1-2.png" alt="">
          </div>
          <div class="container">
             <div class="row">
@@ -621,7 +621,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                               <div class="swiper-slide">
                                  <div class="tp-testimonial-item z-index p-relative">
                                     <div class="tp-testimonial-thumb">
-                                       <img src="<?php echo esc_url( cosmotone_testimonial_image_url( $testimonial_id, 'medium' ) ); ?>" alt="<?php echo esc_attr( $testimonial_name ); ?>">
+                                       <img loading="lazy" decoding="async" src="<?php echo esc_url( cosmotone_testimonial_image_url( $testimonial_id, 'medium' ) ); ?>" alt="<?php echo esc_attr( $testimonial_name ); ?>">
                                        <div class="tp-testimonial-thumb-quot">
                                           <span><i class="flaticon-quote"></i></span>
                                        </div>
@@ -641,7 +641,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                                        </div>
                                     </div>
                                     <div class="tp-testimonial-shape-3">
-                                       <img src="assets/img/testimonial/shape-1-3.png" alt="">
+                                       <img loading="lazy" decoding="async" src="assets/img/testimonial/shape-1-3.png" alt="">
                                     </div>
                                  </div>
                               </div>
@@ -661,7 +661,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
       <?php if ( ! empty( $home_sections['news_enabled'] ) ) : ?>
       <div class="tp-blog-area p-relative pt-120 pb-120">
          <div class="tp-blog-shape-1">
-            <img src="assets/img/blog/shape-1-3.png" alt="">
+            <img loading="lazy" decoding="async" src="assets/img/blog/shape-1-3.png" alt="">
          </div>
          <div class="container">
             <div class="row">
@@ -713,7 +713,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                                     <div class="tp-blog-thumb-wrap p-relative">
                                        <div class="tp-blog-thumb-box p-relative">
                                           <div class="tp-blog-thumb-main z-index-3 fix">
-                                             <img src="<?php echo esc_url( $news_image ); ?>" alt="<?php echo esc_attr( $news_title ); ?>">
+                                             <img loading="lazy" decoding="async" src="<?php echo esc_url( $news_image ); ?>" alt="<?php echo esc_attr( $news_title ); ?>">
                                           </div>
                                           <div class="tp-blog-thumb-icon">
                                              <a class="popup-image" href="<?php echo esc_url( $news_image ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'View image for %s', 'cosmotone' ), $news_title ) ); ?>"><i
@@ -721,10 +721,10 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                                           </div>
                                        </div>
                                        <div class="tp-blog-thumb-shape-1">
-                                          <img src="assets/img/blog/shape-1-1.png" alt="">
+                                          <img loading="lazy" decoding="async" src="assets/img/blog/shape-1-1.png" alt="">
                                        </div>
                                        <div class="tp-blog-thumb-shape-2">
-                                          <img src="assets/img/blog/shape-1-2.png" alt="">
+                                          <img loading="lazy" decoding="async" src="assets/img/blog/shape-1-2.png" alt="">
                                        </div>
                                     </div>
                                     <div class="tp-blog-content">
