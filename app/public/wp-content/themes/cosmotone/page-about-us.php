@@ -139,7 +139,7 @@ ob_start();
                                     <div class="col-xl-5 col-lg-5 col-md-5">
                                        <div class="tp-contact-tab-content-left p-relative">
                                           <div class="tp-contact-tab-content-thumb">
-                                             <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_vision_image' ) ); ?>" alt="">
+                                             <img class="w-100" loading="eager" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_vision_image' ) ); ?>" alt="">
                                           </div>
                                           <?php if ( ! empty( $home_sections['contact_vision_video_url'] ) ) : ?>
                                              <div class="tp-contact-tab-play-icon">
@@ -170,7 +170,7 @@ ob_start();
                                     <div class="col-xl-5 col-lg-5 col-md-5">
                                        <div class="tp-contact-tab-content-left p-relative">
                                           <div class="tp-contact-tab-content-thumb">
-                                             <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_mission_image' ) ); ?>" alt="">
+                                             <img class="w-100" loading="eager" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_mission_image' ) ); ?>" alt="">
                                           </div>
                                           <?php if ( ! empty( $home_sections['contact_mission_video_url'] ) ) : ?>
                                              <div class="tp-contact-tab-play-icon">
@@ -201,7 +201,7 @@ ob_start();
                                     <div class="col-xl-5 col-lg-5 col-md-5">
                                        <div class="tp-contact-tab-content-left p-relative">
                                           <div class="tp-contact-tab-content-thumb">
-                                             <img class="w-100" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_values_image' ) ); ?>" alt="">
+                                             <img class="w-100" loading="eager" src="<?php echo esc_url( cosmotone_home_image_url( $home_sections, 'contact_values_image' ) ); ?>" alt="">
                                           </div>
                                           <?php if ( ! empty( $home_sections['contact_values_video_url'] ) ) : ?>
                                              <div class="tp-contact-tab-play-icon">
@@ -422,7 +422,7 @@ ob_start();
 
    </main>
 <?php
-$cosmotone_about_markup = ob_get_clean();
-echo cosmotone_apply_page_section_fields( $cosmotone_about_markup, get_queried_object_id(), 'about' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+$cosmotone_about_markup = cosmotone_apply_page_section_fields( ob_get_clean(), get_queried_object_id(), 'about' );
+echo cosmotone_optimize_markup_images( $cosmotone_about_markup, '<!-- about area end -->' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
 <?php get_footer(); ?>

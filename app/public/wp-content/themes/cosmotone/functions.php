@@ -84,6 +84,44 @@ function cosmotone_maybe_create_theme_pages() {
 add_action( 'init', 'cosmotone_maybe_create_theme_pages' );
 
 /**
+ * Lazy-load images in rendered markup and let browsers pick a resized copy of uploaded images.
+ *
+ * Section fields store the full "-scaled" upload URL (often 1MB+), sometimes on the old
+ * http://cosmotone.in host, which costs a redirect per image.
+ *
+ * @param string $markup     Rendered HTML.
+ * @param string $lazy_after Images before this marker stay eager (above the fold). Empty = lazy-load all.
+ * @param string $sizes      sizes attribute for uploaded images given a srcset.
+ * @return string
+ */
+function cosmotone_optimize_markup_images( $markup, $lazy_after = '', $sizes = '(max-width: 767px) 100vw, 768px' ) {
+	$split = $lazy_after ? strpos( $markup, $lazy_after ) : 0;
+	if ( false === $split ) {
+		$split = 0;
+	}
+	$uploads_url = wp_get_upload_dir()['baseurl'];
+	$images      = new WP_HTML_Tag_Processor( substr( $markup, $split ) );
+	while ( $images->next_tag( 'IMG' ) ) {
+		$src = (string) $images->get_attribute( 'src' );
+		if ( preg_match( '#/wp-content/uploads/(.+)$#', $src, $match ) ) {
+			$src = $uploads_url . '/' . $match[1];
+			$images->set_attribute( 'src', $src );
+			$attachment_id = attachment_url_to_postid( $src );
+			$srcset        = $attachment_id ? wp_get_attachment_image_srcset( $attachment_id, 'full' ) : false;
+			if ( $srcset && null === $images->get_attribute( 'srcset' ) ) {
+				$images->set_attribute( 'srcset', $srcset );
+				$images->set_attribute( 'sizes', $sizes );
+			}
+		}
+		if ( null === $images->get_attribute( 'loading' ) ) {
+			$images->set_attribute( 'loading', 'lazy' );
+		}
+		$images->set_attribute( 'decoding', 'async' );
+	}
+	return substr( $markup, 0, $split ) . $images->get_updated_html();
+}
+
+/**
  * Get header section logo image URL.
  *
  * @return string The logo image URL, or empty string if not found.

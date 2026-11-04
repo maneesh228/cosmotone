@@ -112,7 +112,8 @@ ob_start();
 
 			<div class="row" id="cosmotone-product-grid">
 				<?php if ( $products->have_posts() ) : ?>
-					<?php $delay = 0.3; while ( $products->have_posts() ) : $products->the_post();
+					<?php $delay = 0.3; $card_index = 0; while ( $products->have_posts() ) : $products->the_post();
+						$card_index++;
 						$product_id  = get_the_ID();
 						$term_ids    = wp_get_object_terms( $product_id, 'cosmotone_product_category', array( 'fields' => 'ids' ) );
 						$term_ids    = is_wp_error( $term_ids ) ? array() : array_map( 'absint', $term_ids );
@@ -126,7 +127,7 @@ ob_start();
 						?>
 						<div class="col-xl-4 col-lg-4 col-md-6 mb-30 wow tpfadeUp cosmotone-product-card" data-categories="<?php echo esc_attr( implode( ' ', $term_ids ) ); ?>" data-wow-duration=".9s" data-wow-delay="<?php echo esc_attr( $delay ); ?>s">
 							<div class="tp-project-item p-relative">
-								<div class="tp-project-thumb"><a href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( cosmotone_catalog_image_url( $product_id, 'large' ) ); ?>" alt="<?php the_title_attribute(); ?>"></a></div>
+								<div class="tp-project-thumb"><a href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( cosmotone_catalog_image_url( $product_id, 'large' ) ); ?>" alt="<?php the_title_attribute(); ?>"<?php echo $card_index > 3 ? ' loading="lazy" decoding="async"' : ''; ?>></a></div>
 								<div class="tp-project-content">
 									<span><?php echo esc_html( $term_label ); ?></span>
 									<h4 class="tp-project-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>

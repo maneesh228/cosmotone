@@ -148,7 +148,7 @@
    <?php
    $footer_markup = ob_get_clean();
    $footer_markup = $footer_settings_id ? cosmotone_apply_page_section_fields( $footer_markup, $footer_settings_id, 'footer' ) : $footer_markup;
-   echo cosmotone_optimize_markup_images( $footer_markup ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+   echo cosmotone_optimize_markup_images( $footer_markup, '', '150px' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
    ?>
 
 
@@ -158,7 +158,6 @@
    <script src="assets/js/bootstrap-bundle.js"></script>
    <script src="assets/js/swiper-bundle.js"></script>
    <script src="assets/js/slick.js"></script>
-   <script src="assets/js/range-slider.js"></script>
    <script src="assets/js/magnific-popup.js"></script>
    <script src="assets/js/nice-select.js"></script>
    <script src="assets/js/purecounter.js"></script>
@@ -167,7 +166,7 @@
    <script src="assets/js/jarallax.js"></script>
    <script src="assets/js/imagesloaded-pkgd.js"></script>
    <script src="assets/js/ajax-form.js"></script>
-   <script src="assets/js/main.js?v=inner-performance-1"></script>
+   <script src="assets/js/main.js?v=inner-performance-2"></script>
    <?php wp_footer(); ?>
 
    

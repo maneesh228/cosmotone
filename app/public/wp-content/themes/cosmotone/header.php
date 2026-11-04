@@ -24,6 +24,9 @@ ob_start();
    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/favicon.png">
 
    <!-- CSS here -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800;9..40,900&display=swap">
    <link rel="stylesheet" href="assets/css/bootstrap.css">
    <link rel="stylesheet" href="assets/css/animate.css">
    <link rel="stylesheet" href="assets/css/swiper-bundle.css">
@@ -33,8 +36,8 @@ ob_start();
    <link rel="stylesheet" href="assets/css/font-awesome-pro.css">
    <link rel="stylesheet" href="assets/css/spacing.css">
    <link rel="stylesheet" href="assets/css/custom-animation.css">
-   <link rel="stylesheet" href="assets/css/main.css">
-   <link rel="stylesheet" href="assets/css/cosmotone.css?v=navbar-active-1">
+   <link rel="stylesheet" href="assets/css/main.css?v=fonts-head-1">
+   <link rel="stylesheet" href="assets/css/cosmotone.css?v=footer-thumbs-1">
    <?php wp_head(); ?>
 </head>
 

@@ -30,9 +30,8 @@
 	var windowOn = $(window);
 	////////////////////////////////////////////////////
 	// 01. PreLoader Js
-	windowOn.on('load', function () {
-		$("#loading").fadeOut(500);
-	});
+	/* Scripts run at the end of <body>, so the page is parsed; don't wait for every image to download. */
+	$("#loading").fadeOut(500);
 
 
 	// 08. Nice Select Js
@@ -134,7 +133,7 @@
 		var url = element.getAttribute(attribute);
 		if (url) element.style.backgroundImage = 'url(' + JSON.stringify(url) + ')';
 	}
-	var backgroundObserver = document.body.classList.contains('home') && 'IntersectionObserver' in window
+	var backgroundObserver = 'IntersectionObserver' in window
 		? new IntersectionObserver(function (entries, observer) {
 			entries.forEach(function (entry) {
 				if (entry.isIntersecting) {
@@ -961,17 +960,20 @@
 			return false;
 		});
 
-		$("#slider-range").slider({
-			range: true,
-			min: 0,
-			max: 500,
-			values: [75, 300],
-			slide: function (event, ui) {
-				$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-			}
-		});
-		$("#amount").val("$" + $("#slider-range").slider("values", 0) +
-			" - $" + $("#slider-range").slider("values", 1));
+		/* jQuery UI (range-slider.js) is no longer loaded; no template has a price slider. */
+		if ($.fn.slider && $("#slider-range").length) {
+			$("#slider-range").slider({
+				range: true,
+				min: 0,
+				max: 500,
+				values: [75, 300],
+				slide: function (event, ui) {
+					$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+				}
+			});
+			$("#amount").val("$" + $("#slider-range").slider("values", 0) +
+				" - $" + $("#slider-range").slider("values", 1));
+		}
 	
 		
 
@@ -1299,7 +1301,7 @@
 
 	/* Price filter active */
 
-	if ($("#slider-range").length) {
+	if ($.fn.slider && $("#slider-range").length) {
 
 		$("#slider-range").slider({
 
