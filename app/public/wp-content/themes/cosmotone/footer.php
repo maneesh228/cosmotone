@@ -89,7 +89,7 @@
                               <div class="tp-footer-thumb-icon">
                                  <a href="#"><i class="fa-brands fa-instagram"></i></a>
                               </div>
-                           </div>
+                           </div>fa
                         </div>
                         <div class="tp-footer-thumb-box d-flex">
                            <div class="tp-footer-thumb p-relative">
@@ -131,10 +131,10 @@
                </div>
                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".5s">
                   <div class="tp-copyright-social text-center text-md-end">
-                     <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                     <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                     <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                     <a target="_blank" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                     <a target="_blank" href="#"><i class="fa-brands fa-instagram"></i></a>
+                     <a target="_blank" href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                     <a target="_blank" href="#"><i class="fa-brands fa-youtube"></i></a>
                      <a href="https://wa.me/919554481761" target="_blank" rel="noopener noreferrer" aria-label="Chat with Cosmotone on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
                   </div>
                </div>
@@ -148,15 +148,7 @@
    <?php
    $footer_markup = ob_get_clean();
    $footer_markup = $footer_settings_id ? cosmotone_apply_page_section_fields( $footer_markup, $footer_settings_id, 'footer' ) : $footer_markup;
-   if ( is_front_page() ) {
-      $footer_images = new WP_HTML_Tag_Processor( $footer_markup );
-      while ( $footer_images->next_tag( 'IMG' ) ) {
-         $footer_images->set_attribute( 'loading', 'lazy' );
-         $footer_images->set_attribute( 'decoding', 'async' );
-      }
-      $footer_markup = $footer_images->get_updated_html();
-   }
-   echo $footer_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+   echo cosmotone_optimize_markup_images( $footer_markup ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
    ?>
 
 
@@ -175,7 +167,7 @@
    <script src="assets/js/jarallax.js"></script>
    <script src="assets/js/imagesloaded-pkgd.js"></script>
    <script src="assets/js/ajax-form.js"></script>
-   <script src="assets/js/main.js?v=home-performance-1"></script>
+   <script src="assets/js/main.js?v=inner-performance-1"></script>
    <?php wp_footer(); ?>
 
    
