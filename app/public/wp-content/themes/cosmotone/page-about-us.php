@@ -348,7 +348,7 @@ ob_start();
 
                      </div>
                      <div class="tp-team-content">
-                        <h4 class="tp-team-title"><a href="team-details.html">Alberta Infantino</a></h4>
+                        <h4 class="tp-team-title">Alberta Infantino</h4>
                         <span>Electrician</span>
                      </div>
                   </div>
@@ -361,7 +361,7 @@ ob_start();
                         </div>
                      </div>
                      <div class="tp-team-content">
-                        <h4 class="tp-team-title"><a href="team-details.html">Jessica Robinson</a></h4>
+                        <h4 class="tp-team-title">Jessica Robinson</h4>
                         <span>Architect</span>
                      </div>
                   </div>
@@ -375,7 +375,7 @@ ob_start();
                        
                      </div>
                      <div class="tp-team-content">
-                        <h4 class="tp-team-title"><a href="team-details.html">Tomaas Hirschi</a></h4>
+                        <h4 class="tp-team-title">Tomaas Hirschi</h4>
                         <span>Support</span>
                      </div>
                   </div>
@@ -386,7 +386,7 @@ ob_start();
                         <div class="tp-team-thumb"><img src="assets/img/team/team-1-4.jpg" alt="Belal Mahmud"></div>
                         
                      </div>
-                     <div class="tp-team-content"><h4 class="tp-team-title"><a href="#">Belal Mahmud</a></h4><span>Architect</span></div>
+                     <div class="tp-team-content"><h4 class="tp-team-title">Belal Mahmud</h4><span>Architect</span></div>
                   </div>
                </div>
                <div class="swiper-slide">
@@ -395,7 +395,7 @@ ob_start();
                         <div class="tp-team-thumb"><img src="assets/img/team/team-1-5.jpg" alt="Diane Lloyd"></div>
                         
                      </div>
-                     <div class="tp-team-content"><h4 class="tp-team-title"><a href="#">Diane Lloyd</a></h4><span>Contractor</span></div>
+                     <div class="tp-team-content"><h4 class="tp-team-title">Diane Lloyd</h4><span>Contractor</span></div>
                   </div>
                </div>
                <div class="swiper-slide">
@@ -404,7 +404,7 @@ ob_start();
                         <div class="tp-team-thumb"><img src="assets/img/team/team-1-6.jpg" alt="Willie Boyd"></div>
                         
                      </div>
-                     <div class="tp-team-content"><h4 class="tp-team-title"><a href="#">Willie Boyd</a></h4><span>Support</span></div>
+                     <div class="tp-team-content"><h4 class="tp-team-title">Willie Boyd</h4><span>Support</span></div>
                   </div>
                </div>
                      </div>

@@ -9,7 +9,6 @@ defined( 'ABSPATH' ) || exit;
 
 $post_id    = get_the_ID();
 $image      = get_the_post_thumbnail_url( $post_id, 'full' );
-$image      = $image ? $image : get_template_directory_uri() . '/assets/img/blog/blog-details-1-1.jpg';
 $categories = get_the_category( $post_id );
 $recent     = new WP_Query(
 	array(
@@ -49,10 +48,12 @@ $recent     = new WP_Query(
 			<div class="row">
 				<div class="col-xxl-8 col-xl-8 col-lg-8 mb-50">
 					<article class="postbox__item format-image transition-3">
-						<div class="postbox__thumb p-relative m-img">
-							<div class="postbox__thumb-text-2 d-none d-md-block"><span><?php echo esc_html( get_the_date( 'd M' ) ); ?></span></div>
-							<img src="<?php echo esc_url( $image ); ?>" alt="<?php the_title_attribute(); ?>">
-						</div>
+						<?php if ( $image ) : ?>
+							<div class="postbox__thumb p-relative m-img">
+								<div class="postbox__thumb-text-2 d-none d-md-block"><span><?php echo esc_html( get_the_date( 'd M' ) ); ?></span></div>
+								<img src="<?php echo esc_url( $image ); ?>" alt="<?php the_title_attribute(); ?>">
+							</div>
+						<?php endif; ?>
 						<div class="postbox__content mb-50">
 							<div class="postbox__meta-box pb-5">
 								<div class="postbox__meta">
