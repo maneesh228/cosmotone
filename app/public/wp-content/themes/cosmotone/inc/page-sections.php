@@ -1183,6 +1183,10 @@ function cosmotone_save_page_sections( $post_id ) {
 		foreach ( isset( $item['images'] ) && is_array( $item['images'] ) ? $item['images'] : array() as $i => $image ) $out[ $key ]['images'][ absint( $i ) ] = array( 'id' => isset( $image['id'] ) ? absint( $image['id'] ) : 0, 'url' => isset( $image['url'] ) ? cosmotone_sanitize_page_section_media_url( $image['url'] ) : '', 'alt' => isset( $image['alt'] ) ? sanitize_text_field( $image['alt'] ) : '' );
 	}
 	update_post_meta( $post_id, '_cosmotone_page_sections', $out );
+	if ( in_array( $type, array( 'header', 'footer' ), true ) ) {
+		// The header/footer render on every page, but LiteSpeed only purges the saved page itself.
+		do_action( 'litespeed_purge_all' );
+	}
 }
 add_action( 'save_post_page', 'cosmotone_save_page_sections' );
 
