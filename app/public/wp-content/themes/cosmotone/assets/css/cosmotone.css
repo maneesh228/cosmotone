@@ -179,3 +179,7 @@ a:hover,.tp-header-main-menu nav>ul>li:hover>a,.tp-service-title a:hover,.tp-pro
 .cosmotone-product-detail__tags{display:flex;flex-wrap:wrap;gap:8px}.cosmotone-product-detail__tags a{margin:0!important}
 @media(max-width:991px){.cosmotone-product-detail__media{min-height:320px;padding:28px}.cosmotone-product-detail__title{font-size:30px}}
 @media(max-width:575px){.cosmotone-product-detail__media{min-height:260px;padding:20px}.cosmotone-product-detail__media img{max-height:300px}.cosmotone-product-detail__title{font-size:26px}.cosmotone-product-detail__specs th,.cosmotone-product-detail__specs td{padding:12px 14px;font-size:14px}.cosmotone-product-detail__actions>a{flex:1 1 100%;justify-content:center}}
+/* Footer link hover: move the 15px slide-in space from right to left so the text width never changes (no re-wrapping). */
+.tp-footer-list ul li{padding-right:15px}.tp-footer-list ul li:hover{padding-left:15px;padding-right:0}
+/* Footer Business Segment: links flow inline (wrapping row) instead of a vertical list. */
+.footer-cols-3 .tp-footer-list ul{display:flex;flex-wrap:wrap;gap:10px 22px}.footer-cols-3 .tp-footer-list ul li,.footer-cols-3 .tp-footer-list ul li:hover{margin:0!important;padding:0!important}.footer-cols-3 .tp-footer-list ul li a{display:inline-flex;align-items:center;white-space:nowrap}.footer-cols-3 .tp-footer-list ul li a i{display:none}.footer-cols-3 .tp-footer-list ul li a:hover{color:var(--ct-blue)!important}

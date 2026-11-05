@@ -37,7 +37,7 @@ ob_start();
    <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/spacing.css">
    <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/custom-animation.css">
    <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/main.css?v=abs-urls-1">
-   <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/cosmotone.css?v=product-detail-1">
+   <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/cosmotone.css?v=footer-hover-1">
    <?php wp_head(); ?>
 </head>
 
