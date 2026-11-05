@@ -34,7 +34,7 @@
                <!-- footer-links area start -->
                <div class="col-xl-2 col-lg-4 col-md-6 col-sm-6 mb-50 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".5s">
                   <div class="tp-footer-widget footer-cols-2">
-                     <h4 class="tp-footer-title">Useful Links</h4>
+                     <h4 class="tp-footer-title">Useful Links fdg</h4>
                      <div class="tp-footer-list">
                         <ul>
                            <li><a href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>"><i class="fa-sharp fa-solid fa-plus"></i>About Cosmotone</a></li>
@@ -48,7 +48,7 @@
                </div>
                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-50 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
                   <div class="tp-footer-widget footer-cols-3">
-                     <h4 class="tp-footer-title">Services</h4>
+                     <h4 class="tp-footer-title">Business Segment</h4>
                      <div class="tp-footer-list">
                         <ul>
                            <li><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>"><i class="fa-sharp fa-solid fa-plus"></i>Air Conditioning</a></li>

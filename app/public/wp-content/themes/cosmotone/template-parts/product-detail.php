@@ -20,8 +20,21 @@ $product_title = get_the_title( $product_id );
 $product_image = cosmotone_catalog_image_url( $product_id, 'full' );
 $product_code  = cosmotone_product_code( $product_id );
 $category_path = cosmotone_product_category_path( $product_id );
-$category_text = $category_path ? implode( ' / ', wp_list_pluck( $category_path, 'name' ) ) : 'Uncategorized';
 $deepest_term  = $category_path ? end( $category_path ) : false;
+$description   = trim( $product->post_content );
+
+// Products page filter parameter for each category depth (top level, sub, child).
+$filter_params = array( 'product_category', 'product_subcategory', 'product_child_category' );
+$category_rows = array( __( 'Category', 'cosmotone' ), __( 'Subcategory', 'cosmotone' ), __( 'Child Category', 'cosmotone' ) );
+$category_link = static function ( $depth ) use ( $category_path, $filter_params ) {
+	$args = array();
+	foreach ( array_slice( $category_path, 0, $depth + 1 ) as $index => $term ) {
+		$args[ $filter_params[ $index ] ] = $term->term_id;
+	}
+	return add_query_arg( $args, home_url( '/products/' ) );
+};
+
+$enquiry_text = sprintf( 'Hello Cosmotone, I would like to enquire about %s%s.', $product_title, $product_code ? ' (' . $product_code . ')' : '' );
 
 $related_args = array(
 	'post_type'      => 'cosmotone_product',
@@ -51,7 +64,7 @@ if ( ! $related->have_posts() && $deepest_term ) {
 ?>
 <main>
 	<!-- breadcrumb area start -->
-	<div class="breadcrumb__area breadcrumb__overlay breadcrumb__height p-relative fix" data-background="<?php echo esc_url( $product_image ); ?>">
+	<div class="breadcrumb__area breadcrumb__overlay breadcrumb__height p-relative fix" data-background="assets/img/breadcurmb/breadcurmb.jpg">
 		<div class="container">
 			<div class="row">
 				<div class="col-xxl-12">
@@ -74,72 +87,85 @@ if ( ! $related->have_posts() && $deepest_term ) {
 	</div>
 	<!-- breadcrumb area end -->
 
-	<div class="tp-porfolio-details-area project-details-customize pt-110 pb-105">
+	<section class="cosmotone-product-detail pt-110 pb-80">
 		<div class="container">
-			<div class="row">
-				<div class="col-xl-12">
-					<div class="evn-text-box mb-35">
-						<h1 class="tp-inner-title pb-10"><?php echo esc_html( $product_title ); ?></h1>
+			<div class="row g-4 g-lg-5 align-items-start">
+				<div class="col-lg-6">
+					<div class="cosmotone-product-detail__media">
+						<img src="<?php echo esc_url( $product_image ); ?>" alt="<?php echo esc_attr( $product_title ); ?>">
 					</div>
-					<div class="evn-thumb-wrap mb-40 p-relative">
-						<div class="evn-avata-content-wrap z-index">
-							<div class="evn-related-info d-flex justify-content-lg-start align-items-center">
+				</div>
+				<div class="col-lg-6">
+					<div class="cosmotone-product-detail__info">
+						<?php if ( $category_path ) : ?>
+							<span class="cosmotone-product-detail__eyebrow"><?php echo esc_html( implode( ' / ', wp_list_pluck( $category_path, 'name' ) ) ); ?></span>
+						<?php endif; ?>
+						<h1 class="cosmotone-product-detail__title"><?php echo esc_html( $product_title ); ?></h1>
+
+						<table class="cosmotone-product-detail__specs">
+							<tbody>
 								<?php if ( $product_code ) : ?>
-									<span><b>Product Code:</b><br><?php echo esc_html( $product_code ); ?></span>
+									<tr><th scope="row"><?php esc_html_e( 'Product Code', 'cosmotone' ); ?></th><td><?php echo esc_html( $product_code ); ?></td></tr>
 								<?php endif; ?>
-								<?php if ( isset( $category_path[0] ) ) : ?>
-									<span><b>Category:</b><br><?php echo esc_html( $category_path[0]->name ); ?></span>
-								<?php endif; ?>
-								<?php if ( isset( $category_path[1] ) ) : ?>
-									<span><b>Subcategory:</b><br><?php echo esc_html( $category_path[1]->name ); ?></span>
-								<?php endif; ?>
-								<?php if ( isset( $category_path[2] ) ) : ?>
-									<span><b>Child Category:</b><br><?php echo esc_html( $category_path[2]->name ); ?></span>
-								<?php endif; ?>
+								<?php foreach ( $category_path as $depth => $term ) : if ( ! isset( $category_rows[ $depth ] ) ) break; ?>
+									<tr><th scope="row"><?php echo esc_html( $category_rows[ $depth ] ); ?></th><td><a href="<?php echo esc_url( $category_link( $depth ) ); ?>"><?php echo esc_html( $term->name ); ?></a></td></tr>
+								<?php endforeach; ?>
+							</tbody>
+						</table>
+
+						<?php if ( '' !== $description ) : ?>
+							<div class="cosmotone-product-detail__description cosmotone-product-description">
+								<h2><?php esc_html_e( 'Description', 'cosmotone' ); ?></h2>
+								<?php echo apply_filters( 'the_content', $product->post_content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
+						<?php endif; ?>
+
+						<div class="cosmotone-product-detail__actions">
+							<a class="tp-btn" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><span><?php esc_html_e( 'Enquire Now', 'cosmotone' ); ?></span></a>
+							<a class="cosmotone-product-detail__whatsapp" href="<?php echo esc_url( 'https://wa.me/919554481761?text=' . rawurlencode( $enquiry_text ) ); ?>" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><?php esc_html_e( 'Chat on WhatsApp', 'cosmotone' ); ?></a>
 						</div>
-						<div class="evn-thumb">
-							<img class="w-100" src="<?php echo esc_url( $product_image ); ?>" alt="<?php echo esc_attr( $product_title ); ?>">
-						</div>
-					</div>
-					<div class="evn-text-box cosmotone-product-description mb-45">
-						<?php echo apply_filters( 'the_content', $product->post_content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					</div>
-					<div class="postbox__details-tag tagcloud mb-45">
-						<?php foreach ( $category_path as $term ) : ?>
-							<a href="<?php echo esc_url( add_query_arg( 'category', $term->term_id, home_url( '/products/' ) ) ); ?>"><?php echo esc_html( $term->name ); ?></a>
-						<?php endforeach; ?>
+
+						<?php if ( $category_path ) : ?>
+							<div class="cosmotone-product-detail__tags tagcloud">
+								<?php foreach ( $category_path as $depth => $term ) : if ( ! isset( $filter_params[ $depth ] ) ) break; ?>
+									<a href="<?php echo esc_url( $category_link( $depth ) ); ?>"><?php echo esc_html( $term->name ); ?></a>
+								<?php endforeach; ?>
+							</div>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 
 	<?php if ( $related->have_posts() ) : ?>
 		<div class="tp-project-area pb-90">
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-12">
-						<div class="tp-project-section-box text-center mb-60">
-							<span class="tp-section-subtitle"><?php echo esc_html( $category_text ); ?></span>
-							<h4 class="tp-section-title">Related products</h4>
+						<div class="tp-project-section-box text-center mb-50">
+							<?php if ( $deepest_term ) : ?>
+								<span class="tp-section-subtitle"><?php echo esc_html( $deepest_term->name ); ?></span>
+							<?php endif; ?>
+							<h4 class="tp-section-title"><?php esc_html_e( 'Related products', 'cosmotone' ); ?></h4>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<?php while ( $related->have_posts() ) : $related->the_post(); $related_id = get_the_ID(); $related_code = cosmotone_product_code( $related_id ); ?>
-						<div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+					<?php while ( $related->have_posts() ) : $related->the_post(); $related_id = get_the_ID(); $related_code = cosmotone_product_code( $related_id ); $related_path = cosmotone_product_category_path( $related_id ); ?>
+						<div class="col-xl-4 col-lg-4 col-md-6 mb-30 cosmotone-product-card">
 							<div class="tp-project-item p-relative">
-								<div class="tp-project-thumb">
-									<a href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( cosmotone_catalog_image_url( $related_id, 'large' ) ); ?>" alt="<?php the_title_attribute(); ?>"></a>
-								</div>
+								<div class="tp-project-thumb"><a href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( cosmotone_catalog_image_url( $related_id, 'large' ) ); ?>" alt="<?php the_title_attribute(); ?>" loading="lazy" decoding="async"></a></div>
 								<div class="tp-project-content">
-									<a href="<?php the_permalink(); ?>"><i class="flaticon-right-arrow"></i></a>
-									<span><?php echo esc_html( implode( ' / ', wp_list_pluck( cosmotone_product_category_path( $related_id ), 'name' ) ) ); ?></span>
+									<span><?php echo esc_html( $related_path ? implode( ' / ', wp_list_pluck( $related_path, 'name' ) ) : 'Uncategorized' ); ?></span>
 									<h4 class="tp-project-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
 									<?php if ( $related_code ) : ?>
 										<div class="cosmotone-product-code"><?php esc_html_e( 'Product Code:', 'cosmotone' ); ?> <strong><?php echo esc_html( $related_code ); ?></strong></div>
 									<?php endif; ?>
+									<a class="cosmotone-listing-read-more" href="<?php the_permalink(); ?>">
+										<span><?php esc_html_e( 'Read More', 'cosmotone' ); ?></span>
+										<i class="flaticon-right-arrow" aria-hidden="true"></i>
+									</a>
 								</div>
 							</div>
 						</div>
@@ -151,6 +177,3 @@ if ( ! $related->have_posts() && $deepest_term ) {
 
 	<?php get_template_part( 'template-parts/cta' ); ?>
 </main>
-<style>
-.cosmotone-product-code{margin-top:8px;color:#5b6678;font-size:14px;line-height:1.4}.cosmotone-product-code strong{color:#102444;font-weight:700}
-</style>

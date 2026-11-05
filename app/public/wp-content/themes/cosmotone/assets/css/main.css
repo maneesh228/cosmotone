@@ -7309,7 +7309,7 @@ body .ui-tooltip {
 .tp-footer-title {
   padding-top: 20px;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 21px;
   margin-bottom: 25px;
   color: var(--tp-common-white);
 }
@@ -7358,7 +7358,7 @@ body .ui-tooltip {
   color: var(--tp-common-white);
 }
 .tp-footer-logo {
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 .tp-footer-text p {
   font-size: 16px;

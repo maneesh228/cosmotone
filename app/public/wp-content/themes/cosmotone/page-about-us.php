@@ -83,13 +83,13 @@ ob_start();
                               </div>
                            </div>
                         </div>
-                        <div class="tp-about-list mb-45">
+                        <!-- <div class="tp-about-list mb-45">
                            <ul>
                               <li><i class="fa-light fa-badge-check"></i>At vero eos et accusamus et iusto odio.</li>
                               <li><i class="fa-light fa-badge-check"></i>Sed ut perspiciatis unde omnis iste natus sit. </li>
                               <li><i class="fa-light fa-badge-check"></i>Established fact that a reader will be distracted. </li>
                            </ul>
-                        </div>
+                        </div> -->
                      </div>
                   </div>
                </div>
