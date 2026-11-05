@@ -7304,7 +7304,7 @@ body .ui-tooltip {
 /*----------------------------------------*/
 .tp-footer-space {
   padding-top: 220px;
-  padding-bottom: 70px;
+  /* padding-bottom: 10px; */
 }
 .tp-footer-title {
   padding-top: 20px;

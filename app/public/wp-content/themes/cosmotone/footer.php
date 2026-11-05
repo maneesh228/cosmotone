@@ -20,18 +20,13 @@
          <div class="container">
             <div class="row">
                <!-- footer-about area start -->
-               <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-50 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".3s">
+               <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-25 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".3s">
                   <div class="tp-footer-widget footer-cols-1">
                      <div class="tp-footer-logo">
                         <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="assets/img/logo/white-logo.png" alt=""></a>
                      </div>
                      <div class="tp-footer-text">
                         <p>Cosmotone Conductors Pvt. Ltd. is a leading manufacturer of Auto Electric Wires, Wiring Harnesses, Relays, and Automotive Electrical Components.</p>
-                     </div>
-                     <div class="tp-footer-contact">
-                        <a href="mailto:info@cosmotone.com"><i
-                              class="flaticon-mail-1"></i>info@cosmotone.com</a>
-                        <a href="#"><i class="flaticon-location-1"></i>Amballoor Mahadeva Temple Rd<br>Valakom, Ernakulam Dist.<br>Kerala</a>
                      </div>
                   </div>
                </div>
@@ -66,55 +61,18 @@
                   </div>
                </div>
                <!-- footer-links area end -->
-               <!-- footer-instagram area start -->
+               <!-- footer-contact area start -->
                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-50 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".9s">
                   <div class="tp-footer-widget footer-cols-4">
-                     <h4 class="tp-footer-title">Instagram</h4>
-                     <div class="tp-footer-thumb-wrap">
-                        <div class="tp-footer-thumb-box d-flex">
-                           <div class="tp-footer-thumb p-relative">
-                              <img src="assets/img/footer/footer-1-1.jpg" alt="">
-                              <div class="tp-footer-thumb-icon">
-                                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                              </div>
-                           </div>
-                           <div class="tp-footer-thumb p-relative">
-                              <img src="assets/img/footer/footer-1-2.jpg" alt="">
-                              <div class="tp-footer-thumb-icon">
-                                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                              </div>
-                           </div>
-                           <div class="tp-footer-thumb p-relative">
-                              <img src="assets/img/footer/footer-1-3.jpg" alt="">
-                              <div class="tp-footer-thumb-icon">
-                                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                              </div>
-                           </div>fa
-                        </div>
-                        <div class="tp-footer-thumb-box d-flex">
-                           <div class="tp-footer-thumb p-relative">
-                              <img src="assets/img/footer/footer-1-4.jpg" alt="">
-                              <div class="tp-footer-thumb-icon">
-                                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                              </div>
-                           </div>
-                           <div class="tp-footer-thumb p-relative">
-                              <img src="assets/img/footer/footer-1-5.jpg" alt="">
-                              <div class="tp-footer-thumb-icon">
-                                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                              </div>
-                           </div>
-                           <div class="tp-footer-thumb p-relative">
-                              <img src="assets/img/footer/footer-1-6.jpg" alt="">
-                              <div class="tp-footer-thumb-icon">
-                                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                              </div>
-                           </div>
-                        </div>
+                     <h4 class="tp-footer-title">Contact Us</h4>
+                     <div class="tp-footer-contact">
+                        <a href="mailto:info@cosmotone.com"><i
+                              class="flaticon-mail-1"></i>info@cosmotone.com</a>
+                        <a href="#"><i class="flaticon-location-1"></i>Amballoor Mahadeva Temple Rd<br>Valakom, Ernakulam Dist.<br>Kerala</a>
                      </div>
                   </div>
                </div>
-               <!-- footer-instagram area end -->
+               <!-- footer-contact area end -->
             </div>
          </div>
       </div>
@@ -166,7 +124,7 @@
    <script src="assets/js/jarallax.js"></script>
    <script src="assets/js/imagesloaded-pkgd.js"></script>
    <script src="assets/js/ajax-form.js"></script>
-   <script src="assets/js/main.js?v=inner-performance-2"></script>
+   <script src="assets/js/main.js?v=page-assets-1"></script>
    <?php wp_footer(); ?>
 
    

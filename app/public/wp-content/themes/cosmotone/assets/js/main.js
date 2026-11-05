@@ -28,6 +28,16 @@
 	"use strict";
 
 	var windowOn = $(window);
+
+	/* Plugin scripts are only printed on pages whose markup uses them (cosmotone_prune_unused_assets()),
+	   so stand in for missing ones to keep the rest of this file running. */
+	var noop = function () { return this; };
+	['niceSelect', 'magnificPopup', 'isotope', 'imagesLoaded', 'jarallax'].forEach(function (name) {
+		if (!$.fn[name]) $.fn[name] = noop;
+	});
+	if (typeof window.Swiper === 'undefined') window.Swiper = function () {};
+	if (typeof window.PureCounter === 'undefined') window.PureCounter = function () {};
+
 	////////////////////////////////////////////////////
 	// 01. PreLoader Js
 	/* Scripts run at the end of <body>, so the page is parsed; don't wait for every image to download. */

@@ -122,6 +122,57 @@ function cosmotone_optimize_markup_images( $markup, $lazy_after = '', $sizes = '
 }
 
 /**
+ * Drop plugin <script>/<link> tags a page's markup doesn't use.
+ *
+ * header.php/footer.php print every theme library on every page. Each entry maps asset
+ * paths to a pattern that marks the plugin as needed; with no match the tags are removed.
+ * A null pattern means no template uses the plugin at all.
+ *
+ * @param string $html Full page HTML.
+ * @return string
+ */
+function cosmotone_prune_unused_assets( $html ) {
+	if ( false === stripos( $html, '</html>' ) ) {
+		return $html; // Not a full page (error output, partial response).
+	}
+	$rules = array(
+		'#class="[^"]*\bswiper-wrapper\b#'                                         => array( 'assets/js/swiper-bundle.js', 'assets/css/swiper-bundle.css' ),
+		'#class="[^"]*\b(?:popup-image|popup-video|tp-product-popup-image)\b#'     => array( 'assets/js/magnific-popup.js', 'assets/css/magnific-popup.css' ),
+		'#<select\b(?![^>]*cosmotone-native-select)#i'                              => array( 'assets/js/nice-select.js' ),
+		'#class="[^"]*\bpurecounter\b#'                                            => array( 'assets/js/purecounter.js' ),
+		'#class="[^"]*\bjarallax\b#'                                               => array( 'assets/js/jarallax.js' ),
+		'#class="(?:[^"]*\s)?grid[\s"]#'                                           => array( 'assets/js/isotope-pkgd.js', 'assets/js/imagesloaded-pkgd.js' ),
+		'#id="contact-form"#'                                                      => array( 'assets/js/ajax-form.js' ),
+	);
+	$unused = array( 'assets/js/slick.js', 'assets/css/slick.css', 'assets/js/vendor/waypoints.js' );
+	foreach ( $rules as $pattern => $assets ) {
+		if ( ! preg_match( $pattern, $html ) ) {
+			$unused = array_merge( $unused, $assets );
+		}
+	}
+	foreach ( $unused as $asset ) {
+		$file = preg_quote( $asset, '#' );
+		$html = preg_replace( '#<script[^>]*\ssrc="' . $file . '[^"]*"[^>]*></script>\s*#', '', $html );
+		$html = preg_replace( '#<link[^>]*\shref="' . $file . '[^"]*"[^>]*>\s*#', '', $html );
+	}
+	// Contact Form 7 enqueues its files on every page; keep them only where a form renders.
+	if ( false === strpos( $html, 'class="wpcf7' ) ) {
+		$html = preg_replace( '#<link[^>]*id=[\'"]contact-form-7-css[\'"][^>]*>\s*#', '', $html );
+		// wp-hooks / wp-i18n are only enqueued on the front end as Contact Form 7 dependencies.
+		$html = preg_replace( '#<script[^>]*id=[\'"](?:swv-js|contact-form-7-js(?:-before|-translations)?|wp-hooks-js|wp-i18n-js(?:-after)?)[\'"][^>]*>.*?</script>\s*#s', '', $html );
+	}
+	return $html;
+}
+
+function cosmotone_start_asset_pruning() {
+	if ( is_admin() || wp_doing_ajax() || is_feed() || is_customize_preview() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		return;
+	}
+	ob_start( 'cosmotone_prune_unused_assets' );
+}
+add_action( 'template_redirect', 'cosmotone_start_asset_pruning', 1 );
+
+/**
  * Get header section logo image URL.
  *
  * @return string The logo image URL, or empty string if not found.

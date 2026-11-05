@@ -104,7 +104,7 @@ function cosmotone_page_sections_config() {
 			'sections' => array(
 				'footer-about'     => 'Company Information',
 				'footer-links'     => 'Footer Links',
-				'footer-instagram' => 'Instagram',
+				'footer-contact'   => 'Contact Details',
 				'copyright'        => 'Copyright & Social Links',
 			),
 		),
@@ -499,13 +499,9 @@ function cosmotone_page_section_custom_schema( $type, $key ) {
 		return array(
 			'texts' => array(
 				0 => array( 'label' => 'Company Description', 'default' => 'Cosmotone Conductors Pvt. Ltd. is a leading manufacturer of Auto Electric Wires, Wiring Harnesses, Relays, and Automotive Electrical Components.', 'type' => 'textarea' ),
-				1 => array( 'label' => 'Contact Email', 'default' => 'info@cosmotone.com' ),
-				2 => array( 'label' => 'Address (one line per row)', 'default' => "Amballoor Mahadeva Temple Rd\nValakom, Ernakulam Dist.\nKerala", 'type' => 'textarea', 'indexes' => array( 2, 3, 4 ) ),
 			),
 			'links' => array(
 				0 => array( 'label' => 'Footer Logo Link', 'default' => home_url( '/' ) ),
-				1 => array( 'label' => 'Email Link', 'default' => 'mailto:info@cosmotone.com' ),
-				2 => array( 'label' => 'Address Link', 'default' => '#' ),
 			),
 			'images' => array(
 				0 => array( 'label' => 'Footer Logo', 'default' => 'assets/img/logo/white-logo.png' ),
@@ -544,18 +540,17 @@ function cosmotone_page_section_custom_schema( $type, $key ) {
 		);
 	}
 
-	if ( 'footer' === $type && 'footer-instagram' === $key ) {
-		$links  = array();
-		$images = array();
-		for ( $index = 0; $index < 6; $index++ ) {
-			$number           = $index + 1;
-			$links[ $index ]  = array( 'label' => "Instagram Item {$number} Link", 'default' => '#' );
-			$images[ $index ] = array( 'label' => "Instagram Image {$number}", 'default' => "assets/img/footer/footer-1-{$number}.jpg" );
-		}
+	if ( 'footer' === $type && 'footer-contact' === $key ) {
 		return array(
-			'texts'  => array( 0 => array( 'label' => 'Instagram Section Title', 'default' => 'Instagram' ) ),
-			'links'  => $links,
-			'images' => $images,
+			'texts' => array(
+				0 => array( 'label' => 'Contact Section Title', 'default' => 'Contact Us' ),
+				1 => array( 'label' => 'Contact Email', 'default' => 'info@cosmotone.com' ),
+				2 => array( 'label' => 'Address (one line per row)', 'default' => "Amballoor Mahadeva Temple Rd\nValakom, Ernakulam Dist.\nKerala", 'type' => 'textarea', 'indexes' => array( 2, 3, 4 ) ),
+			),
+			'links' => array(
+				0 => array( 'label' => 'Email Link', 'default' => 'mailto:info@cosmotone.com' ),
+				1 => array( 'label' => 'Address Link', 'default' => '#' ),
+			),
 		);
 	}
 
@@ -1270,3 +1265,40 @@ function cosmotone_apply_page_section_fields( $content, $post_id, $type ) {
 	}
 	return $content;
 }
+
+/**
+ * One-time move of the footer email/address from "Company Information" into the
+ * "Contact Details" section that replaced the Instagram column.
+ *
+ * Values are stored by node position: in footer-about the email was text 1, the
+ * address texts 2-4 and their links 1-2; footer-contact starts with its title, so
+ * the texts keep their positions and the links shift down by one.
+ */
+function cosmotone_migrate_footer_contact_section() {
+	if ( get_option( 'cosmotone_footer_contact_migrated' ) ) {
+		return;
+	}
+	$footer_page = get_page_by_path( 'footer', OBJECT, 'page' );
+	$sections    = $footer_page ? get_post_meta( $footer_page->ID, '_cosmotone_page_sections', true ) : array();
+	if ( is_array( $sections ) && isset( $sections['footer-about'] ) && ! isset( $sections['footer-contact'] ) ) {
+		$about   = $sections['footer-about'];
+		$contact = array( 'enabled' => 1, 'texts' => array(), 'attributes' => array(), 'links' => array(), 'images' => array() );
+		foreach ( array( 1, 2, 3, 4 ) as $index ) {
+			if ( isset( $about['texts'][ $index ] ) ) {
+				$contact['texts'][ $index ] = $about['texts'][ $index ];
+				unset( $sections['footer-about']['texts'][ $index ] );
+			}
+		}
+		foreach ( array( 1 => 0, 2 => 1 ) as $from => $to ) {
+			if ( isset( $about['links'][ $from ] ) ) {
+				$contact['links'][ $to ] = $about['links'][ $from ];
+				unset( $sections['footer-about']['links'][ $from ] );
+			}
+		}
+		$sections['footer-contact'] = $contact;
+		unset( $sections['footer-instagram'] );
+		update_post_meta( $footer_page->ID, '_cosmotone_page_sections', $sections );
+	}
+	update_option( 'cosmotone_footer_contact_migrated', 1 );
+}
+add_action( 'init', 'cosmotone_migrate_footer_contact_section' );
