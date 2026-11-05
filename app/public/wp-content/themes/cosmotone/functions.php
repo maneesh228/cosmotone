@@ -152,8 +152,8 @@ function cosmotone_prune_unused_assets( $html ) {
 	}
 	foreach ( $unused as $asset ) {
 		$file = preg_quote( $asset, '#' );
-		$html = preg_replace( '#<script[^>]*\ssrc="' . $file . '[^"]*"[^>]*></script>\s*#', '', $html );
-		$html = preg_replace( '#<link[^>]*\shref="' . $file . '[^"]*"[^>]*>\s*#', '', $html );
+		$html = preg_replace( '#<script[^>]*\ssrc="[^"]*/' . $file . '[^"]*"[^>]*></script>\s*#', '', $html );
+		$html = preg_replace( '#<link[^>]*\shref="[^"]*/' . $file . '[^"]*"[^>]*>\s*#', '', $html );
 	}
 	// Contact Form 7 enqueues its files on every page; keep them only where a form renders.
 	if ( false === strpos( $html, 'class="wpcf7' ) ) {

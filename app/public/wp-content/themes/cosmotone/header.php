@@ -21,23 +21,23 @@ ob_start();
 
    <base href="<?php echo esc_url( trailingslashit( get_template_directory_uri() ) ); ?>">
    <!-- Place favicon.ico in the root directory -->
-   <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/favicon.png">
+   <link rel="shortcut icon" type="image/x-icon" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/logo/favicon.png">
 
    <!-- CSS here -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800;9..40,900&display=swap">
-   <link rel="stylesheet" href="assets/css/bootstrap.css">
-   <link rel="stylesheet" href="assets/css/animate.css">
-   <link rel="stylesheet" href="assets/css/swiper-bundle.css">
-   <link rel="stylesheet" href="assets/css/slick.css">
-   <link rel="stylesheet" href="assets/css/magnific-popup.css">
-   <link rel="stylesheet" href="assets/css/flaticon_biddut.css">
-   <link rel="stylesheet" href="assets/css/font-awesome-pro.css">
-   <link rel="stylesheet" href="assets/css/spacing.css">
-   <link rel="stylesheet" href="assets/css/custom-animation.css">
-   <link rel="stylesheet" href="assets/css/main.css?v=fonts-head-1">
-   <link rel="stylesheet" href="assets/css/cosmotone.css?v=footer-thumbs-1">
+   <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/bootstrap.css">
+   <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/animate.css">
+   <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/swiper-bundle.css">
+   <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/slick.css">
+   <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/flaticon_biddut.css">
+   <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/spacing.css">
+   <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/custom-animation.css">
+   <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/main.css?v=abs-urls-1">
+   <link rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/css/cosmotone.css?v=abs-urls-1">
    <?php wp_head(); ?>
 </head>
 
@@ -328,8 +328,9 @@ ob_start();
                         </div> -->
                         <div class="tp-header-right-btn d-none d-md-flex align-items-center">
                            <a class="tp-btn" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><span>MAKE APPOINTMENT</span></a>
-                           <a class="cosmotone-header-whatsapp" href="https://wa.me/919554481761" target="_blank" rel="noopener noreferrer" aria-label="Chat with Cosmotone on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
                         </div>
+                        <?php // Outside the button group above, which is hidden below 768px. ?>
+                        <a class="cosmotone-header-whatsapp ms-3 me-3 me-xl-0" href="https://wa.me/919554481761" target="_blank" rel="noopener noreferrer" aria-label="Chat with Cosmotone on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
                         <div class="tp-header-right-tel-box d-none d-xxl-block">
                            <div class="tp-header-right-tel-icon d-flex align-items-center">
                               <i class="flaticon-phone-call"></i>
