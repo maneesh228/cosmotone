@@ -53,7 +53,7 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                         </div>
                         <div class="tp-about-button-box d-flex align-items-center">
                            <a class="tp-btn-black" href="<?php echo esc_url( $home_sections['about_button_url'] ); ?>"><span><?php echo esc_html( $home_sections['about_button_text'] ); ?></span></a>
-                           <img loading="lazy" decoding="async" src="assets/img/about/shape-1-1.png" alt="">
+                           <!-- <img loading="lazy" decoding="async" src="assets/img/about/shape-1-1.png" alt=""> -->
                         </div>
                      </div>
                   </div>
@@ -769,16 +769,16 @@ $home_sections = cosmotone_get_home_sections( get_queried_object_id() );
                         </div>
                      </div>
                   </div>
-                  <div class="col-lg-5">
+                  <div class="col-lg-8">
                      <div class="tp-certificate-copy">
                         <?php echo wp_kses_post( wpautop( $home_sections['certificates_description'] ) ); ?>
                      </div>
                   </div>
-                  <div class="col-lg-3">
+                  <!-- <div class="col-lg-3">
                      <div class="tp-certificate-action">
-                        <a href="<?php echo esc_url( get_post_type_archive_link( 'cosmotone_cert' ) ); ?>" class="tp-certificate-btn"><?php echo esc_html( $home_sections['certificates_button_text'] ); ?> <i class="fa-regular fa-arrow-right-long"></i></a>
+                        <a href="<?php // echo esc_url( get_post_type_archive_link( 'cosmotone_cert' ) ); ?>" class="tp-certificate-btn"><?php echo esc_html( $home_sections['certificates_button_text'] ); ?> <i class="fa-regular fa-arrow-right-long"></i></a>
                      </div>
-                  </div>
+                  </div> -->
                </div>
             </div>
          </div>
