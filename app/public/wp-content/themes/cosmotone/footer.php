@@ -68,7 +68,7 @@
                      <div class="tp-footer-contact">
                         <a href="mailto:info@cosmotone.com"><i
                               class="flaticon-mail-1"></i>info@cosmotone.com</a>
-                        <a href="#"><i class="flaticon-location-1"></i>Amballoor Mahadeva Temple Rd<br>Valakom, Ernakulam Dist.<br>Kerala</a>
+                        <span class="tp-footer-address"><i class="flaticon-location-1"></i>Amballoor Mahadeva Temple Rd<br>Valakom, Ernakulam Dist.<br>Kerala</span>
                      </div>
                   </div>
                </div>

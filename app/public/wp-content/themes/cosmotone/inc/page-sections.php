@@ -549,7 +549,6 @@ function cosmotone_page_section_custom_schema( $type, $key ) {
 			),
 			'links' => array(
 				0 => array( 'label' => 'Email Link', 'default' => 'mailto:info@cosmotone.com' ),
-				1 => array( 'label' => 'Address Link', 'default' => '#' ),
 			),
 		);
 	}

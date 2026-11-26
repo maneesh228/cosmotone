@@ -129,6 +129,7 @@ a:hover,.tp-header-main-menu nav>ul>li:hover>a,.tp-service-title a:hover,.tp-pro
 
 /* Keep TinyMCE formatting in footer contact text aligned with the footer palette. */
 .tp-footer-contact a{color:var(--ct-navy)!important}.tp-footer-contact a>:not(i){color:inherit!important}
+.tp-footer-contact .tp-footer-address{display:block;font-size:16px;color:var(--ct-navy)}.tp-footer-contact .tp-footer-address i{color:var(--tp-theme-1);display:inline-block;margin-right:15px;transform:translateY(2px)}@media (max-width:767px){.tp-footer-contact .tp-footer-address{font-size:14px}}
 
 /* Cosmotone branding in mobile sidebar and search overlay */
 .tpoffcanvas__logo img,.search__logo img{display:none!important}
